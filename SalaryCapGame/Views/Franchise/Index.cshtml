@@ -1,0 +1,32 @@
+﻿@model SalaryCapGame.WebViewModels.FranchiseIndexModel
+
+    <div id="franchises">
+        <h3>All Franchises Listing</h3>
+        <div id="franchisesTable">
+            <table class="table table-condensed" id="franchiseIndexTable">
+                <thead>
+                    <tr>
+                        <th>Team</th>
+                        <th>Owner Last Name</th>
+                        <th>Owner First Name</th>
+                        <th>League</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ( var franchise in Model.Franchises)
+                    {
+                    <tr class="franchiseRow">
+                        <td class="">
+                               <a asp-controller="Franchise" asp-action="Detail" asp-route-id="@franchise.Id">@franchise.Name</a>
+                               @franchise.Name
+                        </td>
+                        <td class="">@franchise.Owner.FirstName</td>
+                        <td class="">@franchise.Owner.LastName</td>
+                        <td class="">@franchise.League.Name</td>
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
