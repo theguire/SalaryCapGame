@@ -105,7 +105,7 @@ namespace SalaryCapGame.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("FranchiseId,Name,ImageUrl,DateCreated,DateModified")] Franchise franchise)
+        public IActionResult Edit(int id, [Bind("FranchiseId,LeagueId, OwnerId, Name,ImageUrl,DateCreated,DateModified")] Franchise franchise)
         {
             if ( id != franchise.FranchiseId )
             {

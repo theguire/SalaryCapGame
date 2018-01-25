@@ -57,7 +57,7 @@ namespace SalaryCapGame.Controllers
                 LastName = owner.LastName,
                 Email = owner.Email,
                 ImageUrl = owner.ImageUrl,
-                Franchises = owner.Franchises
+                Franchises = owner.Franchises,
             };
 
             //var leagues = _leagues.GetAll();
