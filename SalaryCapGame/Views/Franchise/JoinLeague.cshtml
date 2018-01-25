@@ -1,0 +1,25 @@
+﻿@*@model SalaryCapGame.WebViewModels.SelectLeagueModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <title>CreateFranchise</title>
+</head>
+<body class="p-2">
+    <h3>Join League</h3>
+    <form asp-action="JoinLeague" method="post">
+        <div class="form-group">
+            <label asp-for="">Franchise Name:</label>
+            <input asp-for="@Model.FranchiseName" class="form-control" />
+
+            <input hidden asp-for="@Model.OwnerId" class="form-control" />
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+</body>
+</html>*@

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Owner>
+
+<div id="owners">
+    <h3>All Owners and Franchises Listing</h3>
+    <div id="ownersTable">
+        <table class="table table-condensed" id="ownerIndexTable">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Owner Last Name</th>
+                    <th>Owner First Name</th>
+                    <th>Email</th>
+                    <th>Franchises - League</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ( var o in Model )
+                {
+                    <tr class="ownerRow">
+                        <td class="">
+                            <a asp-controller="Owner" asp-action="Detail" asp-route-id="@o.OwnerId">
+                                <img src="@o.ImageUrl" class="imageCell" />
+                            </a>
+                        </td>
+                        <td class="">@o.FirstName</td>
+                        <td class="">@o.LastName</td>
+                        <td class="">@o.Email</td>
+                        <td id="links">
+                            @foreach ( var franchise in o.Franchises )
+                            {
+                                <a asp-action="FranchiseDetail" asp-route-id="@franchise.FranchiseId">@franchise.Name</a>
+                                <a asp-action="LeagueDetail" asp-route-id="@franchise.LeagueId?">@franchise.League?.Name</a><br />
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

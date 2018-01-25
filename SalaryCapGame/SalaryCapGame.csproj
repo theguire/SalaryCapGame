@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.5" />
@@ -26,6 +27,7 @@
   <ItemGroup>
     <Folder Include="Infrastructure\HtmlHelpers\" />
     <Folder Include="Infrastructure\TagHelpers\" />
+    <Folder Include="Views\Shared\Owner\" />
     <Folder Include="wwwroot\images\Franchises\" />
     <Folder Include="wwwroot\images\Leagues\" />
   </ItemGroup>

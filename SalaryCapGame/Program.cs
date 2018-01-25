@@ -24,6 +24,7 @@ namespace SalaryCapGame
                         .UseContentRoot( Directory.GetCurrentDirectory() )
                         .UseIISIntegration()
                         .UseStartup<Startup>()
+                        .UseDefaultServiceProvider( options => options.ValidateScopes = false )
                         .UseApplicationInsights()
                         .Build() );
         }

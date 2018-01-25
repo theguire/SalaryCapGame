@@ -1,0 +1,40 @@
+﻿@*@model SalaryCapGame.WebViewModels.DashboardIndexModel
+
+<div id="franchises">
+    <h3>All Owners and Franchises Listing</h3>
+    <div id="ownersTable">
+        <table class="table table-condensed" id="ownerIndexTable">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Owner Last Name</th>
+                    <th>Owner First Name</th>
+                    <th>Email</th>
+                    <th>Franchises - League</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ( var owner in Model.Owners )
+                {
+                    <tr class="ownerRow">
+                        <td class="">
+                            <a asp-controller="Dashboard" asp-action="Detail" asp-route-id="@owner.Id">
+                                <img src="@owner.ImageUrl" class="imageCell" />
+                            </a>
+                        </td>
+                        <td class="">@owner.FirstName</td>
+                        <td class="">@owner.LastName</td>
+                        <td class="">@owner.Email</td>
+                        <td>
+                            @foreach ( var franchise in owner.Franchises )
+                            {
+                                <a asp-action="FranchiseDetail" asp-route-id="@franchise.FranchiseId">@franchise.Name</a>
+                                <a asp-action="LeagueDetail" asp-route-id="@franchise.LeagueId?">@franchise.League?.Name</a><br />
+                            }
+                        </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>*@

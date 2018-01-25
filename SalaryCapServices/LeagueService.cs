@@ -10,17 +10,21 @@ namespace SalaryCapServices
 {
     public class LeagueService : ILeague
     {
-        private GameDBContext _context;
+        private GameDBContext _leagues;
+
+        public IQueryable<Franchise> FranchisesQ => throw new NotImplementedException();
+
+        public IQueryable<League> Leagues => throw new NotImplementedException();
 
         public LeagueService( GameDBContext context )
         {
-            _context = context;
+            _leagues = context;
         }
 
         public void Add( League newLeague )
         {
-            _context.Add( newLeague );
-            _context.SaveChanges();
+            _leagues.Add( newLeague );
+            _leagues.SaveChanges();
         }
 
         public League Get( int id )
@@ -30,10 +34,9 @@ namespace SalaryCapServices
 
         public IEnumerable<League> GetAll()
         {
-            return ( _context.Leagues
-                                .Include( f => f.Name )
-                                .Include( f => f.Commissioner )
-                                .Include( f => f.Name ) );
+            return ( _leagues.Leagues
+                                .Include( l => l.Franchises )
+                                .Include( f => f.Commissioner ) );
         }
 
 
@@ -52,5 +55,5 @@ namespace SalaryCapServices
             return( Get( id ).Franchises );
         }
 
-    }
+     }
 }

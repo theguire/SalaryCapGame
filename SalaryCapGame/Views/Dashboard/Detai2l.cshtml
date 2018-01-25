@@ -1,0 +1,115 @@
+﻿@model SalaryCapGame.WebViewModels.OwnerDetailModel
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    @*<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>*@
+}
+
+@section Styles{
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">*@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+}
+
+<div class="container">
+    <div class="page-header clearfix detailHeading">
+        <h2 class="text-muted">Owner Details</h2>
+    </div>
+
+
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    <img class="ownerImage" src="@Model.OwnerIndexListingModel.ImageUrl" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <p id="ownerName">@Model.OwnerIndexListingModel.LastName, @Model.OwnerIndexListingModel.FirstName</p>
+                <p id="ownerEmail">@Model.OwnerIndexListingModel.Email</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4>Owner Franchises</h4>
+                <table class="table table-bordered table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Franchise</th>
+                            <th>League</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ( var franchise in @Model.Franchises )
+                        {
+                            <tr>
+                                <td><a asp-controller="Franchise" asp-route-id="@franchise.FranchiseId">@franchise.Name</a></td>
+                                @*<td><a id="franchiseName">@franchise.Name</a></td>*@
+                                @*<td><a id="leagueName">@franchise.League?.Name</a><br /></td>*@
+                                <td><a asp-controller="League" asp-route-id="@franchise.League?.LeagueId">@franchise.League?.Name</a></td>
+                                <td>
+                                    
+                                    <div class="col-md-9">
+
+
+
+                                        @using ( Html.BeginForm( "JoinLeague", "Dashboard", FormMethod.Post ) )
+    {
+                                    @Html.HiddenFor( f => f.OwnerIndexListingModel.Id )
+                                        <div class="input-group">
+
+                                            <select class="custom-select" id="selectedLeague"
+                                                    @Html.DropDownListFor( x => x.SelectLeague.SelectedLeagueId, new SelectList( Model.SelectLeague.Leagues, "Value", "Text" ), "- Select League -" )></select>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary"
+                                                        role="button"
+                                                        type="submit"
+                                                        value="Save">
+                                                    Join League
+                                                </button>
+                                            </div>
+                                        </div>
+                                        }
+                                    </div>
+                                    
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="col-md-9">
+                    @*this is an html helper - it creates an object that implements idisposable*@
+                    @using ( Html.BeginForm( "CreateFranchise", "Dashboard", FormMethod.Post ) )
+                    {
+                        @Html.HiddenFor( o => o.OwnerIndexListingModel.Id)
+                        <div>
+                            New Franchise Name:
+                            @Html.TextBoxFor( f => f.OwnerIndexListingModel.LastName)
+                            @*write out a text box and set attributes according to info in the model*@
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-success btn-lg">Create Franchise</button>
+                        </div>
+                    }
+                </div>
+                @*<form asp-action="CreateFranchise">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="@Model.Id" />
+                        <div class="form-group">
+                            <label asp-for="@Model.FranchiseName" class="control-label"></label>
+                            <input asp-for="@Model.FranchiseName" class="form-control" />
+                            <span asp-validation-for="@Model.FranchiseName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </form>*@
+
+            </div>
+        </div>
+    </div>
+</div>

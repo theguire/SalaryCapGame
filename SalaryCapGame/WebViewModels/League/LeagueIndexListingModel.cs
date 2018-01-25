@@ -14,5 +14,9 @@ namespace SalaryCapGame.WebViewModels
 
         public int CommissionerId { get; set; }
         public Owner Commissioner { get; set; }
+
+        public string LeagueInfo { get; set; }
+
+        public virtual IEnumerable<Franchise> Franchises { get; set; }
     }
 }

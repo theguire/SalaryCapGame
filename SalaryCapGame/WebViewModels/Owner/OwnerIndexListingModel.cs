@@ -11,15 +11,7 @@ namespace SalaryCapGame.WebViewModels
         public string Email { get; set; }
         public string ImageUrl { get; set; }
 
-        //public IEnumerable<Owner>Owners { get; set; }
-        //public IEnumerable<League>Leagues { get; set; }
         public IEnumerable<Franchise> Franchises { get; set; }
 
     }
-
-    //public class Franchise
-    //{
-    //    public string Name;
-    //    public string League;
-    //}
 }

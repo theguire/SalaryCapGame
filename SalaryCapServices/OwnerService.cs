@@ -7,8 +7,12 @@ using SalaryCapData.Models;
 namespace SalaryCapServices
 {
     public class OwnerService : IOwner
+
     {
         private GameDBContext _ownerDbContext;
+
+        //public IQueryable<Owner> Owners { get; }
+        public IQueryable<Owner> Owners => _ownerDbContext.Owners;
 
         public OwnerService( GameDBContext ownerDbContext )
         {
@@ -49,5 +53,11 @@ namespace SalaryCapServices
                             .Where( o => o.Owner.OwnerId == id );
         }
 
+        
+
+        public IQueryable<Franchise> FranchisesQ( int id )
+        {
+            return ( null );
+        }
     }
 }

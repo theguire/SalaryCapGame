@@ -4,6 +4,8 @@ using SalaryCapGame.WebViewModels;
 using SalaryCapData;
 using System.Threading.Tasks;
 using SalaryCapData.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace SalaryCapGame.Controllers
 {
@@ -12,6 +14,7 @@ namespace SalaryCapGame.Controllers
         private readonly IOwner _owners;
         private readonly IFranchise _franchises;
         private readonly ILeague _leagues;
+        public int PageSize = 4;
 
         public OwnerController( IOwner owners, IFranchise franchises, ILeague leagues )
         {
@@ -20,6 +23,8 @@ namespace SalaryCapGame.Controllers
             _leagues = leagues;
         }
 
+        //public ViewResult List() => View( _owners.Owners );
+        
         //List of all owners
         public IActionResult Index()
         {
@@ -45,29 +50,137 @@ namespace SalaryCapGame.Controllers
         public IActionResult Detail( int id )
         {
             var owner = _owners.Get( id );
-            var model = new OwnerDetailModel
+            var ownerModel = new OwnerIndexListingModel
             {
-                OwnerId = id,
-                OwnerFirstName = owner.FirstName,
-                OwnerLastName = owner.LastName,
-                Franchises = owner.Franchises,
-                //Leagues = _leagues.GetAll()
+                Id = owner.OwnerId,
+                FirstName = owner.FirstName,
+                LastName = owner.LastName,
+                Email = owner.Email,
                 ImageUrl = owner.ImageUrl,
-                NewFranchiseName = ""
+                Franchises = owner.Franchises
             };
 
+            var leagues = _leagues.GetAll();
+            var sll = new SelectLeagueModel
+            {
+                Leagues = leagues.Select( l => new SelectListItem
+                {
+                    Text = l.Name,
+                    Value = l.LeagueId.ToString()
+                } )
+
+            };
+
+
+            //var model = new OwnerDetailModel
+            //{
+            //    OwnerId = id,
+            //    OwnerFirstName = owner.FirstName,
+            //    OwnerLastName = owner.LastName,
+            //    Franchises = owner.Franchises,
+            //    ImageUrl = owner.ImageUrl,
+            //    SelectLeague = sll,
+            //    NewFranchiseName = ""
+            //};
+
+            var model = new OwnerDetailModel
+            {
+                OwnerIndexListingModel = ownerModel,
+            };
+            PopulateLeagueDropDownList();
             return ( View( model ) );
         }
 
+
+        private void PopulateLeagueDropDownList( object selectedLeague = null )
+        {
+            var leagues = _leagues.GetAll();
+            var leagueListingResult = leagues.Select( result => new LeagueIndexListingModel
+            {
+                Id = result.LeagueId,
+                Name = result.Name,
+                Commissioner = result.Commissioner,
+                LeagueInfo = result.Name 
+                                + " " 
+                                + result.Commissioner.FirstName 
+                                + " " 
+                                + result.Commissioner.LastName
+                                + " "
+                                + result.Franchises.Count().ToString() + "/10",
+                CommissionerId = result.CommissionerId
+            } );
+
+
+            ViewBag.LeagueID = new SelectList( leagueListingResult, "Name", "LeagueInfo",  selectedLeague );
+        }
+
+        //public ActionResult CreateNewFranchisePopUp()
+        //{
+        //    return View();
+        //}
+
+        //protected void SaveData( Object sender, EventArgs e )
+        //{
+        //    var  i = 0;
+        //}
         // POST: Franchise/CreateFranchise
         [HttpPost]
-        public IActionResult CreateFranchise( int OwnerId, string newFranchiseName )
+        public IActionResult CreateFranchise( int ownerId, string franchiseName )
         {
             Franchise franchise = new Franchise();
-            franchise.OwnerId = OwnerId;
-            franchise.Name = newFranchiseName;
+            franchise.OwnerId = ownerId;
+            franchise.Name = franchiseName;
             _franchises.Add( franchise );
-            return ( RedirectToAction( nameof( Detail ), new { id = OwnerId }));
+            return ( RedirectToAction( nameof( Detail ), new { id = ownerId }));
+        
+        }
+
+        public IActionResult CreateFranchise( int id )
+        {
+            EditFranchiseName editFranchise = new EditFranchiseName();
+            editFranchise.OwnerId = id;
+             return View( "CreateFranchise", editFranchise );
+
+        }
+
+        
+        public IActionResult JoinLeague( int leagueId, int franchiseId, int ownerId )
+        {
+            //int selectedLeagueId = detailModel.SelectLeague.SelectedLeagueId;
+            //int franchiseId = _franchises.Get( detailModel.OwnerIndexListingModel.Id ).FranchiseId;
+
+            _franchises.JoinLeague( franchiseId, leagueId );
+            return ( RedirectToAction( nameof( Detail ), new { id = ownerId } ) );
+            //return ( RedirectToAction( nameof( Detail ) ) );
+        }
+
+        [HttpPost]
+        public IActionResult JoinLeague( Franchise franchise )
+        {
+            //int selectedLeagueId = detailModel.SelectLeague.SelectedLeagueId;
+            //Franchise franchise = _franchises.Get( detailModel.OwnerIndexListingModel.Id );
+            //franchise.LeagueId = selectedLeagueId;
+            //franchise.League = _leagues.Get( selectedLeagueId );
+            //int franchiseId = _franchises.Get( detailModel.OwnerIndexListingModel.Id ).FranchiseId;
+
+            _franchises.UpdateFranchise( franchise );
+            //_franchises.JoinLeague( franchiseId, selectedLeagueId );
+            //return ( RedirectToAction( nameof( Detail ), new { id = OwnerId } ) );
+            return ( RedirectToAction( nameof( Detail ), new { id = franchise.OwnerId } ) );
+        }
+
+        public IActionResult LeagueDetail( int id )
+        {
+            var leagueModel = _leagues.Get( id );
+            var listingResult = new LeagueIndexListingModel()
+            {
+                Id = leagueModel.LeagueId,
+                Name = leagueModel.Name,
+                Commissioner = leagueModel.Commissioner
+
+            };
+
+            return View( leagueModel );
         }
         // GET:Franchise/New
         public IActionResult New()
@@ -103,5 +216,6 @@ namespace SalaryCapGame.Controllers
             }
             return View( owner );
         }
+
     }
 }
