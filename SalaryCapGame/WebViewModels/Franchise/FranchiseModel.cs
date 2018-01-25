@@ -7,8 +7,9 @@ namespace SalaryCapGame.WebViewModels
 {
     public class FranchiseModel
     {
-        public int Id { get; set; }
+        public int OwnerId { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
+        public int LeagueId { get; set; }
     }
 }

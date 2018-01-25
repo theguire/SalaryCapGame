@@ -17,8 +17,8 @@ namespace SalaryCapData.Models
         public string Name { get; set; }
 
         [Required]
-        public int CommissionerId { get; set; }
-        public Owner Commissioner { get; set; }
+        public Owner Commissioner;
+        
 
         public virtual IEnumerable<Franchise> Franchises { get; set; }
 

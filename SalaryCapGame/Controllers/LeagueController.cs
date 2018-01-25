@@ -21,7 +21,7 @@ namespace SalaryCapGame.Controllers
         public IActionResult Index()
         {
             var leagueModel = _leagues.GetAll();
-            var listingResult = leagueModel.Select( result => new LeagueIndexListingModel
+           var listingResult = leagueModel.Select( result => new LeagueIndexListingModel
             {
                 Id = result.LeagueId,
                 Name = result.Name,
@@ -40,7 +40,7 @@ namespace SalaryCapGame.Controllers
         public IActionResult Detail( int id )
         {
             var leagueModel = _leagues.Get( id );
-            var leagueDetail = new LeagueDetailModel()
+            var leagueDetail = new LeagueIndexListingModel()
             {
                 Id = id,
                 Name = leagueModel.Name,

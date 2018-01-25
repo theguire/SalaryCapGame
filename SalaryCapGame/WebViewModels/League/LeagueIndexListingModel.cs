@@ -12,7 +12,6 @@ namespace SalaryCapGame.WebViewModels
         public string Name { get; set; }
         public string ImageUrl { get; set; }
 
-        public int CommissionerId { get; set; }
         public Owner Commissioner { get; set; }
 
         public string LeagueInfo { get; set; }

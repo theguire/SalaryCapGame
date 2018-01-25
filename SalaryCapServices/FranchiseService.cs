@@ -11,8 +11,6 @@ namespace SalaryCapServices
 
         private GameDBContext _context;
 
-        public IQueryable<Franchise> Franchises => throw new System.NotImplementedException();
-
         public FranchiseService( GameDBContext context )
         {
             _context = context;
@@ -37,19 +35,18 @@ namespace SalaryCapServices
 
         }
 
-        public void UpdateFranchise( Franchise franchise )
+        public void Update( Franchise franchise )
         {
             _context.Update( franchise );
             _context.SaveChanges();
         }
 
-        public void JoinLeague( int leagueId, int franchiseId )
-        {
-            Franchise franchise = Get( franchiseId );
-            franchise.LeagueId = leagueId;
-            _context.Update( franchise );
-            _context.SaveChanges();
-        }
+        //public void JoinLeague( int leagueId, int franchiseId )
+        //{
+        //    Franchise franchise = Get( franchiseId );
+        //    franchise.LeagueId = leagueId;
+        //    Update( franchise );
+        //}
 
         public Owner Owner( int id )
         {

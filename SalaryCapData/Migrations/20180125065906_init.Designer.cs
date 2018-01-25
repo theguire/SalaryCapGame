@@ -11,9 +11,10 @@ using System;
 namespace SalaryCapData.Migrations
 {
     [DbContext(typeof(GameDBContext))]
-    partial class GameDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180125065906_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,6 +54,8 @@ namespace SalaryCapData.Migrations
                     b.Property<int>("LeagueId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CommissionerOwnerId");
+
                     b.Property<DateTime>("DateCreated");
 
                     b.Property<DateTime>("DateModified");
@@ -61,11 +64,9 @@ namespace SalaryCapData.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int?>("OwnerId");
-
                     b.HasKey("LeagueId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("CommissionerOwnerId");
 
                     b.ToTable("Leagues");
                 });
@@ -196,9 +197,10 @@ namespace SalaryCapData.Migrations
 
             modelBuilder.Entity("SalaryCapData.Models.League", b =>
                 {
-                    b.HasOne("SalaryCapData.Models.Owner")
+                    b.HasOne("SalaryCapData.Models.Owner", "Commissioner")
                         .WithMany("Leagues")
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("CommissionerOwnerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SalaryCapData.Models.PlayerAssignment", b =>

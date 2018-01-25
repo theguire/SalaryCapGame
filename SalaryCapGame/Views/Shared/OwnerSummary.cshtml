@@ -43,8 +43,8 @@
                         <form asp-action="JoinLeague" asp-route-id="@franchise" >
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
-                                <label asp-for="@franchise.LeagueId" class="control-label"></label>
-                                <select asp-for="@franchise.LeagueId" class="form-control" asp-items="ViewBag.LeagueID"></select>
+                                <label asp-for="@franchise.League.LeagueId" class="control-label"></label>
+                                <select asp-for="@franchise.League.LeagueId" class="form-control" asp-items="ViewBag.LeagueID"></select>
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="JoinLeague" class="btn btn-default" />
@@ -63,7 +63,7 @@
 else
 {
 
-                    <a asp-controller="League" asp-action="Detail" asp-route-id="@franchise.LeagueId">@franchise.League.Name</a><br />
+                    <a asp-controller="League" asp-action="Detail" asp-route-id="@franchise.League.LeagueId">@franchise.League.Name</a><br />
 
 }
                     </td>

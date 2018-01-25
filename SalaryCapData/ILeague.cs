@@ -9,16 +9,14 @@ namespace SalaryCapData
 {
     public interface ILeague
     {
-        IQueryable<Franchise> FranchisesQ { get; }
-        IQueryable<League> Leagues { get; }
-        
+        IEnumerable<League> GetAll();
         League Get( int id );
 
         void Add( League newLeague );
         string Name( int id );
         Owner Commissioner( int id );
 
-        IEnumerable<League> GetAll();
-        IEnumerable<Franchise> Teams( int id );
+        
+        IEnumerable<Franchise> Franchises( int id );
     }
 }

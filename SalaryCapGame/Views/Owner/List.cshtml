@@ -29,7 +29,7 @@
                             @foreach ( var franchise in o.Franchises )
                             {
                                 <a asp-action="FranchiseDetail" asp-route-id="@franchise.FranchiseId">@franchise.Name</a>
-                                <a asp-action="LeagueDetail" asp-route-id="@franchise.LeagueId?">@franchise.League?.Name</a><br />
+                                <a asp-action="LeagueDetail" asp-route-id="@franchise.League.LeagueId?">@franchise.League?.Name</a><br />
                             }
                         </td>
                     </tr>

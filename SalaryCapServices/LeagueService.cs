@@ -12,10 +12,6 @@ namespace SalaryCapServices
     {
         private GameDBContext _leagues;
 
-        public IQueryable<Franchise> FranchisesQ => throw new NotImplementedException();
-
-        public IQueryable<League> Leagues => throw new NotImplementedException();
-
         public LeagueService( GameDBContext context )
         {
             _leagues = context;
@@ -50,10 +46,10 @@ namespace SalaryCapServices
             return ( Get( id ).Commissioner );
         }
 
-        public IEnumerable<Franchise> Teams( int id )
+        public IEnumerable<Franchise> Franchises( int id )
         {
             return( Get( id ).Franchises );
         }
 
-     }
+    }
 }

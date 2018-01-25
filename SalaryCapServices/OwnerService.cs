@@ -11,9 +11,6 @@ namespace SalaryCapServices
     {
         private GameDBContext _ownerDbContext;
 
-        //public IQueryable<Owner> Owners { get; }
-        public IQueryable<Owner> Owners => _ownerDbContext.Owners;
-
         public OwnerService( GameDBContext ownerDbContext )
         {
             _ownerDbContext = ownerDbContext;
@@ -32,32 +29,46 @@ namespace SalaryCapServices
 
         public IEnumerable<Owner> GetAll()
         {
-            return( _ownerDbContext.Owners.Include( f => f.Franchises ).ThenInclude( f => f.League ) );
+            return ( _ownerDbContext.Owners
+                                    .Include( f => f.Franchises )
+                                    .Include( f => f.Leagues ) );
+ ;
             //.ThenInclude( f => f.League ));
 
         }
 
-        public virtual void AddFranchise( int id, string franchiseName)
+        public void Update( Owner owner )
         {
-            _ownerDbContext.Franchises.Add( new Franchise
-            {
-                OwnerId = id,
-                Name = franchiseName
-            } );
+            _ownerDbContext.Update( owner );
+            _ownerDbContext.SaveChanges();
         }
+
+        public bool OwnerExists( int id )
+        {
+            return _ownerDbContext.Owners.Any( e => e.OwnerId == id );
+        }
+
+        //public virtual void AddFranchise( int id, string franchiseName)
+        //{
+        //    _ownerDbContext.Franchises.Add( new Franchise
+        //    {
+        //        OwnerId = id,
+        //        Name = franchiseName
+        //    } );
+        //}
         public IEnumerable<Franchise> Franchises( int id )
         {
             return _ownerDbContext.Franchises
-                            .Include( f => f.Name )
                             .Include( f => f.League )
                             .Where( o => o.Owner.OwnerId == id );
         }
 
-        
-
-        public IQueryable<Franchise> FranchisesQ( int id )
+        public IEnumerable<League> Leagues( int id )
         {
-            return ( null );
+            return _ownerDbContext.Leagues
+                .Where( o => o.Commissioner.OwnerId == id );
         }
+
+
     }
 }

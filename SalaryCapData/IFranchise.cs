@@ -8,15 +8,13 @@ namespace SalaryCapData
 {
     public interface IFranchise
     {
-        IQueryable<Franchise> Franchises { get; }
         IEnumerable<Franchise> GetAll();
+        Franchise Get( int id );
 
         void Add( Franchise newFranchise );
-        Franchise Get( int id );
+        
         string Name( int id );
-        void UpdateFranchise( Franchise franchise );
-
-        void JoinLeague( int leagueId, int franchiseId );
+        void Update( Franchise franchise );
 
         Owner Owner( int id );
         League League( int id );

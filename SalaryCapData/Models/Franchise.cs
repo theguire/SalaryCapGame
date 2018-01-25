@@ -18,10 +18,8 @@ namespace SalaryCapData.Models
         public string Name { get; set; }
         public string ImageUrl { get; set; }
 
-        public int? LeagueId { get; set; }
         public virtual League League { get; set; }
 
-        public int OwnerId { get; set; }
         public virtual Owner Owner { get; set; }
 
         public DateTime DateCreated { get; set; }

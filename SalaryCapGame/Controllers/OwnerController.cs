@@ -60,16 +60,16 @@ namespace SalaryCapGame.Controllers
                 Franchises = owner.Franchises
             };
 
-            var leagues = _leagues.GetAll();
-            var sll = new SelectLeagueModel
-            {
-                Leagues = leagues.Select( l => new SelectListItem
-                {
-                    Text = l.Name,
-                    Value = l.LeagueId.ToString()
-                } )
+            //var leagues = _leagues.GetAll();
+            //var sll = new SelectLeagueModel
+            //{
+            //    Leagues = leagues.Select( l => new SelectListItem
+            //    {
+            //        Text = l.Name,
+            //        Value = l.LeagueId.ToString()
+            //    } )
 
-            };
+            //};
 
 
             //var model = new OwnerDetailModel
@@ -106,12 +106,11 @@ namespace SalaryCapGame.Controllers
                                 + " " 
                                 + result.Commissioner.LastName
                                 + " "
-                                + result.Franchises.Count().ToString() + "/10",
-                CommissionerId = result.CommissionerId
+                                + result.Franchises.Count().ToString() + "/10"
             } );
 
 
-            ViewBag.LeagueID = new SelectList( leagueListingResult, "Name", "LeagueInfo",  selectedLeague );
+            ViewBag.LeagueID = new SelectList( leagueListingResult, "Id", "LeagueInfo",  selectedLeague );
         }
 
         //public ActionResult CreateNewFranchisePopUp()
@@ -128,7 +127,7 @@ namespace SalaryCapGame.Controllers
         public IActionResult CreateFranchise( int ownerId, string franchiseName )
         {
             Franchise franchise = new Franchise();
-            franchise.OwnerId = ownerId;
+            franchise.Owner.OwnerId = ownerId;
             franchise.Name = franchiseName;
             _franchises.Add( franchise );
             return ( RedirectToAction( nameof( Detail ), new { id = ownerId }));
@@ -144,30 +143,30 @@ namespace SalaryCapGame.Controllers
         }
 
         
-        public IActionResult JoinLeague( int leagueId, int franchiseId, int ownerId )
-        {
-            //int selectedLeagueId = detailModel.SelectLeague.SelectedLeagueId;
-            //int franchiseId = _franchises.Get( detailModel.OwnerIndexListingModel.Id ).FranchiseId;
+        //public IActionResult JoinLeague( int leagueId, int franchiseId, int ownerId )
+        //{
+        //    //int selectedLeagueId = detailModel.SelectLeague.SelectedLeagueId;
+        //    //int franchiseId = _franchises.Get( detailModel.OwnerIndexListingModel.Id ).FranchiseId;
 
-            _franchises.JoinLeague( franchiseId, leagueId );
-            return ( RedirectToAction( nameof( Detail ), new { id = ownerId } ) );
-            //return ( RedirectToAction( nameof( Detail ) ) );
-        }
+        //    _franchises.JoinLeague( franchiseId, leagueId );
+        //    return ( RedirectToAction( nameof( Detail ), new { id = ownerId } ) );
+        //    //return ( RedirectToAction( nameof( Detail ) ) );
+        //}
 
-        [HttpPost]
-        public IActionResult JoinLeague( Franchise franchise )
-        {
-            //int selectedLeagueId = detailModel.SelectLeague.SelectedLeagueId;
-            //Franchise franchise = _franchises.Get( detailModel.OwnerIndexListingModel.Id );
-            //franchise.LeagueId = selectedLeagueId;
-            //franchise.League = _leagues.Get( selectedLeagueId );
-            //int franchiseId = _franchises.Get( detailModel.OwnerIndexListingModel.Id ).FranchiseId;
+        //[HttpPost]
+        //public IActionResult JoinLeague( Franchise franchise )
+        //{
+        //    //int selectedLeagueId = detailModel.SelectLeague.SelectedLeagueId;
+        //    //Franchise franchise = _franchises.Get( detailModel.OwnerIndexListingModel.Id );
+        //    //franchise.LeagueId = selectedLeagueId;
+        //    //franchise.League = _leagues.Get( selectedLeagueId );
+        //    //int franchiseId = _franchises.Get( detailModel.OwnerIndexListingModel.Id ).FranchiseId;
 
-            _franchises.UpdateFranchise( franchise );
-            //_franchises.JoinLeague( franchiseId, selectedLeagueId );
-            //return ( RedirectToAction( nameof( Detail ), new { id = OwnerId } ) );
-            return ( RedirectToAction( nameof( Detail ), new { id = franchise.OwnerId } ) );
-        }
+        //    _franchises.UpdateFranchise( franchise );
+        //    //_franchises.JoinLeague( franchiseId, selectedLeagueId );
+        //    //return ( RedirectToAction( nameof( Detail ), new { id = OwnerId } ) );
+        //    return ( RedirectToAction( nameof( Detail ), new { id = franchise.Owner.OwnerId } ) );
+        //}
 
         public IActionResult LeagueDetail( int id )
         {

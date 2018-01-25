@@ -6,13 +6,14 @@ namespace SalaryCapData
 {
     public interface IOwner
     {
-        IQueryable <Owner> Owners { get; }
-        IQueryable<Franchise> FranchisesQ( int id );
-        
+        IEnumerable<Owner> GetAll();
         Owner Get( int id );
         void Add( Owner newOwner );
+        void Update( Owner owner );
+        bool OwnerExists( int id );
 
-        IEnumerable<Owner> GetAll();
+        
         IEnumerable<Franchise> Franchises( int id );
+        IEnumerable<League> Leagues( int id );
     }
 }

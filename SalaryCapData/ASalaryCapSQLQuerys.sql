@@ -11,7 +11,7 @@ SELECT * FROM Owners
 
 
 INSERT INTO	
-	Leagues( [Name], [CommissionerId], DateCreated, DateModified )
+	Leagues( [Name], OwnerId, DateCreated, DateModified )
 VALUES
 	('Funky2', 1,  GETDATE(), GETDATE()  ),
 	('Peaknuckles', 2, GETDATE(), GETDATE()  ),

@@ -11,8 +11,8 @@ using System;
 namespace SalaryCapData.Migrations
 {
     [DbContext(typeof(GameDBContext))]
-    [Migration("20180110233722_init")]
-    partial class init
+    [Migration("20180125120428_added commissionid to league model-1")]
+    partial class addedcommissionidtoleaguemodel1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,8 @@ namespace SalaryCapData.Migrations
                     b.Property<DateTime>("DateCreated");
 
                     b.Property<DateTime>("DateModified");
+
+                    b.Property<string>("ImageUrl");
 
                     b.Property<int?>("LeagueId");
 
@@ -52,8 +54,6 @@ namespace SalaryCapData.Migrations
                     b.Property<int>("LeagueId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CommissionerId");
-
                     b.Property<DateTime>("DateCreated");
 
                     b.Property<DateTime>("DateModified");
@@ -62,9 +62,11 @@ namespace SalaryCapData.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<int?>("OwnerId");
+
                     b.HasKey("LeagueId");
 
-                    b.HasIndex("CommissionerId");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Leagues");
                 });
@@ -85,6 +87,8 @@ namespace SalaryCapData.Migrations
                         .IsRequired()
                         .HasColumnName("FirstName")
                         .HasMaxLength(50);
+
+                    b.Property<string>("ImageUrl");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -193,10 +197,9 @@ namespace SalaryCapData.Migrations
 
             modelBuilder.Entity("SalaryCapData.Models.League", b =>
                 {
-                    b.HasOne("SalaryCapData.Models.Owner", "Commissioner")
-                        .WithMany()
-                        .HasForeignKey("CommissionerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("SalaryCapData.Models.Owner")
+                        .WithMany("Leagues")
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("SalaryCapData.Models.PlayerAssignment", b =>

@@ -13,11 +13,11 @@
 //{
 //    public class FranchisesController : Controller
 //    {
-//        private readonly IFranchise _context;
+//        private readonly IFranchise _franchises;
 
-//        public FranchisesController( IFranchise context )
+//        public FranchisesController( IFranchise franchises )
 //        {
-//            _context = context;
+//            _franchises = franchises;
 //        }
 
 //        // GET: Franchises
@@ -25,7 +25,7 @@
 //        {
 //            //var gameDBContext = _context.Franchises.Include(f => f.League);
 //            //return View(await gameDBContext.ToListAsync());
-//            var franchiseModels = _context.GetAll();
+//            var franchiseModels = _franchises.GetAll();
 //            var listingResult = franchiseModels.Select( result => new FranchiseIndexListingModel
 //            {
 //                Id = result.FranchiseId,
@@ -44,54 +44,52 @@
 //        }
 
 //        // GET: Franchises/Details/5
-//        public async Task<IActionResult> Details(int? id)
+//        public IActionResult Details( int id )
 //        {
-//            return ( null );
-//            //if (id == null)
-//            //{
-//            //    return NotFound();
-//            //}
+//            if ( id == 0 )
+//            {
+//                return NotFound();
+//            }
 
-//            //var franchise = await _franchises.Owner.f .Franchises
-//            //    .Include(f => f.League)
-//            //    .SingleOrDefaultAsync(m => m.FranchiseId == id);
-//            //if (franchise == null)
-//            //{
-//            //    return NotFound();
-//            //}
+//            var franchise = _franchises.Get( id );
+                
+//            if ( franchise == null )
+//            {
+//                return NotFound();
+//            }
 
-//            //return View(franchise);
+//            return View( franchise );
 //        }
 
-//        // GET: Franchises/Create
-//        public IActionResult Create()
-//        {
-//            ViewData[ "LeagueId" ] = new SelectList( _franchises.League, "LeagueId", "Name" );
-//            return View();
-//        }
+//        //// GET: Franchises/Create
+//        //public IActionResult Create()
+//        //{
+//        //    ViewData[ "LeagueId" ] = new SelectList( _franchises.League, "LeagueId", "Name" );
+//        //    return View();
+//        //}
 
 //        // POST: Franchises/Create
 //        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
 //        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> Create([Bind("FranchiseId,Name,LeagueId,DateCreated,DateModified")] IFranchise franchise)
-//        {
-//            if ( ModelState.IsValid )
-//            {
-//                _context.Add( franchise );
-//                await _franchises.SaveChangesAsync();
-//                return RedirectToAction( nameof( Index ) );
-//            }
-//            ViewData[ "LeagueId" ] = new SelectList( _context.Leagues, "LeagueId", "Name", franchise.LeagueId );
-//            return View( franchise );
+//        //[HttpPost]
+//        //[ValidateAntiForgeryToken]
+//        //public async Task<IActionResult> Create( [Bind( "FranchiseId,Name,LeagueId,DateCreated,DateModified" )] IFranchise franchise )
+//        //{
+//        //    if ( ModelState.IsValid )
+//        //    {
+//        //        _franchises.Add( franchise );
+//        //        await _franchises.SaveChangesAsync();
+//        //        return RedirectToAction( nameof( Index ) );
+//        //    }
+//        //    ViewData[ "LeagueId" ] = new SelectList( _franchises.Leagues, "LeagueId", "Name", franchise.LeagueId );
+//        //    return View( franchise );
 
-//        }
+//        //}
 
 //        // GET: Franchises/Edit/5
-//        public async Task<IActionResult> Edit(int? id)
+//        public async Task<IActionResult> Edit( int? id )
 //        {
-//            if (id == null)
+//            if ( id == null )
 //            {
 //                return NotFound();
 //            }
@@ -110,23 +108,23 @@
 //        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 //        [HttpPost]
 //        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> Edit(int id, [Bind("FranchiseId,Name,LeagueId,DateCreated,DateModified")] Franchise franchise)
+//        public async Task<IActionResult> Edit( int id, [Bind( "FranchiseId,Name,LeagueId,DateCreated,DateModified" )] Franchise franchise )
 //        {
-//            if (id != franchise.FranchiseId)
+//            if ( id != franchise.FranchiseId )
 //            {
 //                return NotFound();
 //            }
 
-//            if (ModelState.IsValid)
+//            if ( ModelState.IsValid )
 //            {
 //                try
 //                {
-//                    //_context.Update(franchise);
-//                    //await _context.SaveChangesAsync();
+//                    _franchises.Update( franchise );
+                    
 //                }
-//                catch (DbUpdateConcurrencyException)
+//                catch ( DbUpdateConcurrencyException )
 //                {
-//                    if (!FranchiseExists(franchise.FranchiseId))
+//                    if ( !FranchiseExists( franchise.FranchiseId ) )
 //                    {
 //                        return NotFound();
 //                    }
@@ -135,45 +133,45 @@
 //                        throw;
 //                    }
 //                }
-//                return RedirectToAction(nameof(Index));
+//                return RedirectToAction( nameof( Index ) );
 //            }
-//          //  ViewData["LeagueId"] = new SelectList(_context.Leagues, "LeagueId", "Name", franchise.LeagueId);
-//            return View(franchise);
+//            //  ViewData["LeagueId"] = new SelectList(_context.Leagues, "LeagueId", "Name", franchise.LeagueId);
+//            return View( franchise );
 //        }
 
-//        // GET: Franchises/Delete/5
-//        public async Task<IActionResult> Delete(int? id)
+//        //// GET: Franchises/Delete/5
+//        //public async Task<IActionResult> Delete( int? id )
+//        //{
+//        //    if ( id == null )
+//        //    {
+//        //        return NotFound();
+//        //    }
+
+//        //    var franchise = await _context.Franchises
+//        //        .Include( f => f.League )
+//        //        .SingleOrDefaultAsync( m => m.FranchiseId == id );
+//        //    if ( franchise == null )
+//        //    {
+//        //        return NotFound();
+//        //    }
+
+//        //    return View( franchise );
+//        //}
+
+//        //// POST: Franchises/Delete/5
+//        //[HttpPost, ActionName( "Delete" )]
+//        //[ValidateAntiForgeryToken]
+//        //public async Task<IActionResult> DeleteConfirmed( int id )
+//        //{
+//        //    var franchise = await _context.Franchises.SingleOrDefaultAsync( m => m.FranchiseId == id );
+//        //    _context.Franchises.Remove( franchise );
+//        //    await _context.SaveChangesAsync();
+//        //    return RedirectToAction( nameof( Index ) );
+//        //}
+
+//        private bool FranchiseExists( int id )
 //        {
-//            if (id == null)
-//            {
-//                return NotFound();
-//            }
-
-//            var franchise = await _context.Franchises
-//                .Include( f => f.League )
-//                .SingleOrDefaultAsync( m => m.FranchiseId == id );
-//            if ( franchise == null )
-//            {
-//                return NotFound();
-//            }
-
-//            return View(franchise);
-//        }
-
-//        // POST: Franchises/Delete/5
-//        [HttpPost, ActionName("Delete")]
-//        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> DeleteConfirmed(int id)
-//        {
-//            var franchise = await _context.Franchises.SingleOrDefaultAsync(m => m.FranchiseId == id);
-//            _context.Franchises.Remove(franchise);
-//            await _context.SaveChangesAsync();
-//            return RedirectToAction(nameof(Index));
-//        }
-
-//        private bool FranchiseExists(int id)
-//        {
-//            return _context.Franchises.Any(e => e.FranchiseId == id);
+//            return _franchises.GetAll().Any( e => e.FranchiseId == id );
 //        }
 //    }
 //}

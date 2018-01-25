@@ -39,6 +39,7 @@ namespace SalaryCapData.Models
         }
 
         public virtual IEnumerable<Franchise> Franchises { get; set; }
+        public virtual IEnumerable<League> Leagues { get; set; }
 
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }

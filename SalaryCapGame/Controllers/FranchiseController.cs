@@ -39,16 +39,16 @@ namespace SalaryCapGame.Controllers
             return ( View( model ));
         }
 
-        [HttpPost]
-        public IActionResult JoinLeague( int leagueId, int franchiseId, int ownerId )
-        {
-            //int selectedLeagueId = detailModel.SelectLeague.SelectedLeagueId;
-            //int franchiseId = _franchises.Get( detailModel.OwnerIndexListingModel.Id ).FranchiseId;
+        //[HttpPost]
+        //public IActionResult JoinLeague( int leagueId, int franchiseId, int ownerId )
+        //{
+        //    //int selectedLeagueId = detailModel.SelectLeague.SelectedLeagueId;
+        //    //int franchiseId = _franchises.Get( detailModel.OwnerIndexListingModel.Id ).FranchiseId;
 
-            _franchises.JoinLeague( franchiseId, leagueId );
-            return ( RedirectToAction( nameof( Detail ), new { id = ownerId } ) );
-            //return ( RedirectToAction( nameof( Detail ) ) );
-        }
+        //    _franchises.JoinLeague( franchiseId, leagueId );
+        //    return ( RedirectToAction( nameof( Detail ), new { id = ownerId } ) );
+        //    //return ( RedirectToAction( nameof( Detail ) ) );
+        //}
 
 
 
@@ -96,19 +96,19 @@ namespace SalaryCapGame.Controllers
         //    return View( franchise );
         //}
 
-        private void PopulateLeagueDropDownList( object selectedLeague = null )
-        {
-            var leagues = _leagues.GetAll();
-            var leagueListingResult = leagues.Select( result => new LeagueIndexListingModel
-            {
-                Id = result.LeagueId,
-                Name = result.Name,
-                Commissioner = result.Commissioner,
-                CommissionerId = result.CommissionerId
-            } );
+        //private void PopulateLeagueDropDownList( object selectedLeague = null )
+        //{
+        //    var leagues = _leagues.GetAll();
+        //    var leagueListingResult = leagues.Select( result => new LeagueIndexListingModel
+        //    {
+        //        Id = result.LeagueId,
+        //        Name = result.Name,
+        //        Commissioner = result.Commissioner,
+        //        CommissionerId = result.Commissioner.OwnerId
+        //    } );
 
 
-            ViewBag.LeagueID = new SelectList( leagueListingResult, "Name", "Commissioner", selectedLeague );
-        }
+        //    ViewBag.LeagueID = new SelectList( leagueListingResult, "Name", "Commissioner", selectedLeague );
+        //}
     }
 }

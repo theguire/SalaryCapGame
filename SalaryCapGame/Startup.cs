@@ -78,8 +78,8 @@ namespace SalaryCapGame
             app.UseStaticFiles();
             app.UseMvc( routes =>
             {
-                routes.MapRoute( name: null, template: "", defaults: new { controller = "Owner", action = "Detail:int" } );
-                routes.MapRoute( name: null, template: "", defaults: new { controller = "Owner", action = "LeagueDetail:int" } );
+                //routes.MapRoute( name: null, template: "", defaults: new { controller = "Owner", action = "Detail:int" } );
+                //routes.MapRoute( name: null, template: "", defaults: new { controller = "Owners2", action = "Index" } );
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}" );

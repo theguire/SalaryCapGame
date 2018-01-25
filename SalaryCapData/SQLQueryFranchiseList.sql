@@ -1,11 +1,11 @@
 ﻿INSERT INTO
-	Owners( [FirstName], [LastName], [Email], DateCreated, DateModified )
+	Owners( [FirstName], [LastName], [Email], [ImageUrl], DateCreated, DateModified )
 VALUES 
-	('Meredith','Alonso','Alexander@mail.com', GETDATE(), GETDATE() ),
-	('Arturo','GytiS','Alexander@mail.com', GETDATE(), GETDATE()  ),
-	('Homer','Simpson','Alexander@mail.com', GETDATE(), GETDATE()  ),
-	('Guy','Goober','Alexander@mail.com', GETDATE(), GETDATE()  ),
-	('Goober','Gober','Alexander@mail.com', GETDATE(), GETDATE()  );
+	('Meredith','Alonso','Alexander@mail.com', 'images/owners/14untitled.png', GETDATE(), GETDATE() ),
+	('Arturo','GytiS','Alexander@mail.com', 'images/owners/14untitled.png', GETDATE(), GETDATE()  ),
+	('Homer','Simpson','Alexander@mail.com', 'images/owners/14untitled.png', GETDATE(), GETDATE()  ),
+	('Guy','Goober','Alexander@mail.com', 'images/owners/14untitled.png', GETDATE(), GETDATE()  ),
+	('Goober','Gober','Alexander@mail.com', 'images/owners/14untitled.png', GETDATE(), GETDATE()  );
 
 SELECT * FROM Owners
 

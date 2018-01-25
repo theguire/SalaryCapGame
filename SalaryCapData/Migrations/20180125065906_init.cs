@@ -7,7 +7,7 @@ namespace SalaryCapData.Migrations
 {
     public partial class init : Migration
     {
-        protected override void Up( MigrationBuilder migrationBuilder )
+        protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "Owners",
@@ -19,6 +19,7 @@ namespace SalaryCapData.Migrations
                     DateModified = table.Column<DateTime>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -45,7 +46,7 @@ namespace SalaryCapData.Migrations
                 {
                     LeagueId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CommissionerId = table.Column<int>(nullable: false),
+                    CommissionerOwnerId = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false)
@@ -54,8 +55,8 @@ namespace SalaryCapData.Migrations
                 {
                     table.PrimaryKey("PK_Leagues", x => x.LeagueId);
                     table.ForeignKey(
-                        name: "FK_Leagues_Owners_CommissionerId",
-                        column: x => x.CommissionerId,
+                        name: "FK_Leagues_Owners_CommissionerOwnerId",
+                        column: x => x.CommissionerOwnerId,
                         principalTable: "Owners",
                         principalColumn: "OwnerId",
                         onDelete: ReferentialAction.Cascade);
@@ -111,6 +112,7 @@ namespace SalaryCapData.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true),
                     LeagueId = table.Column<int>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     OwnerId = table.Column<int>(nullable: true)
@@ -190,9 +192,9 @@ namespace SalaryCapData.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Leagues_CommissionerId",
+                name: "IX_Leagues_CommissionerOwnerId",
                 table: "Leagues",
-                column: "CommissionerId");
+                column: "CommissionerOwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayerAssignmentDates_PlayerAssignmentId",

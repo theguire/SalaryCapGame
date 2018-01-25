@@ -1,4 +1,5 @@
-﻿using SalaryCapGame.WebViewModels;
+﻿using SalaryCapData.Models;
+using SalaryCapGame.WebViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace SalaryCapGame.WebViewModels
 {
     public class FranchiseLeagueModel
     {
-        FranchiseOwnerModel FranchiseOwnerModel { get; set; }
-        LeagueDetailModel LeagueDetail { get; set; }
+        public FranchiseModel FranchiseModel { get; set; }
+        public IEnumerable<LeagueIndexListingModel> Leagues { get; set; }
     }
 }

@@ -1,0 +1,75 @@
+﻿@model SalaryCapGame.WebViewModels.FranchiseLeagueModel
+
+@{
+    ViewData["Title"] = "Create";
+   // Layout = "~/Views/Franchises1/Index.cshtml";
+}
+
+<h2>Create</h2>
+
+<h4>Franchise</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FranchiseModel.Name" class="control-label"></label>
+                <input asp-for="FranchiseModel.Name" class="form-control" />
+                <span asp-validation-for="FranchiseModel.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FranchiseModel.ImageUrl" class="control-label"></label>
+                <input asp-for="FranchiseModel.ImageUrl" class="form-control" />
+                <span asp-validation-for="FranchiseModel.ImageUrl" class="text-danger"></span>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>League</th>
+                            <th>Commissioner</th>
+                            <th>Franchises / League Size</th>
+                        </tr>
+                    </thead>
+                        <tr>
+                            @foreach ( var l in Model.Leagues )
+                            {
+                            <td>
+                                <div class="form-group">
+                                    <label asp-for="@l.Name" class="control-label"></label>
+                                    <input type="radio" asp-for="@l.Name" value="@l.Id" class="form-control" />
+                                </div>
+                            </td>
+                            <td>@Html.DisplayFor( modelItem => l.Commissioner.FirstName + " " + l.Commissioner.LastName )</td>
+                            <td>@Html.DisplayFor( modelItem => l.LeagueInfo )</td>
+
+                            }
+                            <td></td>
+                        </tr>
+                    </table>
+</div>
+            @*<div class="form-group">
+                <label asp-for="DateCreated" class="control-label"></label>
+                <input asp-for="DateCreated" class="form-control" />
+                <span asp-validation-for="DateCreated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateModified" class="control-label"></label>
+                <input asp-for="DateModified" class="form-control" />
+                <span asp-validation-for="DateModified" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
