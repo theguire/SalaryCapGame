@@ -6,41 +6,75 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalaryCapData;
+using SalaryCapData.Interfaces;
 using SalaryCapData.Models;
+using SalaryCapGame.ViewModels;
 
 namespace SalaryCapGame.Controllers
 {
     public class OwnersController : Controller
     {
-        private readonly GameDBContext _context;
+        private readonly IOwner _owners;
+        private readonly ILeague _leagues;
 
-        public OwnersController(GameDBContext context)
+        public OwnersController( IOwner owners, ILeague leagues )
         {
-            _context = context;
+            _owners = owners;
+            _leagues = leagues;
         }
 
+
         // GET: Owners
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Owners.ToListAsync());
+           
+            var owners = _owners.GetAll();
+            var listingResult = owners.Select( o => new OwnerIndexListingModel
+            {
+                Id = o.Id,
+                Email = o.Email,
+                FirstName = o.FirstName,
+                LastName = o.LastName,
+                ImageUrl = o.ImageUrl,
+                Franchises = o.Franchises,
+                Leagues = o.Leagues
+            }).ToList();
+            var model = new OwnerIndexModel { Owners = listingResult };
+            return View( model );
         }
 
         // GET: Owners/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details( int id )
         {
-            if (id == null)
+            if ( id == 0 )
             {
                 return NotFound();
             }
 
-            var owner = await _context.Owners
-                .SingleOrDefaultAsync(m => m.OwnerId == id);
-            if (owner == null)
+            var owner = _owners.Get( id );
+            foreach ( Franchise f in owner.Franchises )
+            {
+                f.League = _leagues.Get( f.LeagueId );
+            }
+
+            //foreach ( League l in owner.Leagues )
+            
+
+            if ( owner == null )
             {
                 return NotFound();
             }
+            var result = new OwnerIndexListingModel
+            {
+                Id = owner.Id,
+                Email = owner.Email,
+                FirstName = owner.FirstName,
+                LastName = owner.LastName,
+                ImageUrl = owner.ImageUrl,
+                Franchises = owner.Franchises
+            };
 
-            return View(owner);
+            return View( result );
         }
 
         // GET: Owners/Create
@@ -54,31 +88,30 @@ namespace SalaryCapGame.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OwnerId,FirstName,LastName,Email,DateCreated,DateModified")] Owner owner)
+        public IActionResult Create( [Bind( "Id,FirstName,LastName,Email,ImageUrl,DateCreated,DateModified" )] Owner owner )
         {
-            if (ModelState.IsValid)
+            if ( ModelState.IsValid )
             {
-                _context.Add(owner);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _owners.Add( owner );
+                return RedirectToAction( nameof( Index ) );
             }
-            return View(owner);
+            return View( owner );
         }
 
         // GET: Owners/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit( int id )
         {
-            if (id == null)
+            if ( id == 0 )
             {
                 return NotFound();
             }
 
-            var owner = await _context.Owners.SingleOrDefaultAsync(m => m.OwnerId == id);
-            if (owner == null)
+            var owner = _owners.Get( id );
+            if ( owner == null )
             {
                 return NotFound();
             }
-            return View(owner);
+            return View( owner );
         }
 
         // POST: Owners/Edit/5
@@ -86,23 +119,22 @@ namespace SalaryCapGame.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OwnerId,FirstName,LastName,Email,DateCreated,DateModified")] Owner owner)
+        public IActionResult Edit( int id, [Bind( "Id,FirstName,LastName,Email,ImageUrl,DateCreated,DateModified" )] Owner owner )
         {
-            if (id != owner.OwnerId)
+            if ( id != owner.Id )
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if ( ModelState.IsValid )
             {
                 try
                 {
-                    _context.Update(owner);
-                    await _context.SaveChangesAsync();
+                    _owners.Update( owner );
                 }
-                catch (DbUpdateConcurrencyException)
+                catch ( DbUpdateConcurrencyException )
                 {
-                    if (!OwnerExists(owner.OwnerId))
+                    if ( !OwnerExists( owner.Id ) )
                     {
                         return NotFound();
                     }
@@ -111,43 +143,43 @@ namespace SalaryCapGame.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction( nameof( Index ) );
             }
-            return View(owner);
+            return View( owner );
         }
 
-        // GET: Owners/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: Owners/Delete/5
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var owner = await _context.Owners
-                .SingleOrDefaultAsync(m => m.OwnerId == id);
-            if (owner == null)
-            {
-                return NotFound();
-            }
+        //    var owner = await _context.Owners
+        //        .SingleOrDefaultAsync(m => m.Id == id);
+        //    if (owner == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(owner);
-        }
+        //    return View(owner);
+        //}
 
-        // POST: Owners/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var owner = await _context.Owners.SingleOrDefaultAsync(m => m.OwnerId == id);
-            _context.Owners.Remove(owner);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //// POST: Owners/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var owner = await _context.Owners.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.Owners.Remove(owner);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         private bool OwnerExists(int id)
         {
-            return _context.Owners.Any(e => e.OwnerId == id);
+            return _owners.Get( id ) != null;
         }
     }
 }

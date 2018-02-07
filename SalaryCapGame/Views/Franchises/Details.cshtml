@@ -1,11 +1,5 @@
 ﻿@model SalaryCapData.Models.Franchise
-
-@{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Owner/Index.cshtml";
-}
-
-<h2>Details</h2>
+<body>
 
 <div>
     <h4>Franchise</h4>
@@ -16,6 +10,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.DateCreated)
@@ -35,9 +35,17 @@
         <dd>
             @Html.DisplayFor(model => model.League.Name)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Owner.Email)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.FranchiseId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+</body>
+

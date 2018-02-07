@@ -1,4 +1,4 @@
-﻿@model SalaryCapGame.WebViewModels.OwnerDetailModel
+﻿@model SalaryCapGame.ViewModels.OwnerIndexListingModel
 
     <div class="container">
         <div class="page-header clearfix detailHeading">
@@ -17,11 +17,11 @@
         data-toggle="modal" data-target="editFranchiseName"
         data-whatever="@Model.NewFranchiseName" href="FranchiseNameModel">Create New Fracnhise</button>*@
         
-        <a asp-controller="Owner" asp-action="CreateFranchise" asp-route-id="@Model.OwnerIndexListingModel.Id">
+        <a asp-controller="Owner" asp-action="CreateFranchise" asp-route-id="@Model.Id">
             Create Franchise
         </a>
             @*<form asp-action="CreateFranchise" method="post" asp-route-id*@
-                  @Html.Partial( "OwnerSummary" , Model.OwnerIndexListingModel )
+                  @Html.Partial( "OwnerSummary" , Model )
 
 </div>
 @*<script type="text/javascript">

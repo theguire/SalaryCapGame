@@ -1,4 +1,4 @@
-﻿@model SalaryCapGame.WebViewModels.LeagueDetailModel
+﻿@model SalaryCapGame.ViewModels.LeagueIndexListingModel
 @{
 
 }
@@ -21,8 +21,9 @@
         @*<div class="row">*@
             @*<div class="col-md-8">
                 <div>*@
-                    <h3>League: @Model.Name</h3>
+                    <h3>@Model.Name</h3>
                     <h4>Commissioner: @Model.Commissioner.FirstName @Model.Commissioner.LastName</h4>
+                    <h4>Email: @Model.Commissioner.Email</h4>
                 @*</div>
             </div>*@
         @*</div>*@
@@ -32,16 +33,22 @@
                     <thead>
                         <tr>
                             <th>Teams</th>
+                            <th>Points</th>
+                            <th>Franchise Value</th>
+                            <th>Trades</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if ( Model.Franchises != null )
-                        {
+                        { 
                             foreach ( var franchise in @Model.Franchises )
                             {
-                                <tr>
-                                    <td><a asp-controller="Franchise" asp-action="Detail" asp-route-id="@franchise.FranchiseId">@franchise.Name</a></td>
-                                </tr>
+                        <tr>
+                            <td><a asp-controller="Franchise" asp-action="Detaisl" asp-route-id="@franchise.Id">@franchise.Name</a></td>
+                            <td>@Html.DisplayFor( modelItem => franchise.Points )</td>
+                            <td>@Html.DisplayFor( modelItem => franchise.Value )</td>
+                            <td>@Html.DisplayFor( modelItem => franchise.NumberOfTrades )</td>
+                        </tr>
                             }
                         }
                     </tbody>

@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SalaryCapData;
-using SalaryCapGame.WebViewModels;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using SalaryCapData.Interfaces;
+using SalaryCapGame.ViewModels;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SalaryCapGame.Controllers
 {
@@ -20,14 +16,16 @@ namespace SalaryCapGame.Controllers
 
         public IActionResult Index()
         {
-            var leagueModel = _leagues.GetAll();
-           var listingResult = leagueModel.Select( result => new LeagueIndexListingModel
+            var leagues = _leagues.GetAll();
+            var listingResult = leagues.Select( result => new LeagueIndexListingModel
             {
-                Id = result.LeagueId,
+                Id = result.Id,
                 Name = result.Name,
-                Commissioner = result.Commissioner
-
-            } );
+                CommissionerId = result.CommissionerId,
+                Commissioner = result.Commissioner,
+                Franchises = result.Franchises
+            } ).ToList();
+            
 
             var model = new LeagueIndexModel()
             {
@@ -45,7 +43,8 @@ namespace SalaryCapGame.Controllers
                 Id = id,
                 Name = leagueModel.Name,
                 Commissioner = leagueModel.Commissioner,
-                Franchises = leagueModel.Franchises
+                CommissionerId = leagueModel.CommissionerId,
+                Franchises = leagueModel.Franchises.OrderByDescending( f => f.Points )
             };
 
             return View( leagueDetail );
@@ -56,7 +55,7 @@ namespace SalaryCapGame.Controllers
             var leagueModel = _leagues.Get( id );
             var listingResult = new LeagueIndexListingModel()
             {
-                Id = leagueModel.LeagueId,
+                Id = leagueModel.Id,
                 Name = leagueModel.Name,
                 Commissioner = leagueModel.Commissioner
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SalaryCapData;
+using SalaryCapData.Interfaces;
 using SalaryCapData.Models;
 
 namespace SalaryCapServices
@@ -24,7 +25,7 @@ namespace SalaryCapServices
 
         public Owner Get( int id )
         {
-            return( GetAll().FirstOrDefault( o => ( o.OwnerId == id )));
+            return( GetAll().FirstOrDefault( o => ( o.Id == id )));
         }
 
         public IEnumerable<Owner> GetAll()
@@ -45,7 +46,7 @@ namespace SalaryCapServices
 
         public bool OwnerExists( int id )
         {
-            return _ownerDbContext.Owners.Any( e => e.OwnerId == id );
+            return _ownerDbContext.Owners.Any( e => e.Id == id );
         }
 
         //public virtual void AddFranchise( int id, string franchiseName)
@@ -60,15 +61,18 @@ namespace SalaryCapServices
         {
             return _ownerDbContext.Franchises
                             .Include( f => f.League )
-                            .Where( o => o.Owner.OwnerId == id );
+                            .Where( o => o.Owner.Id == id );
         }
 
         public IEnumerable<League> Leagues( int id )
         {
             return _ownerDbContext.Leagues
-                .Where( o => o.Commissioner.OwnerId == id );
+                .Where( o => o.Commissioner.Id == id );
         }
 
-
+        public bool Any()
+        {
+            return _ownerDbContext.Owners != null;
+        }
     }
 }

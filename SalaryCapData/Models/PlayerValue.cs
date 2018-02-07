@@ -6,7 +6,7 @@ namespace SalaryCapData.Models
 {
     public class PlayerValue
     {
-        public int PlayerValueId { get; set; }
+        public int Id { get; set; }
 
         public int PlayerId { get; set; }
         public int Date { get; set; }

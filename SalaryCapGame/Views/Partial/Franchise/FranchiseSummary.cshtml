@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SalaryCapData.Models.Franchise>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>@Html.DisplayNameFor( model => model.Name )</th>
+            <th>@Html.DisplayNameFor( model => model.League )</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ( var item in Model )
+        {
+        <tr>
+            <td>
+                <img src="~/@Url.Content( item.ImageUrl )" class="imageCell" />
+            </td>
+            <td>
+                <a asp-controller="Franchises" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+            </td>
+            <td>
+                <a asp-controller="League" asp-action="Detail" asp-route-id="@item.LeagueId">@item.League.Name</a>
+            </td>
+        </tr>
+       
+    }
+</table>

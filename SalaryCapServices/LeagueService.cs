@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using SalaryCapData;
+using SalaryCapData.Interfaces;
 using SalaryCapData.Models;
 
 namespace SalaryCapServices
@@ -25,14 +26,14 @@ namespace SalaryCapServices
 
         public League Get( int id )
         {
-            return ( GetAll().FirstOrDefault( f => f.LeagueId == id ) );
+            return ( GetAll().FirstOrDefault( f => f.Id == id ) );
         }
 
         public IEnumerable<League> GetAll()
         {
             return ( _leagues.Leagues
                                 .Include( l => l.Franchises )
-                                .Include( f => f.Commissioner ) );
+                                .Include( f => f.Commissioner ) ).OrderBy( l => l.Name );
         }
 
 
@@ -51,5 +52,15 @@ namespace SalaryCapServices
             return( Get( id ).Franchises );
         }
 
+        public void Update( League league )
+        {
+            _leagues.Update( league );
+            _leagues.SaveChanges();
+        }
+
+        public bool Any()
+        {
+            return _leagues.Leagues != null;
+        }
     }
 }

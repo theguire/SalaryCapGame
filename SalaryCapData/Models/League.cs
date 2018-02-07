@@ -8,7 +8,7 @@ namespace SalaryCapData.Models
 {
     public class League
     {
-        public int LeagueId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength( 50, MinimumLength = 1,

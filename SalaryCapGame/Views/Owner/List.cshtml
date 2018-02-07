@@ -18,7 +18,7 @@
                 {
                     <tr class="ownerRow">
                         <td class="">
-                            <a asp-controller="Owner" asp-action="Detail" asp-route-id="@o.OwnerId">
+                            <a asp-controller="Owner" asp-action="Detail" asp-route-id="@o.Id">
                                 <img src="@o.ImageUrl" class="imageCell" />
                             </a>
                         </td>
@@ -28,8 +28,8 @@
                         <td id="links">
                             @foreach ( var franchise in o.Franchises )
                             {
-                                <a asp-action="FranchiseDetail" asp-route-id="@franchise.FranchiseId">@franchise.Name</a>
-                                <a asp-action="LeagueDetail" asp-route-id="@franchise.League.LeagueId?">@franchise.League?.Name</a><br />
+                                <a asp-action="FranchiseDetail" asp-route-id="@franchise.Id">@franchise.Name</a>
+                                <a asp-action="LeagueDetail" asp-route-id="@franchise.League.Id?">@franchise.League?.Name</a><br />
                             }
                         </td>
                     </tr>

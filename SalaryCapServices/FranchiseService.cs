@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SalaryCapData;
+using SalaryCapData.Interfaces;
 using SalaryCapData.Models;
 
 namespace SalaryCapServices
@@ -11,7 +12,7 @@ namespace SalaryCapServices
 
         private GameDBContext _context;
 
-        public FranchiseService( GameDBContext context )
+               public FranchiseService( GameDBContext context )
         {
             _context = context;
         }
@@ -24,14 +25,14 @@ namespace SalaryCapServices
 
         public Franchise Get( int id )
         {
-            return ( GetAll().FirstOrDefault( f => f.FranchiseId == id ));
+            return ( GetAll().FirstOrDefault( f => f.Id == id ));
         }
 
         public IEnumerable<Franchise> GetAll()
         {
             return ( _context.Franchises
                                 .Include( f => f.League )
-                                .Include( f => f.Owner ) );
+                                .Include( f => f.Owner ) ).OrderBy( f => f.Id );
 
         }
 
@@ -63,5 +64,34 @@ namespace SalaryCapServices
             return ( Get( id ).Name );
         }
 
+        public int OwnerId( int id )
+        {
+            return Get( id ).OwnerId;
+        }
+
+        public int LeagueId( int id )
+        {
+            return Get( id ).LeagueId;
+        }
+
+        public bool Any( int id )
+        {
+            return Get( id ) != null;
+        }
+
+        long IFranchise.PointTotal( int id )
+        {
+            return Get( id ).Points;
+        }
+
+        decimal IFranchise.FranchiseValue( int id )
+        {
+            return Get( id ).Value;
+        }
+
+        int IFranchise.NumberOfTrades( int id )
+        {
+            return Get( id ).NumberOfTrades;
+        }
     }
 }

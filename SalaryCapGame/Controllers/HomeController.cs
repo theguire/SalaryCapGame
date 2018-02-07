@@ -1,7 +1,6 @@
 ﻿
 
 using Microsoft.AspNetCore.Mvc;
-using SalaryCapGame.WebViewModels;
 using System.Diagnostics;
 
 namespace SalaryCapGame.Controllers

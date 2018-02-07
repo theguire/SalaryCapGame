@@ -1,4 +1,4 @@
-﻿@model SalaryCapGame.WebViewModels.LeagueIndexModel
+﻿@model SalaryCapGame.ViewModels.LeagueIndexModel
 
 <div id="ownerIndexTable">
     <table class="table">
@@ -15,7 +15,7 @@
         <h3>All Leagues</h3>
         @foreach ( var l in Model.Leagues )
         {
-            @Html.Partial( "_LeagueSummary", l )
+            @Html.Partial( "/Views/Partial/League/LeagueSummary.cshtml", l )
         }
         </table>
 

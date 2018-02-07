@@ -12,8 +12,11 @@ namespace SalaryCapData.Models
         public int FranchiseId { get; set;  }
         [Required]
         public int PlayerId { get; set; }
+ //       [Required]
+        //public PlayerPosition PlayerPosition { get; set; }
+        [Required]
+        DateTime DateDrafted { get; set; }
+        DateTime DateDropped { get; set; }
 
-        public IEnumerable<PlayerAssignmentDate> PlayerAssignmentDates { get; set; }
-
-    }
+     }
 }

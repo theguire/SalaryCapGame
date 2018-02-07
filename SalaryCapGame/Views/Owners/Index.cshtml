@@ -1,59 +1,113 @@
-﻿@model IEnumerable<SalaryCapData.Models.Owner>
+﻿@model SalaryCapGame.ViewModels.OwnerIndexModel
 
-@{
-    ViewData["Title"] = "Index";
-}
+<!DOCTYPE html>
 
-<h2>Index</h2>
-
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<div id="ownerIndexTable">
+    @foreach ( var owner in Model.Owners )
+    {
+        @Html.Partial( "OwnerSummary", owner )
+        @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", owner.Franchises )
+        @*@foreach ( var franchise in owner.Franchises )
+        {
+            @Html.Partial( "/Views/Partial//Franchise/FranchiseSummary.cshtml", franchise )
+        }*@
+    }
+</div>
+@*</div><table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DateCreated)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DateModified)
-                </th>
+                <th>@Html.DisplayNameFor(model => model.Owners.FirstName)</th>
+                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach ( var item in Model.Owners )
+    {
         <tr>
+            <td>@Html.DisplayFor( modelItem => item.FirstName )</td>
+            <td>@Html.DisplayFor( modelItem => item.LastName )</td>
+            <td>@Html.DisplayFor( modelItem => item.Email )</td>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateModified)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.OwnerId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.OwnerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OwnerId">Delete</a>
-            </td>
+            <td></td>
         </tr>
+        
+        @foreach ( var f in item.Franchises )
+    {
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor( f => f.Name )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.ImageUrl )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.DateCreated )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.DateModified )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.League )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.Owner )
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+<tbody>
+                @foreach ( var f in item.Franchises)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor( f => f.Name )
+                    </td>
+                    <td>
+                        @Html.DisplayFor( modelItem => item.ImageUrl )
+                    </td>
+                    <td>
+                        @Html.DisplayFor( modelItem => item.DateCreated )
+                    </td>
+                    <td>
+                        @Html.DisplayFor( modelItem => item.DateModified )
+                    </td>
+                    <td>
+                        @Html.DisplayFor( modelItem => item.League.Name )
+                    </td>
+                    <td>
+                        @Html.DisplayFor( modelItem => item.Owner.Email )
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+
 }
+
+            </tr>
+    }
     </tbody>
-</table>
+</table>*@
+</body>
+</html>

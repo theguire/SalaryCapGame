@@ -1,48 +1,74 @@
-﻿@model SalaryCapData.Models.Owner
+﻿@model SalaryCapGame.ViewModels.OwnerIndexListingModel
 
-@{
-    ViewData["Title"] = "Details";
-}
 
-<h2>Profile Details</h2>
-<hr/>
-<container>
-    <div>
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor( model => model.FirstName )
-            </dt>
-            <dd>
-                @Html.DisplayFor( model => model.FirstName )
-            </dd>
-            <dt>
-                @Html.DisplayNameFor( model => model.LastName )
-            </dt>
-            <dd>
-                @Html.DisplayFor( model => model.LastName )
-            </dd>
-            <dt>
-                @Html.DisplayNameFor( model => model.Email )
-            </dt>
-            <dd>
-                @Html.DisplayFor( model => model.Email )
-            </dd>
-            <dt>
-                @Html.DisplayNameFor( model => model.DateCreated )
-            </dt>
-            <dd>
-                @Html.DisplayFor( model => model.DateCreated )
-            </dd>
-            <dt>
-                @Html.DisplayNameFor( model => model.DateModified )
-            </dt>
-            <dd>
-                @Html.DisplayFor( model => model.DateModified )
-            </dd>
-        </dl>
+
+<h4>Owner Dashboard</h4>
+
+<hr />
+@Html.Partial( "OwnerSummary", Model )
+@Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", Model.Franchises )
+@*@foreach ( var franchise in Model .Franchises )
+{
+    @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", franchise )
+}*@
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+@*<div class="row">
+        <div class="col">
+            @Html.DisplayNameFor( model => model.FirstName )
+        </div>
+        <div class="col">
+            @Html.DisplayFor( model => model.FirstName )
+        </div>
+    </div>*@
+
+@*<div class="row">
+        <div class="col">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor( model => model.FirstName )
+                </dt>
+                <dd>
+                    @Html.DisplayFor( model => model.FirstName )
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor( model => model.LastName )
+                </dt>
+                <dd>
+                    @Html.DisplayFor( model => model.LastName )
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor( model => model.Email )
+                </dt>
+                <dd>
+                    @Html.DisplayFor( model => model.Email )
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor( model => model.ImageUrl )
+                </dt>
+                <dd>
+                    @Html.DisplayFor( model => model.ImageUrl )
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor( model => model.DateCreated )
+                </dt>
+                <dd>
+                    @Html.DisplayFor( model => model.DateCreated )
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor( model => model.DateModified )
+                </dt>
+                <dd>
+                    @Html.DisplayFor( model => model.DateModified )
+                </dd>
+            </dl>
+        </div>
     </div>
     <div>
-        <a asp-action="Edit" asp-route-id="@Model.OwnerId">Edit</a> |
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
         <a asp-action="Index">Back to List</a>
-    </div>
-</container>
+    </div>*@
+
+

@@ -8,7 +8,7 @@ namespace SalaryCapData.Models
 {
     public class Franchise
     {
-        public int FranchiseId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Display( Name = "Franchise Name" )]
@@ -26,6 +26,10 @@ namespace SalaryCapData.Models
 
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
+
+        public long Points { get; set; }
+        public decimal Value { get; set; }
+        public int NumberOfTrades { get; set; }
 
        public IEnumerable<PlayerAssignment> Players { get; set; }
     }

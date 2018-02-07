@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SalaryCapData;
+using SalaryCapData.Interfaces;
 using SalaryCapServices;
 
 namespace SalaryCapGame
@@ -82,8 +83,9 @@ namespace SalaryCapGame
                 //routes.MapRoute( name: null, template: "", defaults: new { controller = "Owners2", action = "Index" } );
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}" );
+                    template: "{controller=Owners}/{action=Index}/{id?}" );
             });
+           
 
         }
     }

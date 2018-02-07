@@ -8,7 +8,7 @@ namespace SalaryCapData.Models
 {
     public class Player
     {
-        public int PlayerId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string PlayerName { get; set; }

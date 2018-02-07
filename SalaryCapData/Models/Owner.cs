@@ -7,7 +7,7 @@ namespace SalaryCapData.Models
 {
     public class Owner
     {
-        public int OwnerId { get; set; }
+        public int Id { get; set; }
 
         [Column( "FirstName" )]
         [Display( Name = "First Name" )]

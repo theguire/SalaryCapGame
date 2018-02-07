@@ -1,50 +1,24 @@
-﻿@model SalaryCapGame.WebViewModels.OwnerIndexListingModel
+﻿@model SalaryCapGame.ViewModels.OwnerIndexListingModel
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Dependency Injection</title>
-    <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*.min.css" />
-</head>
 
-    <body class=" m-1 p-1">
+    <body class="m-1 p-1">
         <table class="table table-condensed table-bordered table-striped">
             <thead>
-                @*<tr>
-                    <th></th>
-                    <th>Owner</th>
-                </tr>*@
-            </thead>
-            <tbody>
-                <tr class="">
-                    <td class="">
-                        <a asp-controller="Owner" asp-action="Detail" asp-route-id="@Model.Id">
-                            <img src="@Model.ImageUrl" class="imageCell" />
-                        </a>
-                    </td>
-
-                    <td class="">@Model.FirstName @Model.LastName</td>
-                </tr>
-            <thead>
                 <tr>
-                    <th>Franchise</th>
-                    <th>League</th>
+                    <th class="col">Owner</th>
+                    <th class="col"><a asp-action="Details" asp-controller="Owners" asp-route-id="@Model.Id">@Model.LastName, @Model.FirstName</a></th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ( var franchise in Model.Franchises )
-    {
-                <tr>
-                    <td>
-                        <a asp-controller="Franchise" asp-action="Detail" asp-route-id="@franchise.FranchiseId">@franchise.Name</a>
+          
+                    @*<td>
+                        <a asp-controller="Franchise" asp-action="Detail" asp-route-id="@franchise.Id">@franchise.Name</a>
                     </td>
                     <td>
                         <form asp-action="JoinLeague" asp-route-id="@franchise" >
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
-                                <label asp-for="@franchise.League.LeagueId" class="control-label"></label>
-                                <select asp-for="@franchise.League.LeagueId" class="form-control" asp-items="ViewBag.LeagueID"></select>
+                                <label asp-for="@franchise.League.Id" class="control-label"></label>
+                                <select asp-for="@franchise.League.Id" class="form-control" asp-items="ViewBag.LeagueID"></select>
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="JoinLeague" class="btn btn-default" />
@@ -57,23 +31,22 @@
                     @*<a asp-controller="Franchise" asp-action="JoinLeague" asp-route-id="@franchise.FranchiseId">
         Join League
     </a>*@
-                        <p>You must assign this franchise to a league before drafting players.</p>
+                        @*<p>You must assign this franchise to a league before drafting players.</p>
 
 }
 else
 {
 
-                    <a asp-controller="League" asp-action="Detail" asp-route-id="@franchise.League.LeagueId">@franchise.League.Name</a><br />
+                    <a asp-controller="League" asp-action="Detail" asp-route-id="@franchise.League.Id">@franchise.League.Name</a><br />
 
 }
                     </td>
 
-                    </tr>
+                    </tr>*@
 
-}
+@*}*@
 
-            </tbody>
+
         </table>
     </body>
 
-</html>
