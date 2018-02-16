@@ -1,22 +1,23 @@
 ﻿@model SalaryCapGame.ViewModels.LeagueIndexModel
 
-<div id="ownerIndexTable">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>League</th>
-                @*<th>Date Created</th>
-                    <th>DateModified</th>*@
-                <th>Commissioner</th>
-                <th>Email</th>
-                <th></th>
-            </tr>
-        </thead>
-        <h3>All Leagues</h3>
-        @foreach ( var l in Model.Leagues )
-        {
-            @Html.Partial( "/Views/Partial/League/LeagueSummary.cshtml", l )
-        }
+    <h3>All Leagues</h3>
+    <div id="ownerIndexTable">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>League</th>
+                    @*<th>Date Created</th>
+                        <th>DateModified</th>*@
+                    <th>Commissioner</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            @foreach ( var l in Model.Leagues )
+            {
+                @Html.Partial( "/Views/Partial/League/LeagueSummary.cshtml", l )
+            }
         </table>
 
-</div>
+    </div>

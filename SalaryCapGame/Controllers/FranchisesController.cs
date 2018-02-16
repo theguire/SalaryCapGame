@@ -61,11 +61,20 @@ namespace SalaryCapGame.Controllers
         }
 
         // GET: Franchises/Create
-        public IActionResult Create()
+        public IActionResult Create( int id )
         {
-            ViewData["LeagueId"] = new SelectList( _leagues.GetAll(), "Id", "Name");
-//            ViewData["OwnerId"] = new SelectList(_franchises.Owners, "Id", "Email");
-            return View();
+            //ViewData[ "LeagueId" ] = new SelectList( _leagues.GetAll(), "Id", "Name" );
+            ViewData[ "Leagues" ] = BuildLeaguesList();
+            var editFranchiseModel = new EditFranchiseModel
+            {
+                OwnerId = id,
+                ImageUrl = "",
+                Name = "",
+        };
+            
+            //            ViewData["OwnerId"] = new SelectList(_franchises.Owners, "Id", "Email");
+            
+            return View( editFranchiseModel );
         }
 
         // POST: Franchises/Create
@@ -73,16 +82,25 @@ namespace SalaryCapGame.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create( [Bind( "Id,Name,ImageUrl,LeagueId,OwnerId,DateCreated,DateModified" )] Franchise franchise )
+        public IActionResult Create( [Bind( "Id,Name,ImageUrl,LeagueId,OwnerId,DateCreated,DateModified" )] EditFranchiseModel franchiseModel, int selectedLeagueId )
         {
             if ( ModelState.IsValid )
             {
+                var franchise = new Franchise
+                {
+                    ImageUrl = franchiseModel.ImageUrl,
+                    Name = franchiseModel.Name,
+                    LeagueId = selectedLeagueId,
+                    OwnerId = franchiseModel.OwnerId,
+                    NumberOfTrades = 3,
+                    Value = 50
+                };
                 _franchises.Add( franchise );
                 return RedirectToAction( nameof( Index ) );
             }
-            ViewData[ "LeagueId" ] = new SelectList( _leagues.GetAll(), "Id", "Name", franchise.LeagueId );
+            //ViewData[ "LeagueId" ] = new SelectList( _leagues.GetAll(), "Id", "Name", franchise.LeagueId );
             // ViewData["OwnerId"] = new SelectList(_franchises.Owners, "Id", "Email", franchise.OwnerId);
-            return View( franchise );
+            return View( franchiseModel );
         }
 
         // GET: Franchises/Edit/5
@@ -169,6 +187,39 @@ namespace SalaryCapGame.Controllers
         //    await _franchises.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
+        
+        private void PopulateLegauesDropDownList( object selectedLeague = null )
+        {
+            var leagues = from l in _leagues.GetAll() orderby l.Name select l;
+            var selectLeagues = leagues.Select( l => new LeagueListingModel
+            {
+                Id = l.Id,
+                NumberOfFranchises = l.Franchises.Count(),
+                MaxLeagueSize = 10,
+                Commissioner = l.Commissioner,
+                CommissionerId = l.CommissionerId,
+                Name = l.Name + " " + l.Franchises.Count().ToString() + " / " + "10 " + l.Commissioner.FirstName + " " + l.Commissioner.LastName
+            } ).ToList();
+            ViewData["LeagueId"] = new SelectList( selectLeagues, "Id", "Name", selectedLeague );
+        }
+
+        private IEnumerable<LeagueListingModel> BuildLeaguesList( object selectedLeague = null )
+        {
+            var leagues = from l in _leagues.GetAll() orderby l.Name select l;
+            var selectLeagues = leagues.Select( l => new LeagueListingModel
+            {
+                Id = l.Id,
+                NumberOfFranchises = l.Franchises.Count(),
+                MaxLeagueSize = 10,
+                Commissioner = l.Commissioner,
+                CommissionerId = l.CommissionerId,
+                Name = l.Name
+            } ).ToList();
+
+            return ( selectLeagues );
+
+        }
+
 
         private bool FranchiseExists( int id )
         {

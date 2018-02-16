@@ -1,32 +1,14 @@
 ﻿@model SalaryCapGame.ViewModels.LeagueIndexListingModel
-@{
-
-}
-
-@*@section Scripts{
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-}
-
-@section Styles{
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-}*@
 
 <div class="container">
     <div class="header clearfix detailHeading">
         <h2 class="text-muted">League Information</h2>
     </div>
     <div class="jumbotron">
-        @*<div class="row">*@
-            @*<div class="col-md-8">
-                <div>*@
-                    <h3>@Model.Name</h3>
-                    <h4>Commissioner: @Model.Commissioner.FirstName @Model.Commissioner.LastName</h4>
-                    <h4>Email: @Model.Commissioner.Email</h4>
-                @*</div>
-            </div>*@
-        @*</div>*@
+        <h1>@Model.LeagueListingModel.Name</h1>
+        <hr />
+        <h5><a asp-controller="Owners" asp-action="View" asp-route-id="@Model.LeagueListingModel.Id">@Model.LeagueListingModel.Commissioner.FirstName @Model.LeagueListingModel.Commissioner.LastName</a></h5>
+        <h5>Email: @Model.LeagueListingModel.Commissioner.Email</h5>
         <div class="row">
             <div class="col-lg-6">
                 <table class="table table-bordered table-hover table-condensed">
@@ -40,16 +22,34 @@
                     </thead>
                     <tbody>
                         @if ( Model.Franchises != null )
-                        { 
+                        {
+                            long leaguePoints = 0;
+                            decimal leagueValue = 0;
                             foreach ( var franchise in @Model.Franchises )
                             {
-                        <tr>
-                            <td><a asp-controller="Franchise" asp-action="Detaisl" asp-route-id="@franchise.Id">@franchise.Name</a></td>
-                            <td>@Html.DisplayFor( modelItem => franchise.Points )</td>
-                            <td>@Html.DisplayFor( modelItem => franchise.Value )</td>
-                            <td>@Html.DisplayFor( modelItem => franchise.NumberOfTrades )</td>
-                        </tr>
+                                <tr>
+                                    <td><a asp-controller="Franchise" asp-action="Details" asp-route-id="@franchise.Id">@franchise.Name</a></td>
+                                    <td style="text-align:right;">@String.Format( "{0,6:n}", franchise.Points )</td>
+                                    <td style="text-align:right;">@String.Format( "{0,6:c}", franchise.Value )</td>
+                                    <td style="text-align:center">@Html.DisplayFor( modelItem => franchise.NumberOfTrades )</td>
+                                    @{
+                                        leaguePoints += franchise.Points;
+                                        leagueValue += franchise.Value;
+                                    }
+                               </tr>
                             }
+                            <tr>
+                                <td>Totals</td>
+                                <td style="text-align:right;">@String.Format( "{0,6:n}", leaguePoints )</td>
+                                <td style="text-align:right;">@String.Format( "{0,6:c}", leagueValue )</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Rank (2021)</td>
+                                <td style="text-align:right;">@Html.Raw( "199".ToString() )</td>
+                                <td style="text-align:right;">@Html.Raw( "331" )</td>
+                                <td></td>
+                            </tr>
                         }
                     </tbody>
                 </table>

@@ -83,7 +83,7 @@ namespace SalaryCapGame
                 //routes.MapRoute( name: null, template: "", defaults: new { controller = "Owners2", action = "Index" } );
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Owners}/{action=Index}/{id?}" );
+                    template: "{controller=Owners}/{action=OwnersList}/{id?}" );
             });
            
 

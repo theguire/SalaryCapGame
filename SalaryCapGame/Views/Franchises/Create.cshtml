@@ -1,8 +1,5 @@
-﻿@model SalaryCapData.Models.Franchise
+﻿@model SalaryCapGame.ViewModels.EditFranchiseModel
 
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 
@@ -13,40 +10,110 @@
 </head>
 <body>
 
-<h4>Franchise</h4>
+<h4>Create Franchise</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <label asp-for="@Model.Name" class="control-label">Franchise Name</label>
+                <input asp-for="@Model.Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+            <div class="form-group" hidden>
+                <label asp-for="@Model.OwnerId" class="control-label">OwnerId</label>
+                <input asp-for="@Model.OwnerId" class="form-control" />
+                <span asp-validation-for="OwnerId" class="text-danger"></span>
+            </div>
             <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
+                <label asp-for="@Model.ImageUrl" class="control-label"></label>
+                <input asp-for="@Model.ImageUrl" class="form-control" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LeagueId" class="control-label"></label>
-                <select asp-for="LeagueId" class ="form-control" asp-items="ViewBag.LeagueId"></select>
+                @*<div class="row">
+                                @Html.Display( "Name" );
+                                @Html.Display( "Private?" );
+                                @Html.Display( "# of Franchises" );
+                                @Html.Display( "League Size" );
+                                @Html.Display( "Commissioner" );
+                            </div>
+                            <div class="row">
+                                @foreach ( var l in Model.selectedLeague )
+                {
+                                @Html.RadioButtonFor( sl => l.Id, l );
+            }*@
+
+                <table class="table">
+
+                    @*<thead>
+                    <tr>
+                        <th rowspan="1"></th>
+                        <th colspan="7"></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>@Html.DisplayNameFor( l => l.selectedLeague.First().Name )</th>
+                        <th>@Html.DisplayNameFor( l => l.selectedLeague.First().IsPrivate )</th>
+                        <th>@Html.DisplayNameFor( l => l.selectedLeague.First().NumberOfFranchises )</th>
+                        <th>@Html.DisplayNameFor( l => l.selectedLeague.First().MaxLeagueSize )</th>
+                        <th>@Html.DisplayNameFor( l => l.selectedLeague.First().Commissioner )</th>
+                        <th></th>
+                    </tr>
+                </thead>*@
+
+                    <tbody>
+
+                        @{
+                    IEnumerable<SalaryCapGame.ViewModels.LeagueListingModel> leagues = ViewBag.Leagues;
+
+                    foreach ( var l in leagues )
+                    {
+                        <tr>
+
+                            <td><input type="radio" name="selectedLeagueId" value="@l.Id" />>
+                            <td>@l.Name</td>
+                            <td>@(l.IsPrivate ? "Private" : "Public")</td>
+                            <td>@l.NumberOfFranchises.ToString()</td>
+                            <td>@l.MaxLeagueSize.ToString()</td>
+                            <td>@l.Commissioner.FirstName</td>
+                            <td>@l.Commissioner.LastName</td>
+                        </tr>
+            }
+            @*<td>@Html.RadioButtonFor( sl => l.Id, "" )</td>
+        <td>@l.Name</td>
+        <td>@(l.IsPrivate ? "Private" : "Public")</td>
+        <td>@l.NumberOfFranchises.ToString()</td>
+        <td>@l.MaxLeagueSize.ToString()</td>
+        <td>@l.Commissioner.FirstName</td>
+        <td>@l.Commissioner.LastName</td>*@
+            @*<td>@Html.DisplayFor( sl => l.Name )</td>
+        <td>@Html.DisplayFor( sl => l.IsPrivate )</td>
+        <td>@Html.DisplayFor( sl => l.NumberOfFranchises )</td>
+        <td>@Html.DisplayFor( sl => l.MaxLeagueSize )</td>
+        <td>@Html.DisplayFor( sl => l.Commissioner.FirstName )
+            @Html.DisplayFor( sl => l.Commissioner.LastName  )</td>*@
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+                @*<select asp-for="LeagueId" class ="form-control" asp-items="ViewBag.LeagueId"></select>*@
+                @*<select asp-for="LeagueId" class="form-control" asp-items="ViewBag.LeagueId"></select>*@
             </div>
-            <div class="form-group">
-                <label asp-for="OwnerId" class="control-label"></label>
-                <select asp-for="OwnerId" class ="form-control" asp-items="ViewBag.OwnerId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateCreated" class="control-label"></label>
-                <input asp-for="DateCreated" class="form-control" />
-                <span asp-validation-for="DateCreated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateModified" class="control-label"></label>
-                <input asp-for="DateModified" class="form-control" />
-                <span asp-validation-for="DateModified" class="text-danger"></span>
-            </div>
+            @*<div class="form-group">
+            <label asp-for="DateCreated" class="control-label"></label>
+            <input asp-for="DateCreated" class="form-control" />
+            <span asp-validation-for="DateCreated" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DateModified" class="control-label"></label>
+            <input asp-for="DateModified" class="form-control" />
+            <span asp-validation-for="DateModified" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

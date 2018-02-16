@@ -25,7 +25,7 @@ namespace SalaryCapGame.Controllers
 
 
         // GET: Owners
-        public IActionResult Index()
+        public IActionResult OwnersList()
         {
            
             var owners = _owners.GetAll();
@@ -59,7 +59,6 @@ namespace SalaryCapGame.Controllers
 
             //foreach ( League l in owner.Leagues )
             
-
             if ( owner == null )
             {
                 return NotFound();
@@ -71,7 +70,8 @@ namespace SalaryCapGame.Controllers
                 FirstName = owner.FirstName,
                 LastName = owner.LastName,
                 ImageUrl = owner.ImageUrl,
-                Franchises = owner.Franchises
+                Franchises = owner.Franchises,
+                Leagues = owner.Leagues
             };
 
             return View( result );
@@ -93,7 +93,7 @@ namespace SalaryCapGame.Controllers
             if ( ModelState.IsValid )
             {
                 _owners.Add( owner );
-                return RedirectToAction( nameof( Index ) );
+                return RedirectToAction( nameof( OwnersList ) );
             }
             return View( owner );
         }
@@ -143,7 +143,7 @@ namespace SalaryCapGame.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction( nameof( Index ) );
+                return RedirectToAction( nameof( OwnersList ) );
             }
             return View( owner );
         }

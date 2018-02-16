@@ -29,15 +29,6 @@ namespace SalaryCapData.Models
 
         public string ImageUrl { get; set; }
 
-        [Display( Name = "Full Name" )]
-        string FullName
-        {
-            get
-            {
-                return LastName + ", " + FirstName;
-            }
-        }
-
         public virtual IEnumerable<Franchise> Franchises { get; set; }
         public virtual IEnumerable<League> Leagues { get; set; }
 

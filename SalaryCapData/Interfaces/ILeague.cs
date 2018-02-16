@@ -22,5 +22,6 @@ namespace SalaryCapData.Interfaces
 
         
         IEnumerable<Franchise> Franchises( int id );
+        //int GetNumberOfFranchises( int id );
     }
 }

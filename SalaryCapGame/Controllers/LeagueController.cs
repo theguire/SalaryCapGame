@@ -19,11 +19,15 @@ namespace SalaryCapGame.Controllers
             var leagues = _leagues.GetAll();
             var listingResult = leagues.Select( result => new LeagueIndexListingModel
             {
-                Id = result.Id,
-                Name = result.Name,
-                CommissionerId = result.CommissionerId,
-                Commissioner = result.Commissioner,
+                LeagueListingModel = new LeagueListingModel
+                {
+                    Id = result.Id,
+                    Name = result.Name,
+                    CommissionerId = result.CommissionerId,
+                    Commissioner = result.Commissioner,
+                },
                 Franchises = result.Franchises
+
             } ).ToList();
             
 
@@ -40,10 +44,13 @@ namespace SalaryCapGame.Controllers
             var leagueModel = _leagues.Get( id );
             var leagueDetail = new LeagueIndexListingModel()
             {
-                Id = id,
-                Name = leagueModel.Name,
-                Commissioner = leagueModel.Commissioner,
-                CommissionerId = leagueModel.CommissionerId,
+                LeagueListingModel = new LeagueListingModel
+                {
+                    Id = id,
+                    Name = leagueModel.Name,
+                    Commissioner = leagueModel.Commissioner,
+                    CommissionerId = leagueModel.CommissionerId,
+                },
                 Franchises = leagueModel.Franchises.OrderByDescending( f => f.Points )
             };
 
@@ -53,7 +60,7 @@ namespace SalaryCapGame.Controllers
         public IActionResult Summary( int id )
         {
             var leagueModel = _leagues.Get( id );
-            var listingResult = new LeagueIndexListingModel()
+            var listingResult = new LeagueListingModel()
             {
                 Id = leagueModel.Id,
                 Name = leagueModel.Name,
@@ -63,5 +70,6 @@ namespace SalaryCapGame.Controllers
 
             return View( leagueModel );
         }
+
     }
 }

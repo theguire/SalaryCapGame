@@ -19,6 +19,12 @@ namespace SalaryCapData.Models
         [Required]
         public int CommissionerId { get; set; }
         public Owner Commissioner { get; set; }
+
+        public int MaxNumberFranchises { get; set; }
+        public bool IsPrivate { get; set; }
+
+        public int Points { get; set; }
+        public decimal Value { get; set; }
         
 
         public virtual IEnumerable<Franchise> Franchises { get; set; }

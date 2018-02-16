@@ -28,5 +28,8 @@ namespace SalaryCapData.Interfaces
         decimal FranchiseValue( int id );
         int NumberOfTrades( int id );
 
+        IEnumerable<Franchise> GetAllByOwnerId( int ownerId );
+        
+
     }
 }

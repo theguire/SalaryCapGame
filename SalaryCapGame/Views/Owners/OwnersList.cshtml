@@ -1,0 +1,44 @@
+﻿@model SalaryCapGame.ViewModels.OwnerIndexModel 
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 pull-left">
+            <h4>Owner</h4>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 pull-left">
+
+                <h4>League</h4>
+            </div>
+            <div class="col-lg-2 pull-left">
+                <h4>Franchise</h4>
+            </div>
+            <div class="col-lg-2 pull-left">
+                <h4>Value</h4>
+            </div>
+            <div class="col-lg-2 pull-left">
+                <h4>Points</h4>
+            </div>
+
+        </div>
+        
+
+        @foreach ( var owner in Model.Owners )
+    {
+        <div class="row">
+            <div class="col-md-2 pull-left">
+                <a asp-action="Details" asp-controller="Owners" asp-route-id=@owner.Id>@owner.LastName, @owner.FirstName</a>
+            </div>
+
+            @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", owner.Franchises )
+        </div>
+        @*@if ( owner.Leagues != null )
+        {
+            @Html.Partial( "/Views/Partial/League/LeagueListing.cshtml", owner.Leagues )
+
+        }*@
+
+
+}
+</div>
+        </div>

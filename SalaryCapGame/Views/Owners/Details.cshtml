@@ -2,29 +2,18 @@
 
 
 
-<h4>Owner Dashboard</h4>
+<h4>Owner Profile</h4>
 
-<hr />
-@Html.Partial( "OwnerSummary", Model )
-@Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", Model.Franchises )
-@*@foreach ( var franchise in Model .Franchises )
-{
-    @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", franchise )
-}*@
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
-@*<div class="row">
+<div class="row">
         <div class="col">
             @Html.DisplayNameFor( model => model.FirstName )
         </div>
         <div class="col">
             @Html.DisplayFor( model => model.FirstName )
         </div>
-    </div>*@
+    </div>
 
-@*<div class="row">
+<div class="row">
         <div class="col">
             <dl class="dl-horizontal">
                 <dt>
@@ -51,24 +40,24 @@
                 <dd>
                     @Html.DisplayFor( model => model.ImageUrl )
                 </dd>
-                <dt>
+                @*<dt>
                     @Html.DisplayNameFor( model => model.DateCreated )
                 </dt>
                 <dd>
                     @Html.DisplayFor( model => model.DateCreated )
-                </dd>
-                <dt>
+                </dd>*@
+                @*<dt>
                     @Html.DisplayNameFor( model => model.DateModified )
                 </dt>
                 <dd>
                     @Html.DisplayFor( model => model.DateModified )
-                </dd>
+                </dd>*@
             </dl>
         </div>
     </div>
     <div>
         <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
         <a asp-action="Index">Back to List</a>
-    </div>*@
+    </div>
 
 

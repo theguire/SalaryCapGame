@@ -36,6 +36,10 @@ namespace SalaryCapServices
 
         }
 
+        //public int GetNumberOfFranchises( int id )
+        //{
+        //    //return Get( id ).C
+        //}
         public void Update( Franchise franchise )
         {
             _context.Update( franchise );
@@ -79,19 +83,24 @@ namespace SalaryCapServices
             return Get( id ) != null;
         }
 
-        long IFranchise.PointTotal( int id )
+        public long PointTotal( int id )
         {
             return Get( id ).Points;
         }
 
-        decimal IFranchise.FranchiseValue( int id )
+        public decimal FranchiseValue( int id )
         {
             return Get( id ).Value;
         }
 
-        int IFranchise.NumberOfTrades( int id )
+        public int NumberOfTrades( int id )
         {
             return Get( id ).NumberOfTrades;
+        }
+
+        public IEnumerable<Franchise> GetAllByOwnerId( int ownerId )
+        {
+            return ( GetAll().Where( f => f.OwnerId == ownerId ) );
         }
     }
 }

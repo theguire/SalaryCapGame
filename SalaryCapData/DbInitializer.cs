@@ -29,28 +29,28 @@ namespace SalaryCapData
                     FirstName = "Dumbo",
                     LastName = "Jenkins",
                     Email = "dumbo@gmail.com",
-                    ImageUrl = "images/Owners/14untitled.png",
+                    ImageUrl = "images/a.jpg",
                 },
                 new Owner
                 {
                     FirstName = "Hippy",
                     LastName = "Dippy",
                     Email = "dumbo@gmail.com",
-                    ImageUrl = "images/Owners/14untitled.png",
+                    ImageUrl = "images/b.png",
                 },
                 new Owner
                 {
                     FirstName = "Jimbo",
                     LastName = "Jumbo",
                     Email = "dumbo@gmail.com",
-                    ImageUrl = "images/Owners/14untitled.png",
+                    ImageUrl = "images/b2.png",
                 },
                 new Owner
                 {
                     FirstName = "Dingy",
                     LastName = "Wingie",
                     Email = "dumbo@gmail.com",
-                    ImageUrl = "images/Owners/14untitled.png",
+                    ImageUrl = "images/b3.png",
                 }};
             foreach( Owner o in owners )
             {
@@ -69,31 +69,43 @@ namespace SalaryCapData
                 {
                     Name = "Fun League",
                     CommissionerId = owners.Single( o => o.LastName == "Wingie" ).Id,
+                    MaxNumberFranchises = 10,
+                    IsPrivate = false,
                 },
                 new League
                 {
                     Name = "Dopy League",
                     CommissionerId = owners.Single( o => o.LastName == "Jumbo" ).Id,
+                    MaxNumberFranchises = 20,
+                    IsPrivate = false,
                 },
                 new League
                 {
                     Name = "Goofy League",
                     CommissionerId = owners.Single( o => o.LastName == "Wingie" ).Id,
+                    MaxNumberFranchises = 15,
+                    IsPrivate = false,
                 },
                 new League
                 {
                     Name = "Sleepy League",
                     CommissionerId = owners.Single( o => o.LastName == "Jenkins" ).Id,
+                    MaxNumberFranchises = 10,
+                    IsPrivate = true,
                 },
                 new League
                 {
                     Name = "Sneezy League",
                     CommissionerId = owners.Single( o => o.LastName == "Jenkins" ).Id,
+                    MaxNumberFranchises = 15,
+                    IsPrivate = false,
                 },
                 new League
                 {
                     Name = "Stupid League",
                     CommissionerId = owners.Single( o => o.LastName == "Wingie" ).Id,
+                    MaxNumberFranchises = 12,
+                    IsPrivate = false,
                 },
             };
 
@@ -113,7 +125,7 @@ namespace SalaryCapData
                 new Franchise
                 {
                     Name = "Franchise Wingie One",
-                    ImageUrl = "images/Owners/19thY8RLKX9M.jpg",
+                    ImageUrl = "images/b5.png",
                     LeagueId = leagues.Single( l => l.Name == "Sneezy League" ).Id,
                     OwnerId = owners.Single( o => o.LastName == "Wingie" ).Id,
                     Points = 10201,
@@ -123,7 +135,7 @@ namespace SalaryCapData
                 new Franchise
                 {
                     Name = "Franchise Wingie Two",
-                    ImageUrl = "images/Owners/19thY8RLKX9M.jpg",
+                    ImageUrl = "images/pi-1.jpg",
                     LeagueId = leagues.Single( l => l.Name == "Sneezy League" ).Id,
                     OwnerId = owners.Single( o => o.LastName == "Wingie" ).Id,
                     Points = 7201,
@@ -133,7 +145,7 @@ namespace SalaryCapData
                 new Franchise
                 {
                     Name = "Franchise Wingie Three",
-                    ImageUrl = "images/Owners/19thY8RLKX9M.jpg",
+                    ImageUrl = "images/t.png",
                     LeagueId = leagues.Single( l => l.Name == "Sneezy League" ).Id,
                     OwnerId = owners.Single( o => o.LastName == "Wingie" ).Id,
                     Points = 15350,
@@ -143,7 +155,7 @@ namespace SalaryCapData
                 new Franchise
                 {
                     Name = "Franchise Jumbo One",
-                    ImageUrl = "images/Owners/19thY8RLKX9M.jpg",
+                    ImageUrl = "images/theta4.png",
                     LeagueId = leagues.Single( l => l.Name == "Sneezy League" ).Id,
                     OwnerId = owners.Single( o => o.LastName == "Jumbo" ).Id,
                     Points = 11000,
@@ -153,7 +165,7 @@ namespace SalaryCapData
                 new Franchise
                 {
                     Name = "Franchise Dippy One",
-                    ImageUrl = "images/Owners/19thY8RLKX9M.jpg",
+                    ImageUrl = "images/tt.png",
                     LeagueId = leagues.Single( l => l.Name == "Sneezy League" ).Id,
                     OwnerId = owners.Single( o => o.LastName == "Dippy" ).Id,
                     Points = 60321,
@@ -163,7 +175,7 @@ namespace SalaryCapData
                 new Franchise
                 {
                     Name = "Franchise Jenkins One",
-                    ImageUrl = "images/Owners/19thY8RLKX9M.jpg",
+                    ImageUrl = "images/theta-3.png",
                     LeagueId = leagues.Single( l => l.Name == "Sneezy League" ).Id,
                     OwnerId = owners.Single( o => o.LastName == "Jenkins" ).Id,
                     Points = 9000,
