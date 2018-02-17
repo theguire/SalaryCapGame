@@ -20,7 +20,8 @@ namespace SalaryCapData.Interfaces
 
         Owner Commissioner( int id );
 
-        
+        void AssignFranchiseLeagues( IEnumerable<Franchise> franchises );
+
         IEnumerable<Franchise> Franchises( int id );
         //int GetNumberOfFranchises( int id );
     }

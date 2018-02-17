@@ -14,7 +14,7 @@ namespace SalaryCapGame.ViewModels
         public string ImageUrl { get; set; }
 
         [Display( Name = "Full Name" )]
-        string FullName
+        public string FullName
         {
             get
             {

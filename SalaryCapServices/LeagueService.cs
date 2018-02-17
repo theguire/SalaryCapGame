@@ -36,7 +36,13 @@ namespace SalaryCapServices
                                 .Include( f => f.Commissioner ) ).OrderBy( l => l.Name );
         }
 
-
+        public void AssignFranchiseLeagues( IEnumerable<Franchise> franchises )
+        {
+            foreach ( Franchise f in franchises )
+            {
+                f.League = Get( f.LeagueId );
+            }
+        }
         public string Name( int id )
         {
             return ( Get( id ).Name );

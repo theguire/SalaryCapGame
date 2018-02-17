@@ -1,4 +1,8 @@
-﻿@model SalaryCapGame.ViewModels.OwnerIndexModel
+﻿@model SalaryCapGame.ViewModels.OwnerIndexListingModel
+
+    @{ 
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
 <body class="m-1 p-1">
     <table class="table table-condensed table-bordered table-striped table-responsive">
@@ -12,24 +16,14 @@
 
             </tr>
         </thead>
-        @foreach ( var owner in Model.Owners )
-        {
+        <tbody>
             <tr class="owner_col">
-                <td><a asp-action="Details" asp-controller="Owners" asp-route-id=@owner.Id>@owner.LastName, @owner.FirstName</a></td>
+                <td><a asp-action="Details" asp-controller="Owners" asp-route-id=@Model.Id>@Model.LastName, @Model.FirstName</a></td>
             </tr>
 
-            @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", owner.Franchises )
-            @if ( owner.Leagues != null )
-            {
-                @Html.Partial( "/Views/Partial/League/LeagueListing.cshtml", owner.Leagues )
+            @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", Model.Franchises )
 
-            }
-        }
-        </table>
-
-
-
-        @*@Html.Partial( "/Views/Partial/League/LeagueSummary.cshtml", owner.Leagues )*@
-
-
+            </tbody>
+    </table>
 </body>
+

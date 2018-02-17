@@ -31,6 +31,7 @@ namespace SalaryCapData.Models
         public decimal Value { get; set; }
         public int NumberOfTrades { get; set; }
 
+
         public IEnumerable<PlayerAssignment> Players { get; set; }
 
     }

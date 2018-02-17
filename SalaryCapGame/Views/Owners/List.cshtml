@@ -1,0 +1,61 @@
+﻿@model SalaryCapGame.ViewModels.OwnerIndexListingModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using ( Html.BeginForm() )
+{
+    @Html.HiddenFor( model => Model.Id )
+    @section FranchiseMenu
+        {
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th class="glyphicon-align-left col-sm-2">
+                        @Html.Label( "Franchise" )
+                    </th>
+                    <th class="glyphicon-align-left col-sm-2">
+                        @Html.Label( "League" )
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ( var f in Model.Franchises )
+                {
+                    <tr>
+                        <td class="col-sm-2">
+                            @Html.ActionLink( f.Name, "Edit", "Franchises", new { f.Id }, null )
+                        </td>
+                        <td class="col-sm-2">
+                            @Html.ActionLink( f.League.Name, "Index", "League", new { f.LeagueId }, null )
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+
+}
+
+@*<div class="container">
+    <div class="header clearfix detailHeading">
+        <h2 class="text-muted">Franchise Summaries</h2>
+    </div>
+    <div class="jumbotron">
+        <div class="row">*@
+        <div class="table-responsive">
+            <table class="table table-hover table-striped table-condensed table-sm">
+                @Html.Partial( "~/Views/Partial/Owners/_OwnerHeader.cshtml" )
+                <tbody>
+                    <tr>
+                        @Html.Partial( "~/Views/Partial/Owners/_OwnersSummary.cshtml", Model )
+                        @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", @Model.Franchises )
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        @*</div>
+    </div>
+</div>*@

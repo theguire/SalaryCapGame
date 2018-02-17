@@ -23,7 +23,22 @@ namespace SalaryCapGame.Controllers
             _leagues = leagues;
         }
 
+        public IActionResult List( int id )
+        {
 
+            var owner = _owners.Get( id );
+            var model = new OwnerIndexListingModel
+            {
+                Id = owner.Id,
+                FirstName = owner.FirstName,
+                LastName = owner.LastName,
+                ImageUrl = owner.ImageUrl,
+                Franchises = owner.Franchises,
+                Leagues = owner.Leagues
+            };
+            
+            return View( model );
+        }
         // GET: Owners
         public IActionResult OwnersList()
         {
@@ -43,6 +58,23 @@ namespace SalaryCapGame.Controllers
             return View( model );
         }
 
+        public PartialViewResult View( int id )
+        {
+            var owner = _owners.Get( id );
+
+            _leagues.AssignFranchiseLeagues( owner.Franchises );
+            var model = new FranchiseMenuModel
+            {
+                OwnerId = owner.Id,
+                Franchises = owner.Franchises,
+                Leagues = owner.Leagues
+            };
+
+            return PartialView( "~/Views/Partial/Franchise/_View.cshtml", model );
+
+
+        }
+
         // GET: Owners/Details/5
         public IActionResult Details( int id )
         {
@@ -52,21 +84,18 @@ namespace SalaryCapGame.Controllers
             }
 
             var owner = _owners.Get( id );
-            foreach ( Franchise f in owner.Franchises )
-            {
-                f.League = _leagues.Get( f.LeagueId );
-            }
-
-            //foreach ( League l in owner.Leagues )
-            
             if ( owner == null )
             {
                 return NotFound();
             }
-            var result = new OwnerIndexListingModel
+            //_leagues.AssignFranchiseLeagues( owner.Franchises );
+
+
+            //foreach ( League l in owner.Leagues )
+
+            var model = new OwnerIndexListingModel
             {
                 Id = owner.Id,
-                Email = owner.Email,
                 FirstName = owner.FirstName,
                 LastName = owner.LastName,
                 ImageUrl = owner.ImageUrl,
@@ -74,7 +103,7 @@ namespace SalaryCapGame.Controllers
                 Leagues = owner.Leagues
             };
 
-            return View( result );
+            return View( "List", model );
         }
 
         // GET: Owners/Create

@@ -1,44 +1,48 @@
 ﻿@model SalaryCapGame.ViewModels.OwnerIndexModel 
 
+@{ 
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
 <div class="container">
-    <div class="row">
-        <div class="col-lg-2 pull-left">
-            <h4>Owner</h4>
-        </div>
+    <div class="header clearfix detailHeading">
+        <h2 class="text-muted">League Information</h2>
+    </div>
+    <div class="jumbotron">
         <div class="row">
-            <div class="col-lg-2 pull-left">
+            @*<div class="col-lg-6">*@
+            <table class="table table-bordered table-hover table-condensed table-responsive">
+                @Html.Partial( "~/Views/Partial/Owners/_OwnerHeader.cshtml" )
 
-                <h4>League</h4>
-            </div>
-            <div class="col-lg-2 pull-left">
-                <h4>Franchise</h4>
-            </div>
-            <div class="col-lg-2 pull-left">
-                <h4>Value</h4>
-            </div>
-            <div class="col-lg-2 pull-left">
-                <h4>Points</h4>
-            </div>
 
-        </div>
-        
-
-        @foreach ( var owner in Model.Owners )
+                @foreach ( var owner in Model.Owners )
     {
-        <div class="row">
-            <div class="col-md-2 pull-left">
-                <a asp-action="Details" asp-controller="Owners" asp-route-id=@owner.Id>@owner.LastName, @owner.FirstName</a>
-            </div>
 
-            @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", owner.Franchises )
-        </div>
-        @*@if ( owner.Leagues != null )
-        {
-            @Html.Partial( "/Views/Partial/League/LeagueListing.cshtml", owner.Leagues )
+            <tbody>
+                <tr>
 
-        }*@
+                    @*<a asp-action="View" asp-controller="Owners" asp-route-id=@owner.Id>@owner.LastName, @owner.FirstName</a>*@
+                    @Html.Partial( "~/Views/Partial/Owners/_OwnersSummary.cshtml", owner )
+                    @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", owner.Franchises )
+
+
+                </tr>
+
+            </tbody>
+
 
 
 }
-</div>
+            </table>
+                @*@if ( owner.Leagues != null )
+            {
+                @Html.Partial( "/Views/Partial/League/LeagueListing.cshtml", owner.Leagues )
+
+            }*@
+
+
+
+
+            </div>
         </div>
+        </div>
+    @*</div>*@

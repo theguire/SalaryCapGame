@@ -58,6 +58,8 @@ namespace SalaryCapServices
             return ( Get( id ).Owner );
         }
 
+
+
         public League League( int id )
         {
             return ( Get( id ).League );
