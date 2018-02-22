@@ -39,9 +39,12 @@ namespace SalaryCapGame
             // services.AddScoped<IOwner, OwnerService>();
             //services.AddScoped<ILeague, LeagueService>();
 
-            services.AddTransient<IFranchise, FranchiseService>();
-            services.AddTransient<IOwner, OwnerService>();
-            services.AddTransient<ILeague, LeagueService>();
+            services.AddScoped<IFranchise, FranchiseService>();
+            services.AddScoped<IOwner, OwnerService>();
+            services.AddScoped<ILeague, LeagueService>();
+            services.AddScoped<ITeam, TeamService>();
+            services.AddScoped<IPlayer, PlayerService>();
+            
 
             services.AddDbContext<GameDBContext>( options => options
                                                     .UseSqlServer( Configuration.GetConnectionString( "LibraryConnection" ) ) );

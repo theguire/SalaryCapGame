@@ -11,8 +11,8 @@ using System;
 namespace SalaryCapData.Migrations
 {
     [DbContext(typeof(GameDBContext))]
-    [Migration("20180206180509_init1")]
-    partial class init1
+    [Migration("20180222024348_Initial1")]
+    partial class Initial1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,9 +66,17 @@ namespace SalaryCapData.Migrations
 
                     b.Property<DateTime>("DateModified");
 
+                    b.Property<bool>("IsPrivate");
+
+                    b.Property<int>("MaxNumberFranchises");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<int>("Points");
+
+                    b.Property<decimal>("Value");
 
                     b.HasKey("Id");
 
@@ -107,13 +115,21 @@ namespace SalaryCapData.Migrations
 
             modelBuilder.Entity("SalaryCapData.Models.Player", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
-                    b.Property<string>("PlayerName")
-                        .IsRequired();
+                    b.Property<int>("Age");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<bool>("IsRookie");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<int?>("TeamId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
 
                     b.ToTable("Players");
                 });
@@ -130,8 +146,6 @@ namespace SalaryCapData.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FranchiseId");
-
-                    b.HasIndex("PlayerId");
 
                     b.ToTable("PlayerAssignments");
                 });
@@ -150,22 +164,37 @@ namespace SalaryCapData.Migrations
                     b.ToTable("PlayerAssignmentDates");
                 });
 
-            modelBuilder.Entity("SalaryCapData.Models.PlayerTrade", b =>
+            modelBuilder.Entity("SalaryCapData.Models.PlayerPosition", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Drafts");
+                    b.Property<int>("PlayerId");
 
-                    b.Property<int>("Drops");
+                    b.Property<string>("Position");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId")
+                        .IsUnique();
+
+                    b.ToTable("PlayerPositions");
+                });
+
+            modelBuilder.Entity("SalaryCapData.Models.PlayerTransactions", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AddedCount");
+
+                    b.Property<int>("DroppedCount");
 
                     b.Property<int>("PlayerId");
 
                     b.Property<DateTime>("TradeDate");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PlayerId");
 
                     b.ToTable("PlayerTrades");
                 });
@@ -181,9 +210,22 @@ namespace SalaryCapData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlayerId");
-
                     b.ToTable("PlayerValues");
+                });
+
+            modelBuilder.Entity("SalaryCapData.Models.Team", b =>
+                {
+                    b.Property<int>("Id");
+
+                    b.Property<string>("Abbrev");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("SalaryCapData.Models.Franchise", b =>
@@ -207,32 +249,26 @@ namespace SalaryCapData.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("SalaryCapData.Models.Player", b =>
+                {
+                    b.HasOne("SalaryCapData.Models.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId");
+                });
+
             modelBuilder.Entity("SalaryCapData.Models.PlayerAssignment", b =>
                 {
                     b.HasOne("SalaryCapData.Models.Franchise")
                         .WithMany("Players")
                         .HasForeignKey("FranchiseId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SalaryCapData.Models.Player")
-                        .WithMany("Franchises")
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SalaryCapData.Models.PlayerTrade", b =>
+            modelBuilder.Entity("SalaryCapData.Models.PlayerPosition", b =>
                 {
                     b.HasOne("SalaryCapData.Models.Player")
-                        .WithMany("PlayerTrades")
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SalaryCapData.Models.PlayerValue", b =>
-                {
-                    b.HasOne("SalaryCapData.Models.Player")
-                        .WithMany("PlayerValues")
-                        .HasForeignKey("PlayerId")
+                        .WithOne("PlayerPosition")
+                        .HasForeignKey("SalaryCapData.Models.PlayerPosition", "PlayerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

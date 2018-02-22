@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaryCapGame", "SalaryCapGame\SalaryCapGame.csproj", "{D91158CB-D317-4660-A7AF-AEE484DB4BB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalaryCapGame", "SalaryCapGame\SalaryCapGame.csproj", "{D91158CB-D317-4660-A7AF-AEE484DB4BB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaryCapData", "SalaryCapData\SalaryCapData.csproj", "{A69C5B6E-4F43-4F0A-9FE8-9FA6FB0E5916}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalaryCapData", "SalaryCapData\SalaryCapData.csproj", "{A69C5B6E-4F43-4F0A-9FE8-9FA6FB0E5916}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalaryCapServices", "SalaryCapServices\SalaryCapServices.csproj", "{5BE7F4E2-D662-4982-90FF-347F431E3A61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalaryCapServices", "SalaryCapServices\SalaryCapServices.csproj", "{5BE7F4E2-D662-4982-90FF-347F431E3A61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

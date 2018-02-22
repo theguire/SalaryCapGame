@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SalaryCapServices;
 using SalaryCapData;
 
 namespace SalaryCapGame
@@ -25,6 +21,9 @@ namespace SalaryCapGame
                 {
                     var context = services.GetRequiredService<GameDBContext>();
                     DbInitializer.Initialize( context );
+                    JsonService jsonService = new JsonService( context );
+                    jsonService.UpdatePlayerRoster();
+                    
                 }
                 catch ( Exception ex )
                 {

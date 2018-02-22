@@ -4,12 +4,10 @@ using System.Text;
 
 namespace SalaryCapData.Models
 {
-    public class PlayerTrade
+    public class PlayerPosition
     {
         public int Id { get; set; }
         public int PlayerId { get; set; }
-        public DateTime TradeDate { get; set; }
-        public int Drops { get; set; }
-        public int Drafts { get; set; }
+        public string Position { get; set; }
     }
 }

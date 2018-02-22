@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SalaryCapData.Migrations
 {
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,60 +42,19 @@ namespace SalaryCapData.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Players",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PlayerName = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Players", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Leagues",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CommissionerId = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Leagues", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Leagues_Owners_CommissionerId",
-                        column: x => x.CommissionerId,
-                        principalTable: "Owners",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PlayerTrades",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Drafts = table.Column<int>(nullable: false),
-                    Drops = table.Column<int>(nullable: false),
+                    AddedCount = table.Column<int>(nullable: false),
+                    DroppedCount = table.Column<int>(nullable: false),
                     PlayerId = table.Column<int>(nullable: false),
                     TradeDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PlayerTrades", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PlayerTrades_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,12 +69,68 @@ namespace SalaryCapData.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PlayerValues", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Teams",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    Abbrev = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teams", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Leagues",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CommissionerId = table.Column<int>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    IsPrivate = table.Column<bool>(nullable: false),
+                    MaxNumberFranchises = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Points = table.Column<int>(nullable: false),
+                    Value = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Leagues", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PlayerValues_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
+                        name: "FK_Leagues_Owners_CommissionerId",
+                        column: x => x.CommissionerId,
+                        principalTable: "Owners",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Players",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    IsRookie = table.Column<bool>(nullable: false),
+                    LastName = table.Column<string>(nullable: true),
+                    TeamId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Players", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Players_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,6 +163,26 @@ namespace SalaryCapData.Migrations
                         column: x => x.OwnerId,
                         principalTable: "Owners",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PlayerPositions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PlayerId = table.Column<int>(nullable: false),
+                    Position = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlayerPositions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PlayerPositions_Players_PlayerId",
+                        column: x => x.PlayerId,
+                        principalTable: "Players",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -167,12 +202,6 @@ namespace SalaryCapData.Migrations
                         name: "FK_PlayerAssignments_Franchises_FranchiseId",
                         column: x => x.FranchiseId,
                         principalTable: "Franchises",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PlayerAssignments_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -198,19 +227,15 @@ namespace SalaryCapData.Migrations
                 column: "FranchiseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlayerAssignments_PlayerId",
-                table: "PlayerAssignments",
-                column: "PlayerId");
+                name: "IX_PlayerPositions_PlayerId",
+                table: "PlayerPositions",
+                column: "PlayerId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlayerTrades_PlayerId",
-                table: "PlayerTrades",
-                column: "PlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PlayerValues_PlayerId",
-                table: "PlayerValues",
-                column: "PlayerId");
+                name: "IX_Players_TeamId",
+                table: "Players",
+                column: "TeamId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -220,6 +245,9 @@ namespace SalaryCapData.Migrations
 
             migrationBuilder.DropTable(
                 name: "PlayerAssignments");
+
+            migrationBuilder.DropTable(
+                name: "PlayerPositions");
 
             migrationBuilder.DropTable(
                 name: "PlayerTrades");
@@ -235,6 +263,9 @@ namespace SalaryCapData.Migrations
 
             migrationBuilder.DropTable(
                 name: "Leagues");
+
+            migrationBuilder.DropTable(
+                name: "Teams");
 
             migrationBuilder.DropTable(
                 name: "Owners");
