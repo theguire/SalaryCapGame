@@ -1,4 +1,5 @@
-﻿using SalaryCapData;
+﻿using Microsoft.EntityFrameworkCore;
+using SalaryCapData;
 using SalaryCapData.Interfaces;
 using SalaryCapData.Models;
 using System;
@@ -42,7 +43,7 @@ namespace SalaryCapServices
 
         public IEnumerable<Player> GetAll()
         {
-            return ( _context.Players );
+            return ( _context.Players.Include( p => p.Team ).Include( p => p.PlayerPosition ));
                        
         }
 

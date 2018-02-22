@@ -26,6 +26,24 @@ namespace SalaryCapServices
             foreach (var file in fileArray )
             {
                 playerRoster.ReadJsonDeserialize( file, _teams, _players );
+                
+                
+            }
+            foreach ( var file in fileArray )
+            {
+                try
+                {
+                    string fileName = Path.GetFileName( file );
+                    string x = Path.GetDirectoryName( file );
+                    string newDir = Path.GetDirectoryName( file + @"\Processed\" );
+                    string moveTo = Path.Combine( newDir, fileName );
+                    File.Move( file, newDir );
+                }
+
+                catch ( Exception e )
+                {
+                    throw new Exception();
+                }
             }
 
     }

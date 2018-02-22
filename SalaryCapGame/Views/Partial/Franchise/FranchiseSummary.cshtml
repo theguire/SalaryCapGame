@@ -1,57 +1,48 @@
 ﻿@model IEnumerable<SalaryCapData.Models.Franchise>
-@*<p>
-        <a asp-controller="Franchises" asp-route-id="@ViewBag.asp-action="Create">Create New Franchise</a>
-    </p>*@
-@*<table class="table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>@Html.DisplayNameFor( model => model.League )</th>
-            <th>@Html.DisplayNameFor( model => model.Name )</th>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>*@
 @using ( Html.BeginForm() )
 {
 
-    <td>
+    @*<td>*@
         <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped table-sm">
-            <tbody>
+            <table class="table table-bordered table-hover table-striped table-sm">
+                <tbody>
 
-                @foreach ( var item in Model )
-                {
-                <tr>
+        @foreach ( var item in Model )
+        {
+            <tr>
 
-                    <td width="225px" style="text-align:center">
-                        <a asp-controller="Franchises" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
-                    </td>
-                    <td  width="25px" style="text-align:right">
-                        @String.Format( "{0,6:c}", item.Value )
-                    </td>
-                    <td width="15px"  style="color:green; text-align:center">@String.Format( "+10" )</td>
-                    <td width="25px" style="text-align:right">
-                        @String.Format( "{0,6:n}", item.Points )
-                    </td>
-                    <td width="15px" style="color:red; text-align:center">@String.Format( "-420" )</td>
-                    <td width="15px" style="text-align:center">
-                        @String.Format( "{0,6:g}", item.NumberOfTrades )
-                    </td>
-                    <td width="250px" style="text-align:center">
-                        <a asp-controller="League" asp-action="Detail" asp-route-id="@item.LeagueId">@item.League.Name</a>
-                    </td>
-                    <td width="25px" style="text-align:center">@String.Format( "3/10" )</td>
-                    <td width="25px" style="color:green; text-align:center">@String.Format( "+1" )</td>
-                </tr>
-                }
+                <td width="50px" style="text-align:left">
+                    <a asp-controller="Franchises" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+                </td>
+                <td width="25px" style="text-align:left">
+                    @String.Format( "{0,6:c}", item.Value )
+                </td>
+                <td width="15px" style="color:green; text-align:">@String.Format( "+10" )</td>
+                <td width="25px" style="text-align:left">
+                    @String.Format( "{0,6:n}", item.Points )
+                </td>
+                <td width="15px" style="color:red; text-align:left">@String.Format( "-420" )</td>
+                <td width="15px" style="text-align:center">
+                    @String.Format( "{0,6:g}", item.NumberOfTrades )
+                </td>
+                <td width="250px" style="text-align:left">
+                    <a asp-controller="League" asp-action="Detail" asp-route-id="@item.LeagueId">@item.League.Name</a>
+                </td>
+                <td width="25px" style="text-align:left">@String.Format( "3/10" )</td>
+                <td width="25px" style="color:green; text-align:left">@String.Format( "+1" )</td>
+            </tr>
+        }
 
-            </tbody>
+        </tbody>
         </table>
         </div>
-    </td>
-    
+    @*</td>*@
+
+
+
+
+
 }
 
 @*<div class="row">

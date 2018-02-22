@@ -9,13 +9,13 @@
     @Html.HiddenFor( model => Model.Id )
     @section FranchiseMenu
         {
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm table-responsive">
             <thead>
                 <tr>
-                    <th class="glyphicon-align-left col-sm-2">
+                    <th class="text-left col-sm-2">
                         @Html.Label( "Franchise" )
                     </th>
-                    <th class="glyphicon-align-left col-sm-2">
+                    <th class="text-left col-sm-2">
                         @Html.Label( "League" )
                     </th>
                 </tr>
@@ -24,10 +24,10 @@
                 @foreach ( var f in Model.Franchises )
                 {
                     <tr>
-                        <td class="col-sm-2">
+                        <td class="col-sm-2 text-left">
                             @Html.ActionLink( f.Name, "Edit", "Franchises", new { f.Id }, null )
                         </td>
-                        <td class="col-sm-2">
+                        <td class="col-sm-2 text-left">
                             @Html.ActionLink( f.League.Name, "Index", "League", new { f.LeagueId }, null )
                         </td>
                     </tr>
@@ -37,17 +37,41 @@
 
     }
 
-}
 
-        <div class="table-responsive">
-            <table class="table table-hover table-striped bottom table-sm">
-                @Html.Partial( "~/Views/Partial/Owners/_OwnerHeader.cshtml" )
+  
+        <div class="container col-lg-12">
+            <table class="table col-lg-12 table-responsive table-striped bottom table-sm">
+                <thead>
+                    <tr>
+                        @Html.Partial( "~/Views/Partial/Owners/_OwnerHeader.cshtml" )
+                        @Html.Partial( "~/Views/Partial/Owners/_OwnersSummary.cshtml", Model )
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
+                        @*<td>
                         @Html.Partial( "~/Views/Partial/Owners/_OwnersSummary.cshtml", Model )
-                        @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", @Model.Franchises )
+                    </td>*@
+                        <td>
+                            <table class="table col-lg-12 table-responsive table-hover table-striped bottom table-sm">
+                                <thead>
+                                    <tr>
+                                        @Html.Partial( "~/Views/Partial/Franchise/FranchiseHeader.cshtml" )
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", @Model.Franchises )
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-     
+}
+@*<div class="table-responsive">*@
+
+
+@*</div>*@
