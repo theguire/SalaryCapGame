@@ -1,5 +1,9 @@
 ﻿using SalaryCapData;
 using SalaryCapData.ConsumeJson;
+using SalaryCapData.ConsumeJson.Models.Cumulative;
+using SalaryCapData.ConsumeJson.Models.Daily;
+using SalaryCapData.ConsumeJson.Models.PlayerSalary;
+using SalaryCapData.ConsumeJson.Models.Roster;
 using SalaryCapData.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,15 +23,29 @@ namespace SalaryCapServices
             _players = new PlayerService( context );
         }
 
+        public void UpdateDailyStats()
+        {
+            DailyPlayerStats dailyStatsJson = new DailyPlayerStats();
+            string[] fileArray = Directory.GetFiles( @"Q:\Users\Stephen\Documents\sportsfeeds\Daily", "*.json" );
+            DateTime date = DateTime.Today;
+            foreach ( var file in fileArray )
+            {
+
+                dailyStatsJson.ReadJsonDeserialize( file, _players, date );
+                date = date.AddDays( 1 );
+
+            }
+        }
         public void UpdatePlayerRoster()
         {
-            ConsumePlayerRoster playerRoster = new ConsumePlayerRoster();
+            ConsumePlayerRoster players = new ConsumePlayerRoster();
             string[] fileArray = Directory.GetFiles( @"Q:\Users\Stephen\Documents\sportsfeeds\", "*.json" );
-            foreach (var file in fileArray )
+            IEnumerable<Playersalary> playerSalary = new GetPlayerSalaryList().GetSalaries( @"Q:\Users\Stephen\Documents\sportsfeeds\Salaries\playersalary.json" );
+            foreach ( var file in fileArray )
             {
-                playerRoster.ReadJsonDeserialize( file, _teams, _players );
-                
-                
+                players.ReadJsonDeserialize( file, _teams, _players, playerSalary );
+
+
             }
             foreach ( var file in fileArray )
             {
@@ -42,11 +60,17 @@ namespace SalaryCapServices
 
                 catch ( Exception e )
                 {
-                    throw new Exception();
+                    Console.WriteLine( "Exception Handled" + e );
                 }
             }
+        }
+        public void LoadCumulativePlayerStats()
+        {
+            CumulativePlayerStats playerStats = new CumulativePlayerStats();
+            string fileName = @"Q:\Users\Stephen\Documents\sportsfeeds\2017\cumulative_player_stats.json";
 
+            playerStats.ReadJsonDeserialize( fileName, _players );
+        }
     }
 
-}
 }

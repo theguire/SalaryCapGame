@@ -1,36 +1,45 @@
-﻿
+﻿@using SalaryCapGame.ViewComponents
 @model SalaryCapGame.ViewModels.PlayerIndexModel
 
-    @{ 
-        Layout = null;
-    }
-    <h2></h2>
-    <div class="table-responsive">
-        <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                    <th style="text-align:left" colspan="2">Player</th>
-                    <th>Position</th>
-                    <th>City</th>
-                    <th>Team</th>
-                </tr>
-            </thead>
-            <tbody>
+@using ( Html.BeginForm() )
+{
+   @section PlayersList
+   {
 
-            @{
-                foreach ( var item in Model.Players )
-                {
-                <tr>
-                    <td>@Html.DisplayFor( i => item.FirstName ), @Html.DisplayFor( i => item.LastName )</td>
-                    <td></td>
-                    <td>@Html.DisplayFor( i => item.Position )</td>
-                    <td>@Html.DisplayFor( i => item.Team.City )</td>
-        <td>@Html.DisplayFor( i => item.Team.Name )</td>
-                </tr>
-                }
-             }
-           
-            </tbody>
+        <h2>Players</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th style="text-align:left" colspan="2">Player</th>
+                        <th>Position</th>
+                        <th>City</th>
+                        <th>Team</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        foreach ( var item in Model.Players )
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor( i => item.FirstName ), @Html.DisplayFor( i => item.LastName )</td>
+                                <td></td>
+                                <td>@Html.DisplayFor( i => item.Position )</td>
+                                <td>@Html.DisplayFor( i => item.Team.City )</td>
+                                <td>@Html.DisplayFor( i => item.Team.Name )</td>
+                                <td>@Html.DisplayFor( i => item.Value )</td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
             </table>
+            <div>
+                @await Component.InvokeAsync( "PlayerList" )
+            </div>
         </div>
+    }
+}
+
 

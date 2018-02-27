@@ -59,7 +59,7 @@ namespace SalaryCapServices
 
         public bool Any()
         {
-            return _context.Owners != null;
+            return _context.Teams != null;
         }
 
 

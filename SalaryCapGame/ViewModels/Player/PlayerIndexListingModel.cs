@@ -15,6 +15,7 @@ namespace SalaryCapGame.ViewModels
         {
             get { return FirstName + " " + LastName; }
         }
+        public decimal Value { get; set; }
 
         public Team Team { get; set; }
         public string Position { get; set; }

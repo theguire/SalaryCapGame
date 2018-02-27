@@ -54,6 +54,44 @@ namespace SalaryCapData.Migrations
                     b.ToTable("Franchises");
                 });
 
+            modelBuilder.Entity("SalaryCapData.Models.HitterDailyStats", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("Doubles");
+
+                    b.Property<int>("ExtraBases");
+
+                    b.Property<int>("Hits");
+
+                    b.Property<int>("HomeRuns");
+
+                    b.Property<int>("PlayerId");
+
+                    b.Property<int>("RBI");
+
+                    b.Property<int>("Runs");
+
+                    b.Property<int>("Sacrifices");
+
+                    b.Property<int>("StolenBases");
+
+                    b.Property<int>("TotalBases");
+
+                    b.Property<int>("Triples");
+
+                    b.Property<int>("Walks");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("HitterStats");
+                });
+
             modelBuilder.Entity("SalaryCapData.Models.League", b =>
                 {
                     b.Property<int>("Id")
@@ -112,6 +150,48 @@ namespace SalaryCapData.Migrations
                     b.ToTable("Owners");
                 });
 
+            modelBuilder.Entity("SalaryCapData.Models.PitcherDailyStats", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CompleteGames");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("EarnedRunsAllowed");
+
+                    b.Property<int>("GamesFinished");
+
+                    b.Property<int>("HitsAllowed");
+
+                    b.Property<int>("Holds");
+
+                    b.Property<double>("InningsPitched");
+
+                    b.Property<int>("Loses");
+
+                    b.Property<int>("PickOffs");
+
+                    b.Property<int>("PitcherWalks");
+
+                    b.Property<int>("PlayerId");
+
+                    b.Property<int>("Saves");
+
+                    b.Property<int>("Strikeouts");
+
+                    b.Property<double>("WHIP");
+
+                    b.Property<int>("Wins");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("PitcherStats");
+                });
+
             modelBuilder.Entity("SalaryCapData.Models.Player", b =>
                 {
                     b.Property<int>("Id");
@@ -120,13 +200,15 @@ namespace SalaryCapData.Migrations
 
                     b.Property<string>("FirstName");
 
+                    b.Property<decimal>("InitialValue");
+
                     b.Property<bool>("IsRookie");
 
                     b.Property<string>("LastName");
 
                     b.Property<string>("Position");
 
-                    b.Property<int?>("TeamId");
+                    b.Property<int>("TeamId");
 
                     b.HasKey("Id");
 
@@ -175,9 +257,6 @@ namespace SalaryCapData.Migrations
                     b.Property<string>("Position");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PlayerId")
-                        .IsUnique();
 
                     b.ToTable("PlayerPositions");
                 });
@@ -242,6 +321,14 @@ namespace SalaryCapData.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("SalaryCapData.Models.HitterDailyStats", b =>
+                {
+                    b.HasOne("SalaryCapData.Models.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("SalaryCapData.Models.League", b =>
                 {
                     b.HasOne("SalaryCapData.Models.Owner", "Commissioner")
@@ -250,11 +337,20 @@ namespace SalaryCapData.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("SalaryCapData.Models.PitcherDailyStats", b =>
+                {
+                    b.HasOne("SalaryCapData.Models.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("SalaryCapData.Models.Player", b =>
                 {
                     b.HasOne("SalaryCapData.Models.Team", "Team")
                         .WithMany()
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SalaryCapData.Models.PlayerAssignment", b =>
@@ -262,14 +358,6 @@ namespace SalaryCapData.Migrations
                     b.HasOne("SalaryCapData.Models.Franchise")
                         .WithMany("Players")
                         .HasForeignKey("FranchiseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SalaryCapData.Models.PlayerPosition", b =>
-                {
-                    b.HasOne("SalaryCapData.Models.Player")
-                        .WithOne("PlayerPosition")
-                        .HasForeignKey("SalaryCapData.Models.PlayerPosition", "PlayerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

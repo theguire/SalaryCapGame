@@ -1,4 +1,5 @@
 ﻿using SalaryCapData.Models;
+using System;
 using System.Linq;
 
 namespace SalaryCapData
@@ -18,8 +19,8 @@ namespace SalaryCapData
             var franchises = FranchiseSeed( context, owners, leagues );
             
         }
-        
-        private static Owner[] OwnersSeed( GameDBContext context )
+
+         private static Owner[] OwnersSeed( GameDBContext context )
         {
             var owners = new Owner[]
             {

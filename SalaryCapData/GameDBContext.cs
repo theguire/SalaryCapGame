@@ -23,5 +23,7 @@ namespace SalaryCapData
         public DbSet<PlayerTransactions> PlayerTrades { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<PlayerPosition> PlayerPositions { get; set; }
+        public DbSet<PitcherDailyStats> PitcherStats { get; set; }
+        public DbSet<HitterDailyStats> HitterStats { get; set; }
     }
 }

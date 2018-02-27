@@ -1,11 +1,9 @@
 ﻿
 
-namespace SalaryCapData.ConsumeJson
+namespace SalaryCapData.ConsumeJson.Models.Roster
 
 {
-    public class PlayerRoster
-    {
-
+  
         public class Rootobject
         {
             public Rosterplayers rosterplayers { get; set; }
@@ -48,5 +46,5 @@ namespace SalaryCapData.ConsumeJson
         }
 
     }
-}
+
 

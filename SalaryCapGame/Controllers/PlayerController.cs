@@ -28,7 +28,8 @@ namespace SalaryCapGame.Controllers
                 FirstName = p.FirstName,
                 LastName = p.LastName,
                 Position = p.Position,
-                Team = p.Team
+                Team = p.Team,
+                Value = p.InitialValue
             } ).ToList();
 
             var model = new PlayerIndexModel { Players = results };

@@ -16,11 +16,13 @@ namespace SalaryCapGame.Controllers
     {
         private readonly IOwner _owners;
         private readonly ILeague _leagues;
+        private readonly IPlayer _players;
 
-        public OwnersController( IOwner owners, ILeague leagues )
+        public OwnersController( IOwner owners, ILeague leagues, IPlayer players )
         {
             _owners = owners;
             _leagues = leagues;
+            _players = players;
         }
 
         public IActionResult List( int id )
@@ -88,12 +90,9 @@ namespace SalaryCapGame.Controllers
             {
                 return NotFound();
             }
-            //_leagues.AssignFranchiseLeagues( owner.Franchises );
 
 
-            //foreach ( League l in owner.Leagues )
-
-            var model = new OwnerIndexListingModel
+            var ownerModel = new OwnerIndexListingModel
             {
                 Id = owner.Id,
                 FirstName = owner.FirstName,
@@ -103,7 +102,26 @@ namespace SalaryCapGame.Controllers
                 Leagues = owner.Leagues
             };
 
-            return View( "List", model );
+
+            var players = _players.GetAll();
+            var results = players.Select( p => new PlayerIndexListingModel
+            {
+                Id = p.Id,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                Position = p.Position,
+                Team = p.Team,
+                Value = p.InitialValue
+            } ).ToList();
+
+            var playerModel = new PlayerIndexModel { Players = results };
+            var dashboardModel = new DashboardViewModel
+            {
+                OwnerIndex = ownerModel,
+                PlayerIndexModel = playerModel
+            };
+
+            return View( "List", dashboardModel );
         }
 
         // GET: Owners/Create

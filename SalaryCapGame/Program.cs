@@ -23,6 +23,7 @@ namespace SalaryCapGame
                     DbInitializer.Initialize( context );
                     JsonService jsonService = new JsonService( context );
                     jsonService.UpdatePlayerRoster();
+                    jsonService.UpdateDailyStats();
                     
                 }
                 catch ( Exception ex )

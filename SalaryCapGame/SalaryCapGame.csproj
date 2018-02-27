@@ -4,6 +4,11 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
@@ -27,6 +32,7 @@
   <ItemGroup>
     <Folder Include="Infrastructure\HtmlHelpers\" />
     <Folder Include="Infrastructure\TagHelpers\" />
+    <Folder Include="Views\Partial\Player\" />
     <Folder Include="Views\Shared\Owner\" />
     <Folder Include="wwwroot\images\Franchises\" />
     <Folder Include="wwwroot\images\Leagues\" />
