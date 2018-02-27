@@ -13,11 +13,16 @@ namespace SalaryCapData
             {
                 return;
             }
+            System.Diagnostics.Debug.WriteLine( "Seeding the data models.  Please wait..." );
 
+            System.Diagnostics.Debug.WriteLine( "1 of 3" );
             var owners = OwnersSeed(  context );
+            System.Diagnostics.Debug.Write( "\r2 of 3" );
             var leagues = LeagueSeed( context, owners );
+            System.Diagnostics.Debug.Write( "\r3 of 3" );
             var franchises = FranchiseSeed( context, owners, leagues );
-            
+            System.Diagnostics.Debug.Write( "\rDone...." );
+
         }
 
          private static Owner[] OwnersSeed( GameDBContext context )

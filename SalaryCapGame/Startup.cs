@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -50,27 +51,12 @@ namespace SalaryCapGame
                                                     .UseSqlServer( Configuration.GetConnectionString( "LibraryConnection" ) ) );
         }
 
-        //public void ConfigureServices( IServiceCollection services )
-        //{
-        //    services.AddDbContext<GameDBContext>( options => options
-        //                                                .UseSqlServer( Configuration.GetConnectionString( "LibraryConnection" ) ) );
-        //    services.AddTransient<IFranchise, FranchiseService>();
-        //    services.AddTransient<IOwner, OwnerService>();
-        //    services.AddTransient<ILeague, LeagueService>();
-        //    services.AddScoped<Cart>( sp => SessionCart.GetCart( sp ) );
-        //    services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        //    services.AddMvc();
-
-        //    Support for session state stored in memory declared in following two statements
-        //    services.AddMemoryCache();
-        //    services.AddSession();
-        //}
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+       
         public void Configure( IApplicationBuilder app, IHostingEnvironment env )
         {
             if ( env.IsDevelopment() )
             {
+                TelemetryConfiguration.Active.DisableTelemetry = true;
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
             }
@@ -83,11 +69,7 @@ namespace SalaryCapGame
             app.UseMvc( routes =>
             {
 
-                //routes.MapRoute( name: null, template: "", defaults: new { controller = "Owner", action = "Detail:int" } );
-                //routes.MapRoute( name: null, template: "", defaults: new { controller = "Owners2", action = "Index" } );
-                //routes.MapRoute(
-                //    name: "default",
-                //    template: "{controller=Owners}/{action=OwnersList}/{id?}" );
+              
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Owners}/{action=OwnersList}" );

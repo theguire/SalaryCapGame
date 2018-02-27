@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SalaryCapData.ConsumeJson.Models.Daily
+namespace SalaryCapData.ConsumeJson.Models.PlayerStats
 {
     public class Rootobject
     {

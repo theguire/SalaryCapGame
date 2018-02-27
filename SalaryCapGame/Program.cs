@@ -24,6 +24,7 @@ namespace SalaryCapGame
                     JsonService jsonService = new JsonService( context );
                     jsonService.UpdatePlayerRoster();
                     jsonService.UpdateDailyStats();
+                    jsonService.LoadCumulativePlayerStats();
                     
                 }
                 catch ( Exception ex )

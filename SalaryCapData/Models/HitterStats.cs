@@ -4,10 +4,11 @@ using System.Text;
 
 namespace SalaryCapData.Models
 {
-    public class HitterDailyStats
+    public class HitterStats
     {
         public int Id { get; set; }
         public int PlayerId { get; set; }
+        public bool IsCumulative { get; set; }
         public Player Player { get; set; }
         public DateTime Date { get; set; }
         public int Runs { get; set; }

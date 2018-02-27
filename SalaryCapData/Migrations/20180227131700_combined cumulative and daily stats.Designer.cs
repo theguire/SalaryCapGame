@@ -11,8 +11,8 @@ using System;
 namespace SalaryCapData.Migrations
 {
     [DbContext(typeof(GameDBContext))]
-    [Migration("20180226150948_Modified daily player stats")]
-    partial class Modifieddailyplayerstats
+    [Migration("20180227131700_combined cumulative and daily stats")]
+    partial class combinedcumulativeanddailystats
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,7 +55,7 @@ namespace SalaryCapData.Migrations
                     b.ToTable("Franchises");
                 });
 
-            modelBuilder.Entity("SalaryCapData.Models.HitterDailyStats", b =>
+            modelBuilder.Entity("SalaryCapData.Models.HitterStats", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -69,6 +69,8 @@ namespace SalaryCapData.Migrations
                     b.Property<int>("Hits");
 
                     b.Property<int>("HomeRuns");
+
+                    b.Property<bool>("IsCumulative");
 
                     b.Property<int>("PlayerId");
 
@@ -151,7 +153,7 @@ namespace SalaryCapData.Migrations
                     b.ToTable("Owners");
                 });
 
-            modelBuilder.Entity("SalaryCapData.Models.PitcherDailyStats", b =>
+            modelBuilder.Entity("SalaryCapData.Models.PitcherStats", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -162,11 +164,15 @@ namespace SalaryCapData.Migrations
 
                     b.Property<int>("EarnedRunsAllowed");
 
+                    b.Property<int>("GamesFinished");
+
                     b.Property<int>("HitsAllowed");
 
                     b.Property<int>("Holds");
 
-                    b.Property<int>("InningsPitched");
+                    b.Property<double>("InningsPitched");
+
+                    b.Property<bool>("IsCumulative");
 
                     b.Property<int>("Loses");
 
@@ -179,6 +185,8 @@ namespace SalaryCapData.Migrations
                     b.Property<int>("Saves");
 
                     b.Property<int>("Strikeouts");
+
+                    b.Property<double>("WHIP");
 
                     b.Property<int>("Wins");
 
@@ -197,13 +205,15 @@ namespace SalaryCapData.Migrations
 
                     b.Property<string>("FirstName");
 
+                    b.Property<decimal>("InitialValue");
+
                     b.Property<bool>("IsRookie");
 
                     b.Property<string>("LastName");
 
                     b.Property<string>("Position");
 
-                    b.Property<int?>("TeamId");
+                    b.Property<int>("TeamId");
 
                     b.HasKey("Id");
 
@@ -252,9 +262,6 @@ namespace SalaryCapData.Migrations
                     b.Property<string>("Position");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PlayerId")
-                        .IsUnique();
 
                     b.ToTable("PlayerPositions");
                 });
@@ -319,7 +326,7 @@ namespace SalaryCapData.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SalaryCapData.Models.HitterDailyStats", b =>
+            modelBuilder.Entity("SalaryCapData.Models.HitterStats", b =>
                 {
                     b.HasOne("SalaryCapData.Models.Player", "Player")
                         .WithMany()
@@ -335,7 +342,7 @@ namespace SalaryCapData.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SalaryCapData.Models.PitcherDailyStats", b =>
+            modelBuilder.Entity("SalaryCapData.Models.PitcherStats", b =>
                 {
                     b.HasOne("SalaryCapData.Models.Player", "Player")
                         .WithMany()
@@ -347,7 +354,8 @@ namespace SalaryCapData.Migrations
                 {
                     b.HasOne("SalaryCapData.Models.Team", "Team")
                         .WithMany()
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SalaryCapData.Models.PlayerAssignment", b =>
@@ -355,14 +363,6 @@ namespace SalaryCapData.Migrations
                     b.HasOne("SalaryCapData.Models.Franchise")
                         .WithMany("Players")
                         .HasForeignKey("FranchiseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SalaryCapData.Models.PlayerPosition", b =>
-                {
-                    b.HasOne("SalaryCapData.Models.Player")
-                        .WithOne("PlayerPosition")
-                        .HasForeignKey("SalaryCapData.Models.PlayerPosition", "PlayerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

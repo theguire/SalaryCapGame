@@ -4,31 +4,31 @@ using System.Collections.Generic;
 
 namespace SalaryCapData.Migrations
 {
-    public partial class Modifieddailyplayerstats : Migration
+    public partial class combinedcumulativeanddailystats : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "Strikeouts",
+            migrationBuilder.AddColumn<bool>(
+                name: "IsCumulative",
                 table: "PitcherStats",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: false);
 
-            migrationBuilder.AddColumn<int>(
-                name: "TotalBases",
+            migrationBuilder.AddColumn<bool>(
+                name: "IsCumulative",
                 table: "HitterStats",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: false);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Strikeouts",
+                name: "IsCumulative",
                 table: "PitcherStats");
 
             migrationBuilder.DropColumn(
-                name: "TotalBases",
+                name: "IsCumulative",
                 table: "HitterStats");
         }
     }

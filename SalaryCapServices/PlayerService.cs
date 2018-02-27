@@ -20,23 +20,43 @@ namespace SalaryCapServices
         }
         public void Add( Player newPlayer )
         {
-            if ( !Exists( newPlayer.Id ) )
+            try
             {
-                _context.Add( newPlayer );
-                _context.SaveChanges();
+                if ( !Exists( newPlayer.Id ) )
+                {
+                    _context.Add( newPlayer );
+                    _context.SaveChanges();
+                }
+            } catch ( Exception ex )
+            {
+                System.Diagnostics.Debug.WriteLine( "Error Adding Hitter Stat:" + ex );
             }
         }
 
-        public void AddHitterStats( HitterDailyStats stats )
+ 
+        public void AddHitterStats( HitterStats stats )
         {
-            _context.HitterStats.Add( stats );
-            _context.SaveChanges();
+            try
+            {
+                _context.HitterStats.Add( stats );
+                _context.SaveChanges();
+            } catch ( Exception ex )
+            {
+                System.Diagnostics.Debug.WriteLine( "Error Adding Hitter Stat:" + ex );
+            }
         }
 
-        public void AddPitcherStats( PitcherDailyStats stats )
+        public void AddPitcherStats( PitcherStats stats )
         {
-            _context.PitcherStats.Add( stats );
-            _context.SaveChanges();
+            try
+            {
+                _context.PitcherStats.Add( stats );
+                _context.SaveChanges();
+            }
+            catch ( Exception ex )
+            {
+                System.Diagnostics.Debug.WriteLine( "Error Adding Hitter Stat:" + ex );
+            }
         }
 
         public void AddPlayerPosition( PlayerPosition playerPosition )

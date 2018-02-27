@@ -1,7 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using SalaryCapData.ConsumeJson.Models.PlayerStats;
 using SalaryCapData.Interfaces;
+using SalaryCapData.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
 using System.Text;
 
@@ -9,79 +13,92 @@ namespace SalaryCapData.ConsumeJson.Models.Cumulative
 {
     public class CumulativePlayerStats
     {
-        public void ReadJsonDeserialize( string fileName, IPlayer _players )
+        public void ReadJsonDeserialize( string fileName, IPlayer _context, DateTime date )
         {
-
-            // read file into a string and deserialize JSON to a type
-            // Rosterplayers rosterplayers = JsonConvert.DeserializeObject<Rosterplayers>( File.ReadAllText( @"Q:\Users\Stephen\Documents\sportsfeeds\MYSPORTSFEEDS-ROSTER_PLAYERS-MLB-2017REGULAR-20171001.json" ) );
-            //Rootobject rootObject = JsonConvert.DeserializeObject<Rootobject>( File.ReadAllText( @"Q:\Users\Stephen\Documents\sportsfeeds\MYSPORTSFEEDS-ROSTER_PLAYERS-MLB-2017REGULAR-20171001.json" ) );
+            int i = 0;
+            int j = 0;
+            SaveStats playerStats = new SaveStats();
             try
             {
                 Rootobject rootObject = JsonConvert.DeserializeObject<Rootobject>( File.ReadAllText( fileName ) );
-                //DateTime date = Convert.ToDateTime( rootObject.dailyplayerstats.lastUpdatedOn );
                 foreach ( var p in rootObject.cumulativeplayerstats.playerstatsentry )
                 {
+                    System.Diagnostics.Debug.Write( "#: " + i++ + " Id: " + p.player.ID + " " + p.player.LastName );
+                    //First check to see if the player is in the Player table
+                    SalaryCapData.Models.Player player = _context.Get( Convert.ToInt32( p.player.ID ) );
+                    if ( player == null )
+                        continue;
+
+
+
+                    System.Diagnostics.Debug.Write( " " + j++ + " Saved " );
                     if ( p.player.Position == "P" )
-                        AddPitcherStats( Convert.ToInt32( p.player.ID ), p.stats, _players );
+                    {
+                        BuildPitcherStatModel( Convert.ToInt32( p.player.ID ), p.stats, _context, date );
+                    }
                     else
-                        AddHitterStats( Convert.ToInt32( p.player.ID ), p.stats, _players );
+                    {
+                        BuildHitterMStatModel( Convert.ToInt32( p.player.ID ), p.stats, _context, date );
+                    }
+                    System.Diagnostics.Debug.WriteLine( "\n" );
                 }
             }
             catch ( Exception ex )
             {
-                Console.WriteLine( "Error reading Json file: " + ex );
+            }
+            System.Diagnostics.Debug.WriteLine( i + " Cumulative Records Read.  " + j + " Saved.  Delta: " + (i - j) );
+        }
+
+            public void BuildPitcherStatModel( int id, Stats stats, IPlayer _context, DateTime date )
+            {
+                PitcherStats playerStats = new PitcherStats
+                {
+                    PlayerId = id,
+                    EarnedRunsAllowed = Convert.ToInt32( stats.EarnedRunsAllowed.text ),
+                    HitsAllowed = Convert.ToInt32( stats.HitsAllowed.text ),
+                    CompleteGames = Convert.ToInt32( stats.CompletedGames.text ),
+                    Holds = Convert.ToInt32( stats.Holds.text ),
+                    InningsPitched = Convert.ToDouble( stats.InningsPitched.text ),
+                    Loses = Convert.ToInt32( stats.Losses.text ),
+                    Saves = Convert.ToInt32( stats.Saves.text ),
+                    PickOffs = Convert.ToInt32( stats.Pickoffs.text ),
+                    PitcherWalks = Convert.ToInt32( stats.PitcherWalks.text ),
+                    Wins = Convert.ToInt32( stats.Wins.text ),
+                    Strikeouts = Convert.ToInt32( stats.PitcherStrikeouts.text ),
+                    GamesFinished = Convert.ToInt32( stats.GamesFinished.text ),
+                    WHIP = Convert.ToDouble( stats.WalksAllowedPer9Innings.text ),
+                    IsCumulative = true,
+                    Date = DateTime.Today
+                };
+
+                _context.AddPitcherStats( playerStats );
             }
 
-        }
-
-        public void AddPitcherStats( int id, Stats stats, IPlayer _context )
-        {
-            SalaryCapData.Models.PitcherDailyStats playerStats = new SalaryCapData.Models.PitcherDailyStats
+            public void BuildHitterMStatModel( int id, Stats stats, IPlayer _context, DateTime date )
             {
-                PlayerId = id,
-                EarnedRunsAllowed = Convert.ToInt32( stats.EarnedRunsAllowed.text ),
-                HitsAllowed = Convert.ToInt32( stats.HitsAllowed.text ),
-                CompleteGames = Convert.ToInt32( stats.CompletedGames.text ),
-                Holds = Convert.ToInt32( stats.Holds.text ),
-                InningsPitched = Convert.ToDouble( stats.InningsPitched.text ),
-                Loses = Convert.ToInt32( stats.Losses.text ),
-                Saves = Convert.ToInt32( stats.Saves.text ),
-                PickOffs = Convert.ToInt32( stats.Pickoffs.text ),
-                PitcherWalks = Convert.ToInt32( stats.PitcherWalks.text ),
-                Wins = Convert.ToInt32( stats.Wins.text ),
-                Strikeouts = Convert.ToInt32( stats.PitcherStrikeouts.text ),
-                GamesFinished = Convert.ToInt32( stats.GamesFinished.text ),
-                WHIP = Convert.ToDouble( stats.WalksAllowedPer9Innings.text ),
-                //Date = DateTime.Parse( date.ToShortDateString() )
-                Date = DateTime.Today
-            };
 
-            _context.AddPitcherStats( playerStats );
+
+                HitterStats playerStats = new SalaryCapData.Models.HitterStats
+                {
+                    PlayerId = id,
+                    Doubles = Convert.ToInt32( stats.SecondBaseHits.text ),
+                    ExtraBases = Convert.ToInt32( stats.ExtraBaseHits.text ),
+                    Hits = Convert.ToInt32( stats.Hits.text ),
+                    HomeRuns = Convert.ToInt32( stats.Homeruns.text ),
+                    RBI = Convert.ToInt32( stats.RunsBattedIn.text ),
+                    Runs = Convert.ToInt32( stats.Runs.text ),
+                    Sacrifices = 0,
+                    TotalBases = Convert.ToInt32( stats.TotalBases.text ),
+                    StolenBases = Convert.ToInt32( stats.StolenBases.text ),
+                    Triples = Convert.ToInt32( stats.ThirdBaseHits.text ),
+                    Walks = Convert.ToInt32( stats.BatterWalks.text ),
+                    IsCumulative = true,
+                    Date = DateTime.Today
+                };
+
+                _context.AddHitterStats( playerStats );
+
+            }
         }
 
-        public void AddHitterStats( int id, Stats stats, IPlayer _context )
-        {
-            //Console.WriteLine( stats.Hits ] );
-            Console.WriteLine( stats.AtBats.ToString() );
-            SalaryCapData.Models.HitterDailyStats playerStats = new SalaryCapData.Models.HitterDailyStats
-            {
-                PlayerId = id,
-                Doubles = Convert.ToInt32( stats.SecondBaseHits.text ),
-                ExtraBases = Convert.ToInt32( stats.ExtraBaseHits.text ),
-                Hits = Convert.ToInt32( stats.Hits.text ),
-                HomeRuns = Convert.ToInt32( stats.Homeruns.text ),
-                RBI = Convert.ToInt32( stats.RunsBattedIn.text ),
-                Runs = Convert.ToInt32( stats.Runs.text ),
-                Sacrifices = 0,
-                TotalBases = Convert.ToInt32( stats.TotalBases.text ),
-                StolenBases = Convert.ToInt32( stats.StolenBases.text ),
-                Triples = Convert.ToInt32( stats.ThirdBaseHits.text ),
-                Walks = Convert.ToInt32( stats.BatterWalks.text ),
-                //Date = DateTime.Parse( date.ToShortDateString() )
-                Date = DateTime.Today
-            };
-
-            _context.AddHitterStats( playerStats );
-        }
-    }
 }

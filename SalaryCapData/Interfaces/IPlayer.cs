@@ -14,10 +14,12 @@ namespace SalaryCapData.Interfaces
         void Update( Player player );
         bool Exists( int id );
 
-        void AddPitcherStats( PitcherDailyStats stats );
-        void AddHitterStats( HitterDailyStats stats );
+        void AddPitcherStats( PitcherStats stats );
+        void AddHitterStats( HitterStats stats );
 
         void AddPlayerPosition( PlayerPosition playerPosition );
+
+
 
     }
 }

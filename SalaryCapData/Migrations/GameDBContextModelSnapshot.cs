@@ -54,7 +54,7 @@ namespace SalaryCapData.Migrations
                     b.ToTable("Franchises");
                 });
 
-            modelBuilder.Entity("SalaryCapData.Models.HitterDailyStats", b =>
+            modelBuilder.Entity("SalaryCapData.Models.HitterStats", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -68,6 +68,8 @@ namespace SalaryCapData.Migrations
                     b.Property<int>("Hits");
 
                     b.Property<int>("HomeRuns");
+
+                    b.Property<bool>("IsCumulative");
 
                     b.Property<int>("PlayerId");
 
@@ -150,7 +152,7 @@ namespace SalaryCapData.Migrations
                     b.ToTable("Owners");
                 });
 
-            modelBuilder.Entity("SalaryCapData.Models.PitcherDailyStats", b =>
+            modelBuilder.Entity("SalaryCapData.Models.PitcherStats", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -168,6 +170,8 @@ namespace SalaryCapData.Migrations
                     b.Property<int>("Holds");
 
                     b.Property<double>("InningsPitched");
+
+                    b.Property<bool>("IsCumulative");
 
                     b.Property<int>("Loses");
 
@@ -321,7 +325,7 @@ namespace SalaryCapData.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SalaryCapData.Models.HitterDailyStats", b =>
+            modelBuilder.Entity("SalaryCapData.Models.HitterStats", b =>
                 {
                     b.HasOne("SalaryCapData.Models.Player", "Player")
                         .WithMany()
@@ -337,7 +341,7 @@ namespace SalaryCapData.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SalaryCapData.Models.PitcherDailyStats", b =>
+            modelBuilder.Entity("SalaryCapData.Models.PitcherStats", b =>
                 {
                     b.HasOne("SalaryCapData.Models.Player", "Player")
                         .WithMany()
