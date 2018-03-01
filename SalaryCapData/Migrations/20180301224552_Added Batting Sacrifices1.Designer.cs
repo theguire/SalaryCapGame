@@ -11,9 +11,10 @@ using System;
 namespace SalaryCapData.Migrations
 {
     [DbContext(typeof(GameDBContext))]
-    partial class GameDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180301224552_Added Batting Sacrifices1")]
+    partial class AddedBattingSacrifices1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,6 +91,8 @@ namespace SalaryCapData.Migrations
                     b.Property<int>("Strikeouts");
 
                     b.Property<int>("TotalBases");
+
+                    b.Property<int>("TotalPoints");
 
                     b.Property<int>("Triples");
 

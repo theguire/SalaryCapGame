@@ -77,12 +77,35 @@ namespace SalaryCapServices
         public IEnumerable<Player> GetAll()
         {
             //return ( _context.Players.Include( p => p.Team ).Include( p => p.PlayerPosition )).OrderByDescending( s => s.InitialValue );
-            return ( _context.Players.Include( p => p.Team )).OrderByDescending( s => s.InitialValue );
+            return ( _context.Players
+                                        .Include( p => p.HitterStats )
+                                        .Include( p => p.PictherStats )
+                                        .Include( p => p.Team ))
+                                        .OrderByDescending( s => s.InitialValue );
 
         }
 
+        public HitterStats GetPlayerHitterStats( int playerId )
+        {
+            return _context.HitterStats.FirstOrDefault( s => s.Id == playerId );
+        }
 
-        public void Update( Player player )
+		public IEnumerable<HitterStats> GetHitterStats()
+		{
+			return _context.HitterStats;
+		}
+
+		public PitcherStats GetPlayerPitcherStats( int playerId )
+        {
+            return _context.PitcherStats.FirstOrDefault( s => s.Id == playerId );
+        }
+
+		public IEnumerable<PitcherStats> GetPitcherStats()
+		{
+			return _context.PitcherStats;
+		}
+
+		public void Update( Player player )
         {
             _context.Update( player );
             _context.SaveChanges();

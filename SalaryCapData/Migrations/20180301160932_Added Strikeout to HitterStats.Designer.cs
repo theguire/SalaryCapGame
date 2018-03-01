@@ -11,9 +11,10 @@ using System;
 namespace SalaryCapData.Migrations
 {
     [DbContext(typeof(GameDBContext))]
-    partial class GameDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180301160932_Added Strikeout to HitterStats")]
+    partial class AddedStrikeouttoHitterStats
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,17 +60,11 @@ namespace SalaryCapData.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AtBats");
-
-                    b.Property<float>("Average");
-
                     b.Property<DateTime>("Date");
 
                     b.Property<int>("Doubles");
 
                     b.Property<int>("ExtraBases");
-
-                    b.Property<int>("GamesPlayed");
 
                     b.Property<int>("Hits");
 
@@ -223,8 +218,6 @@ namespace SalaryCapData.Migrations
                     b.Property<string>("Position");
 
                     b.Property<int>("TeamId");
-
-                    b.Property<int>("TotalPoints");
 
                     b.HasKey("Id");
 

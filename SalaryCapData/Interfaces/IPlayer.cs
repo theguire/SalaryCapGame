@@ -19,6 +19,12 @@ namespace SalaryCapData.Interfaces
 
         void AddPlayerPosition( PlayerPosition playerPosition );
 
+        HitterStats GetPlayerHitterStats( int playerId );
+        PitcherStats GetPlayerPitcherStats( int playerId );
+
+		IEnumerable<HitterStats> GetHitterStats();
+		IEnumerable<PitcherStats> GetPitcherStats();
+
 
 
     }

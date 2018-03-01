@@ -65,7 +65,7 @@ namespace SalaryCapData.ConsumeJson.Models.Roster
                         TeamId = team.Id,
                         //PlayerPositions = playerPositions,
                         InitialValue = salary
-                    };
+	                    };
                     _players.Add( player );
                     _teams.Add( team );
                     _players.AddPlayerPosition( playerPosition );

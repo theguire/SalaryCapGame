@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+
 namespace SalaryCapData.ConsumeJson.Models.PlayerStats
 {
     public class DailyPlayerStats

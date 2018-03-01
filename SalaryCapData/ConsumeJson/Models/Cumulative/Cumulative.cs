@@ -180,16 +180,21 @@ namespace SalaryCapData.ConsumeJson.Models
 
     public class Gamesplayed
     {
-        public string abbreviation { get; set; }
-        public string text { get; set; }
-    }
+		[JsonProperty( "@abbreviation" )]
+		public string abbreviation { get; set; }
+		[JsonProperty( "#text" )]
+		public string text { get; set; }
+	}
 
     public class Atbats
     {
-        public string category { get; set; }
-        public string abbreviation { get; set; }
-        public string text { get; set; }
-    }
+		[JsonProperty( "@category" )]
+		public string category { get; set; }
+		[JsonProperty( "@abbreviation" )]
+		public string abbreviation { get; set; }
+		[JsonProperty( "#text" )]
+		public string text { get; set; }
+	}
 
     public class Runs
     {
@@ -447,10 +452,13 @@ namespace SalaryCapData.ConsumeJson.Models
 
     public class Battingavg
     {
-        public string category { get; set; }
-        public string abbreviation { get; set; }
-        public string text { get; set; }
-    }
+		[JsonProperty( "@category" )]
+		public string category { get; set; }
+		[JsonProperty( "@abbreviation" )]
+		public string abbreviation { get; set; }
+		[JsonProperty( "#text" )]
+		public string text { get; set; }
+	}
 
     public class Batteronbasepct
     {
@@ -489,17 +497,23 @@ namespace SalaryCapData.ConsumeJson.Models
 
     public class Battersacrificebunts
     {
-        public string category { get; set; }
-        public string abbreviation { get; set; }
-        public string text { get; set; }
-    }
+		[JsonProperty( "@category" )]
+		public string category { get; set; }
+		[JsonProperty( "@abbreviation" )]
+		public string abbreviation { get; set; }
+		[JsonProperty( "#text" )]
+		public string text { get; set; }
+	}
 
     public class Battersacrificeflies
     {
-        public string category { get; set; }
-        public string abbreviation { get; set; }
-        public string text { get; set; }
-    }
+		[JsonProperty( "@category" )]
+		public string category { get; set; }
+		[JsonProperty( "@abbreviation" )]
+		public string abbreviation { get; set; }
+		[JsonProperty( "#text" )]
+		public string text { get; set; }
+	}
 
     public class Totalbases
     {

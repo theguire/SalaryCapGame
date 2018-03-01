@@ -17,9 +17,13 @@ namespace SalaryCapData.Models
         public bool IsRookie { get; set; }
         public string Position { get; set; }
         public decimal InitialValue { get; set; }
+		public int TotalPoints { get; set; }
+		//public decimal CurrentValue { get; set; }
 
         public int TeamId { get; set; }
         public Team Team { get; set; }
+		public HitterStats HitterStats { get; set; }
+        public PitcherStats PictherStats { get; set; }
         //public IEnumerable<PlayerPosition> PlayerPositions { get; set; }
     }
 }

@@ -46,6 +46,8 @@ namespace SalaryCapServices
            
             ConsumePlayerRoster players = new ConsumePlayerRoster();
             string[] fileArray = Directory.GetFiles( @"Q:\Users\Stephen\Documents\sportsfeeds\", "*.json" );
+			if ( fileArray.Length == 0 )
+				return;
             IEnumerable<Playersalary> playerSalary = new GetPlayerSalaryList().GetSalaries( @"Q:\Users\Stephen\Documents\sportsfeeds\Salaries\playersalary.json" );
             int i = 0;
             foreach ( var file in fileArray )
