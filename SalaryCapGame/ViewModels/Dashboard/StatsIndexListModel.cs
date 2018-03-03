@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SalaryCapGame.ViewModels.Dashboard
 {
-    public class StatsIndexListModel
-    {
+	public class StatsIndexListModel
+	{
 		//public int TotalPoints { get; set; }
 		public IEnumerable<HitterStats> HitterStats { get; set; }
 		public IEnumerable<PitcherStats> PicthterStats { get; set; }

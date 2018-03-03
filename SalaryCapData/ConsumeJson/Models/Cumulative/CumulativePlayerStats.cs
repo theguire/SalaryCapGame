@@ -60,28 +60,38 @@ namespace SalaryCapData.ConsumeJson.Models.Cumulative
 
         public void BuildPitcherStatModel( int id, Stats stats, IPlayer _context, DateTime date )
         {
+			try
+			{
 
-			PitcherStats playerStats = new PitcherStats
-            {
-                PlayerId = id,
-                EarnedRunsAllowed = Convert.ToInt32( stats.EarnedRunsAllowed.text ),
-                HitsAllowed = Convert.ToInt32( stats.HitsAllowed.text ),
-                CompleteGames = Convert.ToInt32( stats.CompletedGames.text ),
-                Holds = Convert.ToInt32( stats.Holds.text ),
-                InningsPitched = Convert.ToDouble( stats.InningsPitched.text ),
-                Loses = Convert.ToInt32( stats.Losses.text ),
-                Saves = Convert.ToInt32( stats.Saves.text ),
-                PickOffs = Convert.ToInt32( stats.Pickoffs.text ),
-                PitcherWalks = Convert.ToInt32( stats.PitcherWalks.text ),
-                Wins = Convert.ToInt32( stats.Wins.text ),
-                Strikeouts = Convert.ToInt32( stats.PitcherStrikeouts.text ),
-                GamesFinished = Convert.ToInt32( stats.GamesFinished.text ),
-                WHIP = Convert.ToDouble( stats.WalksAllowedPer9Innings.text ),
-                IsCumulative = true,
-                Date = DateTime.Today
-            };
+				PitcherStats playerStats = new PitcherStats
+				{
+					PlayerId = id,
+					EarnedRunsAllowed = Convert.ToInt32( stats.EarnedRunsAllowed.text ),
+					HitsAllowed = Convert.ToInt32( stats.HitsAllowed.text ),
+					CompleteGames = Convert.ToInt32( stats.CompletedGames.text ),
+					Holds = Convert.ToInt32( stats.Holds.text ),
+					InningsPitched = (float)Convert.ToDouble( stats.InningsPitched.text ),
+					Loses = Convert.ToInt32( stats.Losses.text ),
+					Saves = Convert.ToInt32( stats.Saves.text ),
+					PitcherWalks = Convert.ToInt32( stats.PitcherWalks.text ),
+					Wins = Convert.ToInt32( stats.Wins.text ),
+					Strikeouts = Convert.ToInt32( stats.PitcherStrikeouts.text ),
+					GamesFinished = Convert.ToInt32( stats.GamesFinished.text ),
+					WHIP = (float)Convert.ToDouble( stats.WalksAndHitsPerInningPitched.text ),
+					ERA = (float)Convert.ToDouble( stats.EarnedRunAvg.text ),
+					IsCumulative = true,
+					Date = DateTime.Today
+				};
+				_context.AddPitcherStats( playerStats );
+			}
+			catch ( Exception ex )
+			{
+				string errorMessage = string.Format( "Error saving player stats: " + ex );
+				System.Diagnostics.Debug.WriteLine( errorMessage );
+				log.Info( errorMessage );
+			}
 
-            _context.AddPitcherStats( playerStats );
+            
         }
 
 

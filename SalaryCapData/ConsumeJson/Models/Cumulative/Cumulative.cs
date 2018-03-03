@@ -613,10 +613,13 @@ namespace SalaryCapData.ConsumeJson.Models
 
     public class Earnedrunavg
     {
-        public string category { get; set; }
-        public string abbreviation { get; set; }
-        public string text { get; set; }
-    }
+		[JsonProperty( "@category" )]
+		public string category { get; set; }
+		[JsonProperty( "@abbreviation" )]
+		public string abbreviation { get; set; }
+		[JsonProperty( "#text" )]
+		public string text { get; set; }
+	}
 
     public class Saves
     {

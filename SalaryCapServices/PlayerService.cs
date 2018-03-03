@@ -59,7 +59,10 @@ namespace SalaryCapServices
             }
         }
 
-        public void AddPlayerPosition( PlayerPosition playerPosition )
+
+		
+
+		public void AddPlayerPosition( PlayerPosition playerPosition )
         {
             _context.PlayerPositions.Add( playerPosition );
         }
@@ -79,7 +82,7 @@ namespace SalaryCapServices
             //return ( _context.Players.Include( p => p.Team ).Include( p => p.PlayerPosition )).OrderByDescending( s => s.InitialValue );
             return ( _context.Players
                                         .Include( p => p.HitterStats )
-                                        .Include( p => p.PictherStats )
+                                        .Include( p => p.PitcherStats )
                                         .Include( p => p.Team ))
                                         .OrderByDescending( s => s.InitialValue );
 
@@ -92,18 +95,19 @@ namespace SalaryCapServices
 
 		public IEnumerable<HitterStats> GetHitterStats()
 		{
-			return _context.HitterStats;
+			return _context.HitterStats.Include( p => p.Player ).Include( t => t.Player.Team );
 		}
 
 		public PitcherStats GetPlayerPitcherStats( int playerId )
-        {
-            return _context.PitcherStats.FirstOrDefault( s => s.Id == playerId );
-        }
+		{
+			return _context.PitcherStats.FirstOrDefault( s => s.Id == playerId );
+		}
 
 		public IEnumerable<PitcherStats> GetPitcherStats()
 		{
-			return _context.PitcherStats;
+			return _context.PitcherStats.Include( p => p.Player ).Include( t => t.Player.Team );
 		}
+
 
 		public void Update( Player player )
         {

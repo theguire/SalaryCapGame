@@ -7,19 +7,20 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+	<title>Dashboard Template for Bootstrap</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <!-- Custom styles for this template -->
-    <link href="~/css/dashboard.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="~/css/dashboard.css" rel="stylesheet">
+	@*<link href="~/css/Styles.css" rel="stylesheet">*@
 </head>
 
 <body>
@@ -44,10 +45,10 @@
                                 Dashboard <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            @RenderSection( "FranchiseMenu" )
-                        </li>
-                      
+						<li class="nav-item">
+							@RenderSection( "FranchiseMenu" )
+							@RenderBody()
+						</li>
                     </ul>
 
                     @*<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -85,148 +86,185 @@
                 </div>
             </nav>
 
-            <main role="main" class="col-md-8 ml-sm-auto col-lg-8 pt-3 px-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
+			<main role="main" class="col-md-8 ml-sm-auto col-lg-8 pt-3 px-4">
+				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+					<h1 class="h2">Dashboard</h1>
+					<div class="btn-toolbar mb-2 mb-md-0">
 
-                    </div>
-                </div>
-                @RenderBody()
-                <canvas class="my-4" id="myChart" width="500" height="100"></canvas>
+					</div>
+				</div>
+				<div class="row chartRow" >
+					<div class="chartContainer">
+						<div class="chart1">
+							<label for="myChart1">
+								Points<br />
+								<canvas id="myChart1"></canvas>
+							</label>
+						</div>
+						<div class="chart2">
+							<label for="myChart1">
+								Value <br />
+								<canvas id="myChart2"></canvas>
+							</label>
+								@*<canvas class="my-4" id="myChart" width="500" height="50"></canvas>*@
+						</div>
+					</div>
+					Something
+				</div>
+				<div class="row">
+					<div class="row" id="accordion">
+						<div>
+							<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#pitcherCollapse" aria-expanded="false" aria-controls="hitterCollapse">
+								Pitchers
+							</button>
+							<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#hitterCollapse" aria-expanded="false" aria-controls="pitcherCollapse">
+								Hitters
+							</button>
+						</div>
+						<div class="collapse" id="pitcherCollapse" data-parent="#accordion">
+							<div class="card card-body">
+								@RenderSection( "PitchersList" )
+							</div>
+						</div>
 
-                @RenderSection( "HitterList" )
+						<div class="collapse" id="hitterCollapse" data-parent="#accordion">
+							<div class="card card-body">
+								@RenderSection( "HittersList" )
+							</div>
+						</div>
+					</div>
+				</div>
+				
 
-
-                <h2>Section title</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,002</td>
-                                <td>amet</td>
-                                <td>consectetur</td>
-                                <td>adipiscing</td>
-                                <td>elit</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>Integer</td>
-                                <td>nec</td>
-                                <td>odio</td>
-                                <td>Praesent</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>libero</td>
-                                <td>Sed</td>
-                                <td>cursus</td>
-                                <td>ante</td>
-                            </tr>
-                            <tr>
-                                <td>1,004</td>
-                                <td>dapibus</td>
-                                <td>diam</td>
-                                <td>Sed</td>
-                                <td>nisi</td>
-                            </tr>
-                            <tr>
-                                <td>1,005</td>
-                                <td>Nulla</td>
-                                <td>quis</td>
-                                <td>sem</td>
-                                <td>at</td>
-                            </tr>
-                            <tr>
-                                <td>1,006</td>
-                                <td>nibh</td>
-                                <td>elementum</td>
-                                <td>imperdiet</td>
-                                <td>Duis</td>
-                            </tr>
-                            <tr>
-                                <td>1,007</td>
-                                <td>sagittis</td>
-                                <td>ipsum</td>
-                                <td>Praesent</td>
-                                <td>mauris</td>
-                            </tr>
-                            <tr>
-                                <td>1,008</td>
-                                <td>Fusce</td>
-                                <td>nec</td>
-                                <td>tellus</td>
-                                <td>sed</td>
-                            </tr>
-                            <tr>
-                                <td>1,009</td>
-                                <td>augue</td>
-                                <td>semper</td>
-                                <td>porta</td>
-                                <td>Mauris</td>
-                            </tr>
-                            <tr>
-                                <td>1,010</td>
-                                <td>massa</td>
-                                <td>Vestibulum</td>
-                                <td>lacinia</td>
-                                <td>arcu</td>
-                            </tr>
-                            <tr>
-                                <td>1,011</td>
-                                <td>eget</td>
-                                <td>nulla</td>
-                                <td>Class</td>
-                                <td>aptent</td>
-                            </tr>
-                            <tr>
-                                <td>1,012</td>
-                                <td>taciti</td>
-                                <td>sociosqu</td>
-                                <td>ad</td>
-                                <td>litora</td>
-                            </tr>
-                            <tr>
-                                <td>1,013</td>
-                                <td>torquent</td>
-                                <td>per</td>
-                                <td>conubia</td>
-                                <td>nostra</td>
-                            </tr>
-                            <tr>
-                                <td>1,014</td>
-                                <td>per</td>
-                                <td>inceptos</td>
-                                <td>himenaeos</td>
-                                <td>Curabitur</td>
-                            </tr>
-                            <tr>
-                                <td>1,015</td>
-                                <td>sodales</td>
-                                <td>ligula</td>
-                                <td>in</td>
-                                <td>libero</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </main>
+				@*<h2>Section title</h2>
+		<div class="table-responsive">
+			<table class="table table-striped table-sm">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Header</th>
+						<th>Header</th>
+						<th>Header</th>
+						<th>Header</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1,001</td>
+						<td>Lorem</td>
+						<td>ipsum</td>
+						<td>dolor</td>
+						<td>sit</td>
+					</tr>
+					<tr>
+						<td>1,002</td>
+						<td>amet</td>
+						<td>consectetur</td>
+						<td>adipiscing</td>
+						<td>elit</td>
+					</tr>
+					<tr>
+						<td>1,003</td>
+						<td>Integer</td>
+						<td>nec</td>
+						<td>odio</td>
+						<td>Praesent</td>
+					</tr>
+					<tr>
+						<td>1,003</td>
+						<td>libero</td>
+						<td>Sed</td>
+						<td>cursus</td>
+						<td>ante</td>
+					</tr>
+					<tr>
+						<td>1,004</td>
+						<td>dapibus</td>
+						<td>diam</td>
+						<td>Sed</td>
+						<td>nisi</td>
+					</tr>
+					<tr>
+						<td>1,005</td>
+						<td>Nulla</td>
+						<td>quis</td>
+						<td>sem</td>
+						<td>at</td>
+					</tr>
+					<tr>
+						<td>1,006</td>
+						<td>nibh</td>
+						<td>elementum</td>
+						<td>imperdiet</td>
+						<td>Duis</td>
+					</tr>
+					<tr>
+						<td>1,007</td>
+						<td>sagittis</td>
+						<td>ipsum</td>
+						<td>Praesent</td>
+						<td>mauris</td>
+					</tr>
+					<tr>
+						<td>1,008</td>
+						<td>Fusce</td>
+						<td>nec</td>
+						<td>tellus</td>
+						<td>sed</td>
+					</tr>
+					<tr>
+						<td>1,009</td>
+						<td>augue</td>
+						<td>semper</td>
+						<td>porta</td>
+						<td>Mauris</td>
+					</tr>
+					<tr>
+						<td>1,010</td>
+						<td>massa</td>
+						<td>Vestibulum</td>
+						<td>lacinia</td>
+						<td>arcu</td>
+					</tr>
+					<tr>
+						<td>1,011</td>
+						<td>eget</td>
+						<td>nulla</td>
+						<td>Class</td>
+						<td>aptent</td>
+					</tr>
+					<tr>
+						<td>1,012</td>
+						<td>taciti</td>
+						<td>sociosqu</td>
+						<td>ad</td>
+						<td>litora</td>
+					</tr>
+					<tr>
+						<td>1,013</td>
+						<td>torquent</td>
+						<td>per</td>
+						<td>conubia</td>
+						<td>nostra</td>
+					</tr>
+					<tr>
+						<td>1,014</td>
+						<td>per</td>
+						<td>inceptos</td>
+						<td>himenaeos</td>
+						<td>Curabitur</td>
+					</tr>
+					<tr>
+						<td>1,015</td>
+						<td>sodales</td>
+						<td>ligula</td>
+						<td>in</td>
+						<td>libero</td>
+					</tr>
+				</tbody>
+			</table>*@
+				@*</div>*@
+			</main>
         </div>
     </div>
 
@@ -247,8 +285,8 @@
     <!-- Graphs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script>
-        var ctx = document.getElementById("myChart");
-        var myChart = new Chart(ctx, {
+        var ctx1 = document.getElementById("myChart1");
+        var myChart1 = new Chart(ctx1, {
             type: 'line',
             data: {
                 labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
@@ -265,15 +303,54 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: false
+                            beginAtZero: true
                         }
                     }]
                 },
                 legend: {
-                    display: false,
+					display: false,
                 }
             }
-        });
+		});
+
+		var ctx2 = document.getElementById("myChart2");
+		var myChart2 = new Chart(ctx2, {
+			type: 'line',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [5, -10, 3.1, 2.1, -3, 30, 14],
+					lineTension:0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 3,
+					pointBackgroundColor: '#007bff',
+					
+				},
+					
+				{
+					data: [8, 6, -2, 2.1, -3, 5, 4],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#009000',
+					borderWidth: 3,
+					pointBackgroundColor: '#009000'
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+				
+			}
+		});
     </script>
 </body>
 </html>

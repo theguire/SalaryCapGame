@@ -24,7 +24,7 @@ namespace SalaryCapGame.Controllers
             var players = _players.GetAll();
             var results = players.Select( p => new PlayerIndexListingModel
             {
-                Id = p.Id,
+                PlayerId = p.Id,
                 FirstName = p.FirstName,
                 LastName = p.LastName,
                 Position = p.Position,

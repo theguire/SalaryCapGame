@@ -1,10 +1,35 @@
-﻿.logo {
+﻿/*.logo {
     font-family: "Coda";
     font-size: 1.8em;
     font-weight: bold;
+}*/
+/*table, tr, td, th {
+	margin: 0;
+	border: 0;
+	padding: 0;
+	border-spacing: 0;
 }
 
-.logo > a {
+
+	tr.rowhighlight {
+		background-color: #f0f8ff;
+		margin: 0;
+		border: 0;
+		padding: 0;
+		border-spacing: 0;
+	}*/
+/*tr.rowhighlight {
+		background-color: #f0f8ff;
+		margin: 0;
+		border: 0;
+		padding: 0;
+	}*/
+
+
+/*.rowhighlight > td {
+	background-color: green
+}*/
+/*.logo > a {
     color: #ddd;
     text-decoration: none;
     transition-duration: 0.5s;
@@ -60,14 +85,14 @@
 
 .demo-card-square > .mdl-card__title {
     color: #fff;
-}
+}*/
 
 /*.homeLabel {
     background-color: rgba(0,0,0,0.3);
     padding: 4px;
 }*/
 
-#owners {
+/*#owners {
     background: url('/images/pexels-photo-139762.jpeg') top left 15% no-repeat #555;
 }
 
@@ -100,9 +125,9 @@ table th {
     min-width: 2em;
     min-height: 2em;
     border: 1px solid #000;
-}
+}*/
 
-.customTable td {
+/*.customTable td {
     text-align: left;
     font-size: 1.2em;
 }
@@ -208,4 +233,4 @@ table th {
 #patronNoFees {
     color: #2f6fc7;
     font-weight: bold;
-}
+}*/

@@ -53,24 +53,26 @@ namespace SalaryCapData.ConsumeJson.Models.Roster
                         Position = item.player.Position
                     };
 
-                    SalaryCapData.Models.Player player = new SalaryCapData.Models.Player
-                    {
-                        Id = playerId,
-                        Age = Convert.ToInt32( item.player.Age ),
-                        FirstName = item.player.FirstName,
-                        LastName = item.player.LastName,
-                        IsRookie = item.player.IsRookie == "true" ? true : false,
-                        Position = item.player.Position,
-                        Team = team,
-                        TeamId = team.Id,
+					SalaryCapData.Models.Player player = new SalaryCapData.Models.Player
+					{
+						Id = playerId,
+						Age = Convert.ToInt32( item.player.Age ),
+						FirstName = item.player.FirstName,
+						LastName = item.player.LastName,
+						IsRookie = item.player.IsRookie == "true" ? true : false,
+						Position = item.player.Position,
+						Team = team,
+						TeamId = team.Id,
+						//TotalPoints = 0,
                         //PlayerPositions = playerPositions,
                         InitialValue = salary
 	                    };
+					
                     _players.Add( player );
                     _teams.Add( team );
                     _players.AddPlayerPosition( playerPosition );
 
-                    System.Diagnostics.Debug.Write( "\n" );
+                    //System.Diagnostics.Debug.Write( "\n" );
                 }
                 catch ( Exception ex )
                 {

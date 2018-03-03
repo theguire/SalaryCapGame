@@ -4,8 +4,8 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 
-<body class="m-1 p-1">
-    <table class="table table-condensed table-bordered table-striped table-responsive">
+<body class=" m-1 p-1">
+    <table class="table cntrblk table-condensed table-striped table-responsive">
         <thead>
             <tr>
                 <th class="owner_col">Owner</th>
@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="owner_col">
+            <tr class="rowhighlight">
                 <td><a asp-action="Details" asp-controller="Owners" asp-route-id=@Model.Id>@Model.LastName, @Model.FirstName</a></td>
             </tr>
 

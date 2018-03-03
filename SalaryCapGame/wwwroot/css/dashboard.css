@@ -2,16 +2,69 @@
     font-size: .875rem;
 }
 
+table.tabborder {
+	border-width: 1px;
+	border-spacing: 0px;
+	border-style: solid;
+	border-color: gray;
+	border-collapse: separate;
+	background-color: white;
+}
+
+table.tabborder th,
+table.tabborder td {
+	border-width: 1px;
+	padding: 2px;
+	border-style: inset;
+	border-color: black;
+	background-color: white;
+}
+
+.bold8 {
+	width: 50px;
+	font-size: 7pt;
+	font-family: verdana,arial,serif;
+	text-align: center;
+	font-weight: bold;
+}
+
+.pt8 {
+	width: 50px;
+	font-size: 8pt;
+	font-family: verdana,arial,serif;
+	text-align: center;
+}
+
 .feather {
-    width: 20px;
-    height: 16px;
-    vertical-align: text-bottom;
+	width: 20px;
+	height: 16px;
+	vertical-align: text-bottom;
+}
+
+.chartRow{
+	border-bottom:double;
+
+}
+.chartContainer {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	/*height: 50px;*/
+}
+
+.chart1,
+.chart2 {
+	width: 50%;
+	background-color: lightblue;
+	border: thin solid darkgray;
 }
 
 /*
  * Sidebar
  */
-
+.stats{
+	text-align:right;
+}
 .sidebar {
     position: fixed;
     top: 0;

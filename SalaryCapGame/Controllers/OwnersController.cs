@@ -94,14 +94,22 @@ namespace SalaryCapGame.Controllers
             }
 
             OwnerIndexListingModel ownerModel = GetOwnerIndexListingModel( id, owner );
-            List<PlayerIndexListingModel> playersModel = GetPlayersIndexListingModel( id );
+            //List<PlayerIndexListingModel> playersModel = GetPlayersIndexListingModel( id );
 			StatsIndexListModel statsIndexListModel = GetAllStats();
+			foreach ( var p in statsIndexListModel.HitterStats )
+			{
+				p.Player.TotalPoints = p.Player.GetHitterPoints();
+			}
 
-            var playerModel = new PlayerIndexModel { Players = playersModel };
-            var dashboardModel = new DashboardViewModel
+			foreach ( var p in statsIndexListModel.PicthterStats )
+			{
+				p.Player.TotalPoints = p.Player.GetPitcherPoints();
+			}
+			// var playerModel = new PlayerIndexModel { Players = playersModel };
+			var dashboardModel = new DashboardViewModel
             {
                 OwnerIndex = ownerModel,
-                PlayerIndexModel = playerModel,
+                PlayerStats = statsIndexListModel,
             };
 
             return View( "List", dashboardModel );
@@ -110,8 +118,12 @@ namespace SalaryCapGame.Controllers
 		private StatsIndexListModel GetAllStats()
 		{
 
-			IEnumerable<HitterStats> hitterStats = _players.GetHitterStats();
-			IEnumerable<PitcherStats> pitcherStats = _players.GetPitcherStats();
+			IEnumerable<HitterStats> hitterStats = _players
+													.GetHitterStats()
+													.OrderByDescending( pts => pts.Player.TotalPoints );
+			IEnumerable<PitcherStats> pitcherStats = _players
+													.GetPitcherStats()
+													.OrderByDescending( pts => pts.Player.TotalPoints );
 
 			StatsIndexListModel statsModel = new StatsIndexListModel
 			{
@@ -122,7 +134,49 @@ namespace SalaryCapGame.Controllers
 			return ( statsModel );
 		}
 
-        private List<PlayerIndexListingModel> GetPlayersIndexListingModel( int id )
+
+
+		//private int GetTotalPoints( Player player )
+		//{
+		//	if ( player.Position == "P" )
+		//		return (GetTotalPitcherPoints( player.PictherStats ));
+		//	else
+		//		return (GetTotalHitterPoints( player.HitterStats ));
+		//}
+
+		//private int GetTotalPitcherPoints( PitcherStats pictherStats )
+		//{
+		//	return 100;
+
+		//}
+
+		//private int GetTotalHitterPoints( HitterStats hitterStats )
+		//{
+		//	int hitPoints = hitterStats.Hits * (int)HitterPointValues.Hit;
+		//	int runPoints = hitterStats.Runs * (int)HitterPointValues.Run;
+		//	int doublePoints = hitterStats.Doubles * (int)HitterPointValues.Double;
+		//	int triplePoints = hitterStats.Doubles * (int)HitterPointValues.Triple;
+		//	int homeRunPoints = hitterStats.Doubles * (int)HitterPointValues.HomeRun;
+		//	int rbiPoints = hitterStats.Doubles * (int)HitterPointValues.RBI;
+		//	int walkPoints = hitterStats.Doubles * (int)HitterPointValues.Walk;
+		//	int stolenBasePoints = hitterStats.Doubles * (int)HitterPointValues.StolenBase;
+		//	int strikeoutPoints = hitterStats.Doubles * (int)HitterPointValues.Strikeout;
+		//	int sacrificePoints = hitterStats.Sacrifices;
+
+		//	return (hitPoints
+		//			+ runPoints
+		//			+ doublePoints
+		//			+ triplePoints
+		//			+ homeRunPoints
+		//			+ rbiPoints
+		//			+ walkPoints
+		//			+ stolenBasePoints
+		//			+ sacrificePoints
+		//			+ strikeoutPoints);
+
+		//}
+
+		private List<PlayerIndexListingModel> GetPlayersIndexListingModel( int id )
         {
             IEnumerable<Player> players = _players.GetAll();
 
@@ -131,59 +185,21 @@ namespace SalaryCapGame.Controllers
             
             var results = players.Select( p => new PlayerIndexListingModel
             {
-                Id = p.Id,
+                PlayerId = p.Id,
                 FirstName = p.FirstName,
                 LastName = p.LastName,
                 Position = p.Position,
                 Team = p.Team,
                 Value = p.InitialValue,
                 HitterStats = p.HitterStats,
-                PitcherStats = p.PictherStats,
-				TotalPoints = GetTotalPoints( p )
+                PitcherStats = p.PitcherStats,
+				//TotalPoints = GetTotalPoints( p )
             } ).ToList();
 
             return results;
         }
 
-		private int GetTotalPoints( Player player )
-		{
-			if ( player.Position == "P" )
-				return (GetTotalPitcherPoints( player.PictherStats ));
-			else
-				return (GetTotalHitterPoints( player.HitterStats ));
-		}
-
-		private int GetTotalPitcherPoints( PitcherStats pictherStats )
-		{
-			return 100;
-
-		}
-
-		private int GetTotalHitterPoints( HitterStats hitterStats )
-		{
-			int hitPoints = hitterStats.Hits * (int)HitterPointValues.Hit;
-			int runPoints = hitterStats.Runs * (int)HitterPointValues.Run;
-			int doublePoints = hitterStats.Doubles * (int)HitterPointValues.Double;
-			int triplePoints = hitterStats.Doubles * (int)HitterPointValues.Triple;
-			int homeRunPoints = hitterStats.Doubles * (int)HitterPointValues.HomeRun;
-			int rbiPoints = hitterStats.Doubles * (int)HitterPointValues.RBI;
-			int walkPoints = hitterStats.Doubles * (int)HitterPointValues.Walk;
-			int stolenBasePoints = hitterStats.Doubles * (int)HitterPointValues.StolenBase;
-			int strikeoutPoints = hitterStats.Doubles * (int)HitterPointValues.Strikeout;
-			int sacrificePoints = hitterStats.Sacrifices; 
-
-			return (hitPoints
-					+ runPoints
-					+ doublePoints
-					+ triplePoints
-					+ homeRunPoints
-					+ rbiPoints
-					+ walkPoints
-					+ stolenBasePoints
-					+ sacrificePoints
-					+ strikeoutPoints);
-
-		}
+		
         private OwnerIndexListingModel GetOwnerIndexListingModel( int id, Owner owner )
         {
             var ownerModel = new OwnerIndexListingModel

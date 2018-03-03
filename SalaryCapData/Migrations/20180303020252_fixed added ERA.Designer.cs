@@ -11,9 +11,10 @@ using System;
 namespace SalaryCapData.Migrations
 {
     [DbContext(typeof(GameDBContext))]
-    partial class GameDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180303020252_fixed added ERA")]
+    partial class fixedaddedERA
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,6 +186,8 @@ namespace SalaryCapData.Migrations
                     b.Property<bool>("IsCumulative");
 
                     b.Property<int>("Loses");
+
+                    b.Property<int>("PickOffs");
 
                     b.Property<int>("PitcherWalks");
 

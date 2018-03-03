@@ -17,16 +17,15 @@ namespace SalaryCapData.ConsumeJson.Models.PlayerStats
                 HitsAllowed = Convert.ToInt32( stats.HitsAllowed.text ),
                 CompleteGames = Convert.ToInt32( stats.CompletedGames.text ),
                 Holds = Convert.ToInt32( stats.Holds.text ),
-                InningsPitched = Convert.ToDouble( stats.InningsPitched.text ),
+                InningsPitched = (float)Convert.ToDouble( stats.InningsPitched.text ),
                 Loses = Convert.ToInt32( stats.Losses.text ),
                 Saves = Convert.ToInt32( stats.Saves.text ),
-                PickOffs = Convert.ToInt32( stats.Pickoffs.text ),
                 PitcherWalks = Convert.ToInt32( stats.PitcherWalks.text ),
                 Wins = Convert.ToInt32( stats.Wins.text ),
                 Strikeouts = Convert.ToInt32( stats.PitcherStrikeouts.text ),
                 GamesFinished = Convert.ToInt32( stats.GamesFinished.text ),
                 IsCumulative = false,
-                WHIP = Convert.ToDouble( stats.WalksAllowedPer9Innings.text ),
+                WHIP = (float)Convert.ToDouble( stats.WalksAndHitsPerInningPitched.text ),
                 Date = DateTime.Parse( date.ToShortDateString() )
            };
 

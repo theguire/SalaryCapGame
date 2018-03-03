@@ -11,9 +11,10 @@ using System;
 namespace SalaryCapData.Migrations
 {
     [DbContext(typeof(GameDBContext))]
-    partial class GameDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180302204111_Added Batting Sacrifices3")]
+    partial class AddedBattingSacrifices3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,8 +171,6 @@ namespace SalaryCapData.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<float>("ERA");
-
                     b.Property<int>("EarnedRunsAllowed");
 
                     b.Property<int>("GamesFinished");
@@ -180,11 +179,13 @@ namespace SalaryCapData.Migrations
 
                     b.Property<int>("Holds");
 
-                    b.Property<float>("InningsPitched");
+                    b.Property<double>("InningsPitched");
 
                     b.Property<bool>("IsCumulative");
 
                     b.Property<int>("Loses");
+
+                    b.Property<int>("PickOffs");
 
                     b.Property<int>("PitcherWalks");
 
@@ -194,7 +195,7 @@ namespace SalaryCapData.Migrations
 
                     b.Property<int>("Strikeouts");
 
-                    b.Property<float>("WHIP");
+                    b.Property<double>("WHIP");
 
                     b.Property<int>("Wins");
 
@@ -356,7 +357,7 @@ namespace SalaryCapData.Migrations
             modelBuilder.Entity("SalaryCapData.Models.PitcherStats", b =>
                 {
                     b.HasOne("SalaryCapData.Models.Player", "Player")
-                        .WithOne("PitcherStats")
+                        .WithOne("PictherStats")
                         .HasForeignKey("SalaryCapData.Models.PitcherStats", "PlayerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

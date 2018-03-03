@@ -6,9 +6,9 @@
     @foreach ( var item in Model )
     {
 
-            <tr>
-                <td></td>
-                <td style="text-align:left">
+            <tr >
+               
+                <td colspan="2" style="text-align:left">
                     <a asp-controller="Player" asp-action="Index" asp-route-id="@item.Id">@item.Name</a>
                 </td>
                 <td style="text-align:left">
