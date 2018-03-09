@@ -75,7 +75,8 @@ namespace SalaryCapGame
                     template: "{controller=Owners}/{action=OwnersList}" );
                 routes.MapRoute( "Franchise", "{controller=Franchises}/{action=Edit}/{id?}" );
                 routes.MapRoute( "", "{controller=Owners}/{action=List}/{id}" );
-            } );
+				
+			} );
            
 
         }

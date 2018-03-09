@@ -5,198 +5,175 @@
 }
 
 @using ( Html.BeginForm() )
-{
-	@Html.HiddenFor( model => Model.OwnerIndex.Id )
-	@section FranchiseMenu
-		{
-		<table class="table table-striped table-sm table-responsive">
-			<thead>
-				<tr>
-					<th class="text-left col-sm-2">
-						@Html.Label( "Franchise" )
-					</th>
-					<th class="text-left col-sm-2">
-						@Html.Label( "League" )
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach ( var f in Model.OwnerIndex.Franchises )
-				{
-					<tr>
-						<td class="col-sm-2 text-left">
-							@Html.ActionLink( f.Name, "Edit", "Franchises", new { f.Id }, null )
-						</td>
-						<td class="col-sm-2 text-left">
-							@Html.ActionLink( f.League.Name, "Index", "League", new { f.LeagueId }, null )
-						</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-	}
-	<div class="jumbotron container ">
-		<table class="table table-striped table-hover table-condensed table-responsive">
-			<thead>
-
-				@Html.Partial( "~/Views/Partial/Franchise/_FranchiseHeader.cshtml" )
-			</thead>
-			<tbody>
-				@Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", Model.OwnerIndex.Franchises )
-
-
-			</tbody>
-		</table>
-	</div>
-	@*</div>*@
-}
-
-
-
-@using ( Html.BeginForm() )
-{
-	@Html.HiddenFor( model => Model.OwnerIndex.Id )
-	@section HittersList
-		{
-		<h2>Hitters</h2>
-		<div class="container table-responsive">
-			@*<table cellspacing="0" cellpadding="0" border="0" width:100% class="table table-striped table-sm table-hover">*@
-			@*<table cellspacing="0" cellpadding="0" border="0" width:100%>*@
-			<table cellspacing="0" cellpadding="0" border="0" width="1000">
-				<tr>
-					<td>
-						<table cellspacing="1" cellpadding="1" width="970">
-							@*<thead>*@
-							<tr class="stats">
-								<th style="text-align:left" width="100px" >Player</th>
-								<th>Position</th>
-								<th>Team</th>
-								<th>Value</th>
-								<th>GP</th>
-								<th>AB</th>
-								<th>Hits</th>
-								<th>Avg</th>
-								<th>2B</th>
-								<th>3B</th>
-								<th>HR</th>
-								<th>R</th>
-								<th>RBI</th>
-								<th>BB</th>
-								<th>SB</th>
-								<th>SAC</th>
-								<th>TB</th>
-								<th>EB</th>
-								<th>SO</th>
-								<th>Pts</th>
-							</tr>
-							@*</thead>*@
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div style="overflow:auto; width:1000px; height:400px;">
-							@*<tbody>*@
-							<table cellspacing="0" cellpadding="1" width="990" class="table table-striped table-sm table-hover">
-
-								@foreach ( var item in Model.PlayerStats.HitterStats )
-						{
-							<tr class="stats">
-								<td style="text-align:left">@Html.DisplayFor( i => item.Player.FirstName ) @Html.DisplayFor( i => item.Player.LastName )</td>
-								<td>@Html.DisplayFor( i => item.Player.Position )</td>
-								<td>@Html.DisplayFor( i => item.Player.Team.Abbrev )</td>
-								<td>$@Html.DisplayFor( i => item.Player.InitialValue )</td>
-								<td>@Html.DisplayFor( i => item.GamesPlayed )</td>
-								<td>@Html.DisplayFor( i => item.AtBats )</td>
-								<td>@Html.DisplayFor( i => item.Hits )</td>
-								<td>@Html.DisplayFor( i => item.Average )</td>
-								<td>@Html.DisplayFor( i => item.Doubles )</td>
-								<td>@Html.DisplayFor( i => item.Triples )</td>
-								<td>@Html.DisplayFor( i => item.HomeRuns )</td>
-								<td>@Html.DisplayFor( i => item.Runs )</td>
-								<td>@Html.DisplayFor( i => item.RBI )</td>
-								<td>@Html.DisplayFor( i => item.Walks )</td>
-								<td>@Html.DisplayFor( i => item.StolenBases )</td>
-								<td>@Html.DisplayFor( i => item.Sacrifices )</td>
-								<td>@Html.DisplayFor( i => item.TotalBases )</td>
-								<td>@Html.DisplayFor( i => item.ExtraBases )</td>
-								<td>@Html.DisplayFor( i => item.Strikeouts )</td>
-								<td>@Html.DisplayFor( i => item.Player.TotalPoints )</td>
-							</tr>
-				}
-								@*</tbody>*@
-							</table>
-						</div>
-					</td>
-				</tr>
-			</table>
-
-
-		</div>
-
-	}
-}
-
-@using ( Html.BeginForm() )
-{
-	@Html.HiddenFor( model => Model.OwnerIndex.Id )
-	@section PitchersList
-		{
-		<h2>Pitchers</h2>
-		<div class="table-responsive">
-			<table class="table table-striped table-sm table-hover">
+	{
+		@Html.HiddenFor( model => Model.OwnerIndex.Id )
+		@section FranchiseMenu
+			{
+			<table class="table table-striped table-sm table-responsive">
 				<thead>
-					<tr class="stats">
-						<th style="text-align:left">Player</th>
-						<th>Position</th>
-						<th>Team</th>
-						<th>Value</th>
-						<th>CG</th>
-						<th>W</th>
-						<th>L</th>
-						<th>S</th>
-						<th>H</th>
-						<th>IP</th>
-						<th>R</th>
-						<th>Hits</th>
-						<th>BB</th>
-						<th>WHIP</th>
-						<th>SO</th>
-						<th>ERA</th>
-						<th>Pts</th>
+					<tr>
+						<th class="text-left col-sm-2">
+							@Html.Label( "Franchise" )
+						</th>
+						<th class="text-left col-sm-2">
+							@Html.Label( "League" )
+						</th>
 					</tr>
 				</thead>
 				<tbody>
-
-					@foreach ( var item in Model.PlayerStats.PicthterStats )
+					@foreach ( var f in Model.OwnerIndex.Franchises )
 					{
-						<tr class="stats">
-							<td th style="text-align:left">@Html.DisplayFor( i => item.Player.FirstName ) @Html.DisplayFor( i => item.Player.LastName )</td>
-							<td>@Html.DisplayFor( i => item.Player.Position )</td>
-							<td>@Html.DisplayFor( i => item.Player.Team.Abbrev )</td>
-							<td>$@Html.DisplayFor( i => item.Player.InitialValue )</td>
-
-							<td>@Html.DisplayFor( i => item.CompleteGames )</td>
-							<td>@Html.DisplayFor( i => item.Wins )</td>
-							<td>@Html.DisplayFor( i => item.Loses )</td>
-							<td>@Html.DisplayFor( i => item.Saves )</td>
-							<td>@Html.DisplayFor( i => item.Holds )</td>
-							<td>@Html.DisplayFor( i => item.InningsPitched )</td>
-							<td>@Html.DisplayFor( i => item.EarnedRunsAllowed )</td>
-							<td>@Html.DisplayFor( i => item.HitsAllowed )</td>
-							<td>@Html.DisplayFor( i => item.PitcherWalks )</td>
-							<td>@Html.DisplayFor( i => item.WHIP )</td>
-							<td>@Html.DisplayFor( i => item.Strikeouts )</td>
-							<td>@Html.DisplayFor( i => item.ERA )</td>
-							<td>@Html.DisplayFor( i => item.Player.TotalPoints )</td>
+						<tr>
+							<td class="col-sm-2 text-left">
+								@Html.ActionLink( f.Name, "Edit", "Franchises", new { f.Id }, null )
+							</td>
+							<td class="col-sm-2 text-left">
+								@Html.ActionLink( f.League.Name, "Index", "League", new { f.LeagueId }, null )
+							</td>
 						</tr>
 					}
 				</tbody>
 			</table>
+		}
+		<div class="jumbotron container ">
+			<table class="table table-striped table-hover table-condensed table-responsive">
+				<thead>
 
-
+					@Html.Partial( "~/Views/Partial/Franchise/_FranchiseHeader.cshtml" )
+				</thead>
+				<tbody>
+					@Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", Model.OwnerIndex.Franchises )
+				</tbody>
+			</table>
 		</div>
-
 	}
-}
+
+@*@using ( Html.BeginForm() )
+{*@
+	@section HitterList
+		{
+		@Html.Partial( "~/Views/Partial/Player/ViewHitters.cshtml" )
+	}
+@*}*@
+
+@*@using ( Html.BeginForm() )
+{*@
+
+	@section PitcherList
+		{
+		@Html.Partial( "~/Views/Partial/Player/ViewPitchers.cshtml" )
+	}
+@*}*@
+	@*@using ( Html.BeginForm() )
+		{
+		@Html.HiddenFor( model => Model.OwnerIndex.Id )
+		@section MyPlayers
+			{
+
+			<div class="container">
+				<ul class="nav nav-tabs">
+					<li class="nav-item active">
+						<a class="nav-link" href="#pitcherList">Pitchers</a>
+					</li>
+					<li class="nav-item active">
+
+						<a class="nav-link" href=@Html.Partial( "~/Views/Partial/Player/ViewPitchers.cshtml" )>Hitters</a>
+					</li>
+				</ul>
+			</div>
+		}
+		}*@
+
+	@*<div class="row" id="accordion">
+				<div>
+					<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#pitcherCollapse" aria-expanded="true" aria-controls="hitterCollapse">
+						Pitchers
+					</button>
+					<button  class="btn btn-primary" type="button" data-toggle="collapse" data-target="#hitterCollapse" aria-expanded="false" aria-controls="pitcherCollapse">
+						Hitters
+					</button>
+				</div>
+				<div class="collapse" id="pitcherCollapse" data-parent="#accordion">
+					<div class="card card-body">
+						@Html.Partial( "~/Views/Partials/Player/ViewHitters.cshtml" )
+					</div>
+				</div>
+
+				<div class="collapse" id="hitterCollapse" data-parent="#accordion" >
+					<div class="card card-body">
+						@Html.Partial( "~/Views/Partials/Player/ViewPitchers.cshtml" )
+					</div>
+				</div>
+			</div>
+		</div>*@
+
+
+
+	@*@using ( Html.BeginForm() )
+		{
+			@Html.HiddenFor( model => Model.OwnerIndex.Id )
+			@section PitchersList
+				{
+				<h2>Pitchers</h2>
+				<table cellspacing="0" id="pitcherStatsTable" class="sortable" cellpadding="0" border="0" width="1050">
+					<tr>
+						<td>
+							<table  cellspacing="1" cellpadding="1" width="1025">
+								<tr class="stats">
+									<th style="text-align:left" onclick="sortTable(0)">Player</th>
+									<th onclick="sortTable(1)">Position</th>
+									<th onclick="sortTable(2)">Team</th>
+									<th onclick="sortTable(3)">Value</th>
+									<th onclick="sortTable(4)">CG</th>
+									<th onclick="sortTable(5)">W</th>
+									<th onclick="sortTable(6)">L</th>
+									<th onclick="sortTable(7)">S</th>
+									<th onclick="sortTable(8)">H</th>
+									<th onclick="sortTable(9)">IP</th>
+									<th onclick="sortTable(10)">R</th>
+									<th onclick="sortTable(11)">Hits</th>
+									<th onclick="sortTable(12)">BB</th>
+									<th onclick="sortTable(13)">WHIP</th>
+									<th onclick="sortTable(14)">SO</th>
+									<th onclick="sortTable(15)">ERA</th>
+									<th onclick="sortTable(16)">Pts</th>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div style="overflow:auto; width:1050px; height:400px;">
+								<table cellspacing="0" cellpadding="1" width="1025" class="table table-striped table-sm table-hover">
+									@foreach ( var item in Model.PlayerStats.PicthterStats )
+									{
+										<tr class="stats">
+											<td th style="text-align:left">@Html.DisplayFor( i => item.Player.FirstName ) @Html.DisplayFor( i => item.Player.LastName )</td>
+											<td>@Html.DisplayFor( i => item.Player.Position )</td>
+											<td>@Html.DisplayFor( i => item.Player.Team.Abbrev )</td>
+											<td>$@Html.DisplayFor( i => item.Player.InitialValue )</td>
+											<td>@Html.DisplayFor( i => item.CompleteGames )</td>
+											<td>@Html.DisplayFor( i => item.Wins )</td>
+											<td>@Html.DisplayFor( i => item.Loses )</td>
+											<td>@Html.DisplayFor( i => item.Saves )</td>
+											<td>@Html.DisplayFor( i => item.Holds )</td>
+											<td>@Html.DisplayFor( i => item.InningsPitched )</td>
+											<td>@Html.DisplayFor( i => item.EarnedRunsAllowed )</td>
+											<td>@Html.DisplayFor( i => item.HitsAllowed )</td>
+											<td>@Html.DisplayFor( i => item.PitcherWalks )</td>
+											<td>@Html.DisplayFor( i => item.WHIP )</td>
+											<td>@Html.DisplayFor( i => item.Strikeouts )</td>
+											<td>@Html.DisplayFor( i => item.ERA )</td>
+											<td>@Html.DisplayFor( i => item.Player.TotalPoints )</td>
+										</tr>
+									}
+								</table>
+							</div>
+						</td>
+					</tr>
+				</table>
+			}
+		}*@
+
+
 

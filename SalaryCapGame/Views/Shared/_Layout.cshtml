@@ -8,311 +8,213 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="icon" href="favicon.ico">
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
+	@*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" /><div class='container'> <div class='hero-unit'> <h1>Bootstrap Sortable</h1> </div><table class='table table-bordered table-striped sortable'> <thead> <tr> <th style="width: 20%; vertical-align: middle;" rowspan="2" class='az' data-defaultsign="nospan" data-defaultsort="asc"><i class="fa fa-map-marker fa-fw"></i>Name</th> <th colspan="4" data-mainsort="3" style="text-align: center;">Results</th> <th data-defaultsort="disabled"></th> </tr><tr> <th style="width: 20%" colspan="2" data-mainsort="1" data-firstsort="desc">Round 1</th> <th style="width: 20%">Round 2</th> <th style="width: 20%">Total</th> <th style="width: 20%" data-defaultsign="month">Date</th> </tr></thead> <tbody> </tbody> </table> <table class='table table-bordered table-striped sortable'> <thead> <tr> <th style="width: 20%; vertical-align: middle;" rowspan="2" class='az' data-defaultsign="nospan" data-defaultsort="asc"><i class="fa fa-map-marker fa-fw"></i>Name</th> <th colspan="4" data-mainsort="3" style="text-align: center;">Results</th> <th data-defaultsort="disabled"></th> </tr><tr> <th style="width: 20%" colspan="2" data-mainsort="1" data-firstsort="desc">Round 1</th> <th style="width: 20%">Round 2</th> <th style="width: 20%">Total</th> <th style="width: 20%" data-defaultsign="month">Date</th> </tr></thead> <tbody> </tbody> </table> <div class='well'> <button type='button' class='btn btn-primary add-row' data-sort="true">Add Row (use last sort)</button> <button type='button' class='btn btn-primary add-row'>Add Row (use default sort)</button> </div><div class='well'> <button type='button' class='btn btn-primary change-sort' data-custom="true">Set custom sorting</button> <button type='button' class='btn btn-primary change-sort'>Reset built-in sorting</button> </div><div class="well"> <span class="groupbox">Options</span> <div class="well" style="margin-top: 10px"> <span class="groupbox">Event</span> <div class="checkbox"> <label> <input type="checkbox" checked="checked" id="event" />Hook on 'sorted' event </label> </div></div><div class="well"> <span class="groupbox">Sorting sign</span> <div class="radio"> <label> <input type="radio" name="sign" id="default" value="" checked>Default (points towards larger value) </label> </div><div class="radio"> <label> <input type="radio" name="sign" id="reversed" value="reversed">Reversed (points towards smaller value) </label> </div><div class="radio"> <label> <input type="radio" name="sign" id="az" value="az">a..z </label> </div><div class="radio"> <label> <input type="radio" name="sign" id="AZ" value="AZ">A..Z </label> </div><div class="radio"> <label> <input type="radio" name="sign" id="19" value="_19">1..9 </label> </div><div class="radio"> <label> <input type="radio" name="sign" id="month" value="month">jan..dec </label> </div></div></div></div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>*@
+	@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap4.min.css" rel="stylesheet" />*@
 	<title>Dashboard Template for Bootstrap</title>
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 	<!-- Custom styles for this template -->
-	<link href="~/css/dashboard.css" rel="stylesheet">
-	@*<link href="~/css/Styles.css" rel="stylesheet">*@
+	@*<link href="~/css/dashboard.css" rel="stylesheet">*@
+	@*<link href="~/css/sortable.css" rel="stylesheet">*@
+	@*<link href="~/css/accordion.css" rel="stylesheet">*@
+	@*<link href="~/css/sidenav.css" rel="stylesheet">*@
+	@*<script type="text/javascript" src="~/js/sortable.js" async></script>*@
+
+	@*@RenderSection( "MyPlayers", false );*@
+
+
 </head>
 
 <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Salary Cap Games</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Sign out</a>
-            </li>
-        </ul>
-    </nav>
+	<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Salary Cap Games</a>
+		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+		<ul class="navbar-nav px-3">
+			<li class="nav-item text-nowrap">
+				<a class="nav-link" href="#">Sign out</a>
+			</li>
+		</ul>
+	</nav>
 
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-4 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <span data-feather="home"></span>
-                                Dashboard <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-						<li class="nav-item">
-							@RenderSection( "FranchiseMenu" )
-							@RenderBody()
-						</li>
-                    </ul>
+	<div class="container-fluid">
+	<div class="row">
+	<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+		<div class="sidebar-sticky">
+			<ul class="nav flex-column">
+				<li class="nav-item">
+					<a class="nav-link active" href="#">
+						<span data-feather="home"></span>
+						Dashboard <span class="sr-only">(current)</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					@RenderSection( "FranchiseMenu" )
+					@*@RenderBody()*@
+				</li>
+				<li class="nav-item">
+					@*<div class="row">
+						<div class="container-fluid accordian">*@
+					<div class="accordion nav-item">
 
-                    @*<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Saved reports</span>
-                        <a class="d-flex align-items-center text-muted" href="#">
-                            <span data-feather="plus-circle"></span>
-                        </a>
-                    </h6>
-                    <ul class="nav flex-column mb-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Current month
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Last quarter
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Social engagement
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file-text"></span>
-                                Year-end sale
-                            </a>
-                        </li>
-                    </ul>*@
-                </div>
-            </nav>
-
-			<main role="main" class="col-md-8 ml-sm-auto col-lg-8 pt-3 px-4">
-				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-					<h1 class="h2">Dashboard</h1>
-					<div class="btn-toolbar mb-2 mb-md-0">
-
-					</div>
-				</div>
-				<div class="row chartRow" >
-					<div class="chartContainer">
-						<div class="chart1">
-							<label for="myChart1">
-								Points<br />
-								<canvas id="myChart1"></canvas>
-							</label>
-						</div>
-						<div class="chart2">
-							<label for="myChart1">
-								Value <br />
-								<canvas id="myChart2"></canvas>
-							</label>
-								@*<canvas class="my-4" id="myChart" width="500" height="50"></canvas>*@
-						</div>
-					</div>
-					Something
-				</div>
-				<div class="row">
-					<div class="row" id="accordion">
-						<div>
-							<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#pitcherCollapse" aria-expanded="false" aria-controls="hitterCollapse">
-								Pitchers
-							</button>
-							<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#hitterCollapse" aria-expanded="false" aria-controls="pitcherCollapse">
-								Hitters
-							</button>
-						</div>
-						<div class="collapse" id="pitcherCollapse" data-parent="#accordion">
-							<div class="card card-body">
-								@RenderSection( "PitchersList" )
+						<div class="card">
+							<div class="card-header" id="headingTrade">
+								<h5 class="mb-0">
+									<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTrade" aria-expanded="false" aria-controls="collapseTrade">
+										<h3>My Team</h3>
+									</button>
+								</h5>
+							</div>
+							<div id="collapseTrade" class="collapse" aria-labelledby="headingTrade" data-parent="#accordion">
+								<div class="card-body">
+									<div class="card">
+										<div class="card-header" id="headingTradeHitters">
+											<h5 class="mb-0">
+												<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTradeHitters" aria-expanded="false" aria-controls="collapseTradeHitters">
+													<h5>Hitters</h5>
+												</button>
+											</h5>
+										</div>
+									</div>
+									<div class="card">
+										<div class="card-header" id="headingTradePitchers">
+											<h5 class="mb-0">
+												<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTradePitchers" aria-expanded="false" aria-controls="collapseTradePitchers">
+													<h5>Pitchers</h5>
+												</button>
+											</h5>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 
-						<div class="collapse" id="hitterCollapse" data-parent="#accordion">
-							<div class="card card-body">
-								@RenderSection( "HittersList" )
-							</div>
-						</div>
 					</div>
+					@*</div>*@
+
+				</li>
+			</ul>
+		</div>
+	</nav>
+	@*</div>*@
+	@*</div>*@
+
+	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
+		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+			<h1 class="h2">Dashboard</h1>
+		</div>
+		<div class="row chartRow">
+			<div class="chartContainer">
+				<div class="chart1">
+					<label for="myChart1" style="text-align:center">
+						Franchise Points<br />
+						<canvas id="myChart1"></canvas>
+					</label>
 				</div>
-				
+			</div>
+			<div class="chartContainer">
+				<div class="chart2">
+					<label for="myChart2" style="text-align:center">
+						Franchise Value <br />
+						<canvas id="myChart2"></canvas>
+					</label>
+				</div>
+			</div>
+			<div class="chartContainer">
+				<div class="chart3">
+					<label for="myChart3" style="text-align:center">
+						Franchise Points<br />
+						<canvas id="myChart3"></canvas>
+					</label>
+				</div>
+			</div>
+			<div class="chartContainer">
+				<div class="chart4">
+					<label for="myChart4" style="text-align:center">
+						Franchise Points<br />
+						<canvas id="myChart4"></canvas>
+					</label>
+				</div>
+			</div>
 
-				@*<h2>Section title</h2>
-		<div class="table-responsive">
-			<table class="table table-striped table-sm">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Header</th>
-						<th>Header</th>
-						<th>Header</th>
-						<th>Header</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1,001</td>
-						<td>Lorem</td>
-						<td>ipsum</td>
-						<td>dolor</td>
-						<td>sit</td>
-					</tr>
-					<tr>
-						<td>1,002</td>
-						<td>amet</td>
-						<td>consectetur</td>
-						<td>adipiscing</td>
-						<td>elit</td>
-					</tr>
-					<tr>
-						<td>1,003</td>
-						<td>Integer</td>
-						<td>nec</td>
-						<td>odio</td>
-						<td>Praesent</td>
-					</tr>
-					<tr>
-						<td>1,003</td>
-						<td>libero</td>
-						<td>Sed</td>
-						<td>cursus</td>
-						<td>ante</td>
-					</tr>
-					<tr>
-						<td>1,004</td>
-						<td>dapibus</td>
-						<td>diam</td>
-						<td>Sed</td>
-						<td>nisi</td>
-					</tr>
-					<tr>
-						<td>1,005</td>
-						<td>Nulla</td>
-						<td>quis</td>
-						<td>sem</td>
-						<td>at</td>
-					</tr>
-					<tr>
-						<td>1,006</td>
-						<td>nibh</td>
-						<td>elementum</td>
-						<td>imperdiet</td>
-						<td>Duis</td>
-					</tr>
-					<tr>
-						<td>1,007</td>
-						<td>sagittis</td>
-						<td>ipsum</td>
-						<td>Praesent</td>
-						<td>mauris</td>
-					</tr>
-					<tr>
-						<td>1,008</td>
-						<td>Fusce</td>
-						<td>nec</td>
-						<td>tellus</td>
-						<td>sed</td>
-					</tr>
-					<tr>
-						<td>1,009</td>
-						<td>augue</td>
-						<td>semper</td>
-						<td>porta</td>
-						<td>Mauris</td>
-					</tr>
-					<tr>
-						<td>1,010</td>
-						<td>massa</td>
-						<td>Vestibulum</td>
-						<td>lacinia</td>
-						<td>arcu</td>
-					</tr>
-					<tr>
-						<td>1,011</td>
-						<td>eget</td>
-						<td>nulla</td>
-						<td>Class</td>
-						<td>aptent</td>
-					</tr>
-					<tr>
-						<td>1,012</td>
-						<td>taciti</td>
-						<td>sociosqu</td>
-						<td>ad</td>
-						<td>litora</td>
-					</tr>
-					<tr>
-						<td>1,013</td>
-						<td>torquent</td>
-						<td>per</td>
-						<td>conubia</td>
-						<td>nostra</td>
-					</tr>
-					<tr>
-						<td>1,014</td>
-						<td>per</td>
-						<td>inceptos</td>
-						<td>himenaeos</td>
-						<td>Curabitur</td>
-					</tr>
-					<tr>
-						<td>1,015</td>
-						<td>sodales</td>
-						<td>ligula</td>
-						<td>in</td>
-						<td>libero</td>
-					</tr>
-				</tbody>
-			</table>*@
-				@*</div>*@
-			</main>
-        </div>
-    </div>
+		</div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script>window.jQuery || document.write('<script src="~/js/jquery-slim.min.js"><\/script>')</script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<div id="accordion">
+			<div id="collapseTradeHitters" class="collapse" aria-labelledby="headingTradeHitters" data-parent="#accordion">
+				<div class="card-body">
+					@RenderSection( "HitterList" )
+				</div>
+			</div>
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-        feather.replace()
-    </script>
+			<div id="collapseTradePitchers" class="collapse" aria-labelledby="headingTradePitchers" data-parent="#accordion">
+				<div class="card-body">
+					@RenderSection( "PitcherList" )
+				</div>
+			</div>
+		</div>
+	</main>
+</div>
+		</div>
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- Graphs -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+	<script>
+		var ctx1 = document.getElementById("myChart1");
+		var myChart1 = new Chart(ctx1, {
+			type: 'bar',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.3)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				},
+				{
+					data: [8, 6, -2, 2.1, -3, 5, 4],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#009000',
+					borderWidth: 3,
+					pointBackgroundColor: '#009000'
+				}]
+			},
 
-    <!-- Graphs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-    <script>
-        var ctx1 = document.getElementById("myChart1");
-        var myChart1 = new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
-                datasets: [{
-                    data: [25, 10, 30, 21, 17, 30, 14],
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
-                    borderColor: '#007bff',
-                    borderWidth: 4,
-                    pointBackgroundColor: '#007bff'
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
-                legend: {
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
 					display: false,
-                }
-            }
+				}
+			}
 		});
-
+	</script>
+	<script>
 		var ctx2 = document.getElementById("myChart2");
 		var myChart2 = new Chart(ctx2, {
 			type: 'line',
@@ -320,14 +222,19 @@
 				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
 				datasets: [{
 					data: [5, -10, 3.1, 2.1, -3, 30, 14],
-					lineTension:0,
+					lineTension: 0,
 					backgroundColor: 'transparent',
 					borderColor: '#007bff',
-					borderWidth: 3,
+					borderWidth: 4,
 					pointBackgroundColor: '#007bff',
-					
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+
 				},
-					
+
 				{
 					data: [8, 6, -2, 2.1, -3, 5, 4],
 					lineTension: 0,
@@ -348,9 +255,121 @@
 				legend: {
 					display: false,
 				}
-				
+
 			}
 		});
-    </script>
+	</script>
+
+	<script>
+		var ctx3 = document.getElementById("myChart3");
+		var myChart3 = new Chart(ctx3, {
+			type: 'line',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	<script>
+		var ctx4 = document.getElementById("myChart4");
+		var myChart4 = new Chart(ctx4, {
+			type: 'bar',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	<script>window.jQuery || document.write('<script src="~/js/jquery-slim.min.js"><\/script>')</script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.13/js/dataTables.bootstrap4.min.js"></script>
+
+	<script>
+		function openSlideMenu() {
+			document.getElementById('side-menu').style.width = '250px';
+			document.getElementById('main').style.marginLeft = '250px';
+		}
+
+		function closeSlideMenu() {
+			document.getElementById('side-menu').style.width = '0px';
+			document.getElementById('main').style.marginLeft = '0px';
+		}
+	</script>
+
+
+	<!-- Icons -->
+	<script type="text/javascript" src="https://unpkg.com/feather-icons/dist/feather.min.js" async></script>
+	<script>
+		feather.replace()
+	</script>
+	<script>
+		function toggleChevron(e) {
+			$(e.target)
+				.prev('.panel-heading')
+				.find("i.indicator")
+				.toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+		}
+		$('#accordion').on('hidden.bs.collapse', toggleChevron);
+		$('#accordion').on('shown.bs.collapse', toggleChevron);
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('#pitchersTable').DataTable();
+		});
+	</script>
 </body>
 </html>

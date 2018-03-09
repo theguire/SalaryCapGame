@@ -1,0 +1,53 @@
+﻿@{
+	Layout = null;
+
+
+}
+<div class="container-fluid">
+	<div class="=row d-flex d-md-block flex-nowrap wrapper">
+		<div class="col-md-3 float-left col-1 pl-0 pr-0 collapse width" id="sidebar">
+			<div class="list-group border-0 glyphicon-credit-card text-center text-md-left">
+				<a href="menu1"
+				   class="list-group-item d-line-block collapsed"
+				   data-toggle="collapse"
+				   data-parent="#sidebar"
+				   aria-expanded="false"
+						<i class="fa fa-dashboard"></i>
+						<span class="d-none d-md-inline">Menu 1</span>
+					</a>
+				<!--Menu1-->
+				<div class="collapse" id="menu1">
+					<!--Menu1.SubMenu1-->
+					<a href="#menu1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">
+						Menu1.SubMenu1
+					</a>
+					<div class="collapse" id="menu1sub1">
+						<!--Menu1.SubMenu1.Item1-->
+						<a href="#" class="list-group-item" data-parent="#menu1sub1">SubMenu1.Item1</a>
+						<!--Menu1.SubMenu1.Item2-->
+						<a href="#" class="list-group-item" data-parent="#menu1sub2">SubMenu1.Item2</a>
+						<!--Menu1.SubMenu1.SubMenu1-->
+						<a href="#menu1sub1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">SubMenu1.Item3</a>
+						<div class="collapse" id="menu1sub1sub1">
+							<!--Menu1.SubMenu1.SubMenu1.Item1-->
+							<a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Menu1.SubMenu1.Item1</a>
+							<!--Menu1.SubMenu1.SubMenu1.Item2-->
+							<a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Menu1.SubMenu1.Item2</a>
+						</div>
+						<a href="#" class="list-group-item" data-parent="#menu1sub1">SubMenu1.Item4</a>
+						<a href="#menu1sub1sub2" class="list-  group-item" data-toggle="collapse" aria-expanded="false"
+					</div>
+
+				</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts
+	{
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+}

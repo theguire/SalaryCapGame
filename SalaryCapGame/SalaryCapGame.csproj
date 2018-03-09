@@ -32,7 +32,6 @@
   <ItemGroup>
     <Folder Include="Infrastructure\HtmlHelpers\" />
     <Folder Include="Infrastructure\TagHelpers\" />
-    <Folder Include="Views\Partial\Player\" />
     <Folder Include="Views\Shared\Owner\" />
     <Folder Include="wwwroot\images\Franchises\" />
     <Folder Include="wwwroot\images\Leagues\" />
