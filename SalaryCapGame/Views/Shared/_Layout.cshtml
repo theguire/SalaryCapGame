@@ -9,367 +9,426 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link rel="icon" href="favicon.ico">
+	<meta name="viewport" content="width=device-width , initial-scale=1">
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" />
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
-	@*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" /><div class='container'> <div class='hero-unit'> <h1>Bootstrap Sortable</h1> </div><table class='table table-bordered table-striped sortable'> <thead> <tr> <th style="width: 20%; vertical-align: middle;" rowspan="2" class='az' data-defaultsign="nospan" data-defaultsort="asc"><i class="fa fa-map-marker fa-fw"></i>Name</th> <th colspan="4" data-mainsort="3" style="text-align: center;">Results</th> <th data-defaultsort="disabled"></th> </tr><tr> <th style="width: 20%" colspan="2" data-mainsort="1" data-firstsort="desc">Round 1</th> <th style="width: 20%">Round 2</th> <th style="width: 20%">Total</th> <th style="width: 20%" data-defaultsign="month">Date</th> </tr></thead> <tbody> </tbody> </table> <table class='table table-bordered table-striped sortable'> <thead> <tr> <th style="width: 20%; vertical-align: middle;" rowspan="2" class='az' data-defaultsign="nospan" data-defaultsort="asc"><i class="fa fa-map-marker fa-fw"></i>Name</th> <th colspan="4" data-mainsort="3" style="text-align: center;">Results</th> <th data-defaultsort="disabled"></th> </tr><tr> <th style="width: 20%" colspan="2" data-mainsort="1" data-firstsort="desc">Round 1</th> <th style="width: 20%">Round 2</th> <th style="width: 20%">Total</th> <th style="width: 20%" data-defaultsign="month">Date</th> </tr></thead> <tbody> </tbody> </table> <div class='well'> <button type='button' class='btn btn-primary add-row' data-sort="true">Add Row (use last sort)</button> <button type='button' class='btn btn-primary add-row'>Add Row (use default sort)</button> </div><div class='well'> <button type='button' class='btn btn-primary change-sort' data-custom="true">Set custom sorting</button> <button type='button' class='btn btn-primary change-sort'>Reset built-in sorting</button> </div><div class="well"> <span class="groupbox">Options</span> <div class="well" style="margin-top: 10px"> <span class="groupbox">Event</span> <div class="checkbox"> <label> <input type="checkbox" checked="checked" id="event" />Hook on 'sorted' event </label> </div></div><div class="well"> <span class="groupbox">Sorting sign</span> <div class="radio"> <label> <input type="radio" name="sign" id="default" value="" checked>Default (points towards larger value) </label> </div><div class="radio"> <label> <input type="radio" name="sign" id="reversed" value="reversed">Reversed (points towards smaller value) </label> </div><div class="radio"> <label> <input type="radio" name="sign" id="az" value="az">a..z </label> </div><div class="radio"> <label> <input type="radio" name="sign" id="AZ" value="AZ">A..Z </label> </div><div class="radio"> <label> <input type="radio" name="sign" id="19" value="_19">1..9 </label> </div><div class="radio"> <label> <input type="radio" name="sign" id="month" value="month">jan..dec </label> </div></div></div></div>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>*@
-	@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap4.min.css" rel="stylesheet" />*@
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/fh-3.1.3/r-2.2.1/sl-1.2.5/datatables.min.css" />
+	@*
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />*@
 	<title>Dashboard Template for Bootstrap</title>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+	<style>
+
+		body {
+			font-family: "Lato", sans-serif;
+		}
+
+		.sidenav {
+			height: 100%;
+			width: 0;
+			position: fixed;
+			z-index: 1;
+			top: 0;
+			left: 0;
+			background-color: #111;
+			overflow-x: hidden;
+			transition: 0.5s;
+			padding-top: 60px;
+		}
+
+			.sidenav a {
+				padding: 8px 8px 8px 32px;
+				text-decoration: none;
+				font-size: 25px;
+				color: #818181;
+				display: block;
+				transition: 0.3s;
+			}
+
+				.sidenav a:hover {
+					color: #f1f1f1;
+				}
+
+			.sidenav .closebtn {
+				position: absolute;
+				top: 0;
+				right: 25px;
+				font-size: 36px;
+				margin-left: 50px;
+			}
+
+		#main {
+			transition: margin-left .5s;
+			padding: 16px;
+		}
+
+		@@media screen and (max-height: 450px) {
+			.sidenav {
+				padding-top: 15px;
+			}
+
+				.sidenav a {
+					font-size: 18px;
+				}
+		}
+
+		td.details-control {
+			text-align: center;
+			color: forestgreen;
+			cursor: pointer;
+		}
+
+		tr.dropPlayer td.details-control {
+			text-align: center;
+			color: red;
+		}
+
+		.padding-0 {
+			padding-right: 0;
+			padding-left: 0;
+		}
+
+		.mb-0 > a {
+			display: block;
+			position: relative;
+		}
+
+			.mb-0 > a:after {
+				content: "\f078"; /* fa-chevron-down */
+				font-family: 'FontAwesome';
+				position: absolute;
+				right: 0;
+			}
+
+			.mb-0 > a[aria-expanded="true"]:after {
+				content: "\f077"; /* fa-chevron-up */
+			}
+	</style>
 	<!-- Bootstrap core CSS -->
 	<!-- Custom styles for this template -->
-	@*<link href="~/css/dashboard.css" rel="stylesheet">*@
-	@*<link href="~/css/sortable.css" rel="stylesheet">*@
+	<link href="~/css/chart.css" rel="stylesheet">
+
+	@*
+		<link href="~/css/sortable.css" rel="stylesheet">*@
+
+	@*
+		<link href="~/css/dashboard.css" rel="stylesheet">*@
+
+	@*
+		<link rel="stylesheet" href="~/css/sidebar.css">*@
+
 	@*<link href="~/css/accordion.css" rel="stylesheet">*@
-	@*<link href="~/css/sidenav.css" rel="stylesheet">*@
-	@*<script type="text/javascript" src="~/js/sortable.js" async></script>*@
+
+	@*
+		<link href="~/css/sidenav.css" rel="stylesheet">*@
+	@*
+		<script type="text/javascript" src="~/js/sortable.js" async></script>*@
 
 	@*@RenderSection( "MyPlayers", false );*@
+
 
 
 </head>
 
 <body>
-	<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Salary Cap Games</a>
-		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap">
-				<a class="nav-link" href="#">Sign out</a>
-			</li>
-		</ul>
-	</nav>
-
-	<div class="container-fluid">
-	<div class="row">
-	<nav class="col-md-2 d-none d-md-block bg-light sidebar">
-		<div class="sidebar-sticky">
-			<ul class="nav flex-column">
-				<li class="nav-item">
-					<a class="nav-link active" href="#">
-						<span data-feather="home"></span>
-						Dashboard <span class="sr-only">(current)</span>
-					</a>
+	@*<nav class="navbar">
+			<span class="open-slide">
+				<a href="#" onclick="openSlideMenu()">
+					<svg height="30" width="30">
+						<path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
+						<path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
+						<path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
+					</svg>
+				</a>
+			</span>
+			<ul class="navbar-nav">
+				<li>
+					<a href="#Home">W</a>
 				</li>
-				<li class="nav-item">
-					@RenderSection( "FranchiseMenu" )
-					@*@RenderBody()*@
+				<li>
+					<a href="#">About</a>
 				</li>
-				<li class="nav-item">
-					@*<div class="row">
-						<div class="container-fluid accordian">*@
-					<div class="accordion nav-item">
+				<li>
+					<a href="#">Services</a>
+				</li>
+			</ul>
+		</nav>*@
 
-						<div class="card">
-							<div class="card-header" id="headingTrade">
-								<h5 class="mb-0">
-									<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTrade" aria-expanded="false" aria-controls="collapseTrade">
-										<h3>My Team</h3>
-									</button>
-								</h5>
-							</div>
-							<div id="collapseTrade" class="collapse" aria-labelledby="headingTrade" data-parent="#accordion">
-								<div class="card-body">
-									<div class="card">
-										<div class="card-header" id="headingTradeHitters">
-											<h5 class="mb-0">
-												<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTradeHitters" aria-expanded="false" aria-controls="collapseTradeHitters">
-													<h5>Hitters</h5>
-												</button>
-											</h5>
-										</div>
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div class="list-group border-0 card text-center text-md-left">
+			<a href="#menu1" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
+				<i class="fa fa-dashboard"></i>
+				<span class="d-none d-md-inline">Item 1</span>
+			</a>
+			<div class="collapse" id="menu1">
+				<a href="#menu1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 1 </a>
+				<div class="collapse" id="menu1sub1">
+					<a href="#demo" class="list-group-item" data-parent="#menu1sub1">Demo</a>
+					<a href="#demo2" class="list-group-item" data-parent="#menu1sub1">Demo 2 b</a>
+					<a href="#menu1sub1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 3 c </a>
+					<div class="collapse" id="menu1sub1sub1">
+						<a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem 3 c.1</a>
+						<a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem 3 c.2</a>
+					</div>
+					<a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem 4 d</a>
+					<a href="#menu1sub1sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 5 e </a>
+					<div class="collapse" id="menu1sub1sub2">
+						<a href="#" class="list-group-item" data-parent="#menu1sub1sub2">Subitem 5 e.1</a>
+						<a href="#" class="list-group-item" data-parent="#menu1sub1sub2">Subitem 5 e.2</a>
+					</div>
+				</div>
+				<a href="#" class="list-group-item" data-parent="#menu1">Subitem 2</a>
+				<a href="#" class="list-group-item" data-parent="#menu1">Subitem 3</a>
+			</div>
+
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-heart"></i>
+				<span class="d-none d-md-inline">Item 2</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-list"></i>
+				<span class="d-none d-md-inline">Item 3</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-clock-o"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-th"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-gear"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-calendar"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-envelope"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-bar-chart-o"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-star"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+		</div>
+	</div>
+
+	<main id="main">
+		@*<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+				<h1 class="h2">Dashboard</h1>
+			</div>*@
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+		<div class="d-flex flex-column col-md-5">
+			@RenderSection( "FranchiseMenu" )
+			@*@RenderBody()*@
+		</div>
+
+
+		<div id="accordion">
+			<div class="card">
+				<div class="card-header" id="heading-1">
+					<h5 class="mb-0">
+						<a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+							My Team
+						</a>
+					</h5>
+				</div>
+				<div id="collapse-1" class="collapse show" data-parent="#accordion" aria-labelledby="heading-1">
+					<div class="card-body">
+
+						<div id="accordion-1">
+							<div class="card">
+								<div class="card-header" id="heading-1-1">
+									<h5 class="mb-0">
+										<a class="collapsed" role="button" data-toggle="collapse" href="#collapse-1-1" aria-expanded="false" aria-controls="collapse-1-1">
+											Hitters
+										</a>
+									</h5>
+								</div>
+								<div id="collapse-1-1" class="collapse" data-parent="#accordion-1" aria-labelledby="heading-1-1">
+									<div class="card-body">
+										@RenderSection( "MyHitters" )
+
 									</div>
-									<div class="card">
-										<div class="card-header" id="headingTradePitchers">
-											<h5 class="mb-0">
-												<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTradePitchers" aria-expanded="false" aria-controls="collapseTradePitchers">
-													<h5>Pitchers</h5>
-												</button>
-											</h5>
-										</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="heading-1-2">
+									<h5 class="mb-0">
+										<a class="collapsed" role="button" data-toggle="collapse" href="#collapse-1-2" aria-expanded="false" aria-controls="collapse-1-2">
+											Pitchers
+										</a>
+									</h5>
+								</div>
+								<div id="collapse-1-2" class="collapse" data-parent="#accordion-1" aria-labelledby="heading-1-2">
+									<div class="card-body">
+										@RenderSection( "MyPitchers" )
 									</div>
 								</div>
 							</div>
 						</div>
 
 					</div>
-					@*</div>*@
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header" id="heading-2">
+					<h5 class="mb-0">
+						<a class="collapsed" role="button" data-toggle="collapse" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+							Trade Players
+						</a>
+					</h5>
+				</div>
+				<div id="collapse-2" class="collapse" data-parent="#accordion" aria-labelledby="heading-2">
+					<div class="card-body">
 
-				</li>
-			</ul>
+						<div id="accordion-2">
+							<div class="card">
+								<div class="card-header" id="heading-2-1">
+									<h5 class="mb-0">
+										<a class="collapsed" role="button" data-toggle="collapse" href="#collapse-2-1" aria-expanded="false" aria-controls="collapse-2-1">
+											Hitters
+										</a>
+									</h5>
+								</div>
+								<div id="collapse-2-1" class="collapse" data-parent="#accordion-2" aria-labelledby="heading-2-1">
+									<div class="card-body">
+										@RenderSection( "HitterList" )
+
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="heading-2-2">
+									<h5 class="mb-0">
+										<a class="collapsed" role="button" data-toggle="collapse" href="#collapse-2-2" aria-expanded="false" aria-controls="collapse-2-2">
+											Pitchers
+										</a>
+									</h5>
+								</div>
+								<div id="collapse-2-2" class="collapse" data-parent="#accordion-2" aria-labelledby="heading-2-2">
+									<div class="card-body">
+										@RenderSection( "PitcherList" )
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
 		</div>
-	</nav>
-	@*</div>*@
-	@*</div>*@
 
-	<main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
-		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-			<h1 class="h2">Dashboard</h1>
-		</div>
-		<div class="row chartRow">
-			<div class="chartContainer">
-				<div class="chart1">
-					<label for="myChart1" style="text-align:center">
-						Franchise Points<br />
-						<canvas id="myChart1"></canvas>
-					</label>
-				</div>
-			</div>
-			<div class="chartContainer">
-				<div class="chart2">
-					<label for="myChart2" style="text-align:center">
-						Franchise Value <br />
-						<canvas id="myChart2"></canvas>
-					</label>
-				</div>
-			</div>
-			<div class="chartContainer">
-				<div class="chart3">
-					<label for="myChart3" style="text-align:center">
-						Franchise Points<br />
-						<canvas id="myChart3"></canvas>
-					</label>
-				</div>
-			</div>
-			<div class="chartContainer">
-				<div class="chart4">
-					<label for="myChart4" style="text-align:center">
-						Franchise Points<br />
-						<canvas id="myChart4"></canvas>
-					</label>
-				</div>
-			</div>
 
-		</div>
-
-		<div id="accordion">
-			<div id="collapseTradeHitters" class="collapse" aria-labelledby="headingTradeHitters" data-parent="#accordion">
-				<div class="card-body">
-					@RenderSection( "HitterList" )
-				</div>
-			</div>
-
-			<div id="collapseTradePitchers" class="collapse" aria-labelledby="headingTradePitchers" data-parent="#accordion">
-				<div class="card-body">
-					@RenderSection( "PitcherList" )
-				</div>
-			</div>
-		</div>
 	</main>
-</div>
-		</div>
+
+
+
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<!-- Graphs -->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-	<script>
-		var ctx1 = document.getElementById("myChart1");
-		var myChart1 = new Chart(ctx1, {
-			type: 'bar',
-			data: {
-				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
-				datasets: [{
-					data: [25, 10, 30, 21, 17, 30, 14],
-					lineTension: 0,
-					backgroundColor: 'transparent',
-					borderColor: '#007bff',
-					borderWidth: 4,
-					pointBackgroundColor: '#007bff',
-					fillColor: "rgba(220,220,220,0.3)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(220,220,220,1)",
-				},
-				{
-					data: [8, 6, -2, 2.1, -3, 5, 4],
-					lineTension: 0,
-					backgroundColor: 'transparent',
-					borderColor: '#009000',
-					borderWidth: 3,
-					pointBackgroundColor: '#009000'
-				}]
-			},
-
-			options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero: true
-						}
-					}]
-				},
-				legend: {
-					display: false,
-				}
-			}
-		});
-	</script>
-	<script>
-		var ctx2 = document.getElementById("myChart2");
-		var myChart2 = new Chart(ctx2, {
-			type: 'line',
-			data: {
-				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
-				datasets: [{
-					data: [5, -10, 3.1, 2.1, -3, 30, 14],
-					lineTension: 0,
-					backgroundColor: 'transparent',
-					borderColor: '#007bff',
-					borderWidth: 4,
-					pointBackgroundColor: '#007bff',
-					fillColor: "rgba(220,220,220,0.2)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(220,220,220,1)",
-
-				},
-
-				{
-					data: [8, 6, -2, 2.1, -3, 5, 4],
-					lineTension: 0,
-					backgroundColor: 'transparent',
-					borderColor: '#009000',
-					borderWidth: 3,
-					pointBackgroundColor: '#009000'
-				}]
-			},
-			options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero: true
-						}
-					}]
-				},
-				legend: {
-					display: false,
-				}
-
-			}
-		});
-	</script>
-
-	<script>
-		var ctx3 = document.getElementById("myChart3");
-		var myChart3 = new Chart(ctx3, {
-			type: 'line',
-			data: {
-				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
-				datasets: [{
-					data: [25, 10, 30, 21, 17, 30, 14],
-					lineTension: 0,
-					backgroundColor: 'transparent',
-					borderColor: '#007bff',
-					borderWidth: 4,
-					pointBackgroundColor: '#007bff',
-					fillColor: "rgba(220,220,220,0.2)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(220,220,220,1)",
-				}]
-			},
-			options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero: true
-						}
-					}]
-				},
-				legend: {
-					display: false,
-				}
-			}
-		});
-	</script>
-	<script>
-		var ctx4 = document.getElementById("myChart4");
-		var myChart4 = new Chart(ctx4, {
-			type: 'bar',
-			data: {
-				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
-				datasets: [{
-					data: [25, 10, 30, 21, 17, 30, 14],
-					lineTension: 0,
-					backgroundColor: 'transparent',
-					borderColor: '#007bff',
-					borderWidth: 4,
-					pointBackgroundColor: '#007bff',
-					fillColor: "rgba(220,220,220,0.2)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(220,220,220,1)",
-				}]
-			},
-			options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero: true
-						}
-					}]
-				},
-				legend: {
-					display: false,
-				}
-			}
-		});
-	</script>
-	<script>window.jQuery || document.write('<script src="~/js/jquery-slim.min.js"><\/script>')</script>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.13/js/dataTables.bootstrap4.min.js"></script>
-
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/fh-3.1.3/r-2.2.1/sl-1.2.5/datatables.min.js"></script>
+	<script src="~/js/accordion.js"></script>
 	<script>
-		function openSlideMenu() {
-			document.getElementById('side-menu').style.width = '250px';
-			document.getElementById('main').style.marginLeft = '250px';
-		}
 
-		function closeSlideMenu() {
-			document.getElementById('side-menu').style.width = '0px';
-			document.getElementById('main').style.marginLeft = '0px';
-		}
-	</script>
+		//$(document).ready(function () {
+		//	$('#pitchersTable').DataTable()
+		//});
 
-
-	<!-- Icons -->
-	<script type="text/javascript" src="https://unpkg.com/feather-icons/dist/feather.min.js" async></script>
-	<script>
-		feather.replace()
-	</script>
-	<script>
-		function toggleChevron(e) {
-			$(e.target)
-				.prev('.panel-heading')
-				.find("i.indicator")
-				.toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
-		}
-		$('#accordion').on('hidden.bs.collapse', toggleChevron);
-		$('#accordion').on('shown.bs.collapse', toggleChevron);
-	</script>
-	<script>
 		$(document).ready(function () {
-			$('#pitchersTable').DataTable();
+			$('#pitchersTable').DataTable({
+				"ordering": true,
+				"paging": true,
+				"FixedHeader": true,
+				"fixedColumns": true
+			});
+
+			$("input[name='franchiseId']:radio").change(function () {
+				var value = $(this).val();
+				alert(value);
+
+			});
+
+			var span = document.getElementsByName("franchiseId");
+			var inputs = span.getElementsByTagName("input");
+			for (var i = 0; i < inputs.length; ++i) {
+				if (inputs[i].checked) {
+					var i = inputs[i].value;
+					alert(i);
+				}
+			}
+
+
 		});
+
+		// Add event listener for opening and closing details
+		$('#pitchersTable tbody').on('click', 'td.details-control', function () {
+			var table = $('#pitchersTable').DataTable();
+			var tr = $(this).closest('tr');
+			var tdi = tr.find("i.fa");
+			var row = table.row(tr);
+
+			if (tr.hasClass('dropPlayer')) {
+				//tdi.first().hasClass('addPlayer'))
+				//tr.removeClass('addPlayer');
+				tdi.first().removeClass('fa-minus-square');
+				tdi.first().addClass('fa-plus-square');
+				tr.removeClass('dropPlayer');
+
+
+			}
+			else {
+				// Open this row
+				//row.child(format(row.data())).show();
+				tr.addClass('dropPlayer');
+
+				tdi.first().removeClass('fa-plus-square');
+				tdi.first().addClass('fa-minus-square');
+
+			}
+		});
+
+		//	}
+		//});
+	</script>
+
+	<script>
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "250px";
+			document.getElementById("main").style.marginLeft = "250px";
+			document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+			document.getElementById("main").style.marginLeft = "0";
+			document.body.style.backgroundColor = "white";
+		}																														//	if ($(cell.node()).hasClass("details-control")) {
+		$('.panel-collapse').on('hidden.bs.collapse', function () {
+			// find the children and close them
+			$(this).find('.collapse').collapse('hide');
+		});																																																																																																																																																																																																				//		e.preventDefault();
+
+
+	</script>
+	<script src="~/js/players.js">
+
+
+
 	</script>
 </body>
 </html>

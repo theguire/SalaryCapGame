@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SalaryCapGame.ViewModels
 {
-    public class LeagueIndexListingModel
-    {
-        public LeagueListingModel LeagueListingModel { get;set; } 
-        public IEnumerable<Franchise> Franchises { get; set; }
-    }
+	public class LeagueIndexListingModel
+	{
+		public LeagueListingModel LeagueListingModel { get; set; }
+		public IEnumerable<Franchise> Franchises { get; set; }
+	}
 }

@@ -1,0 +1,1348 @@
+﻿@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using SalaryCapGame.ViewModels
+@model SalaryCapGame.ViewModels.DashboardViewModel
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width , initial-scale=1">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/fh-3.1.3/r-2.2.1/sl-1.2.5/datatables.min.css" />
+	@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />*@
+	<title>Dashboard Template for Bootstrap</title>
+
+	<style>
+		body {
+			font-family: "Lato", sans-serif;
+		}
+
+		.sidenav {
+			height: 100%;
+			width: 0;
+			position: fixed;
+			z-index: 1;
+			top: 0;
+			left: 0;
+			background-color: #111;
+			overflow-x: hidden;
+			transition: 0.5s;
+			padding-top: 60px;
+		}
+
+			.sidenav a {
+				padding: 8px 8px 8px 32px;
+				text-decoration: none;
+				font-size: 25px;
+				color: #818181;
+				display: block;
+				transition: 0.3s;
+			}
+
+				.sidenav a:hover {
+					color: #f1f1f1;
+				}
+
+			.sidenav .closebtn {
+				position: absolute;
+				top: 0;
+				right: 25px;
+				font-size: 36px;
+				margin-left: 50px;
+			}
+
+		#main {
+			transition: margin-left .5s;
+			padding: 16px;
+		}
+
+		@@media screen and (max-height: 450px) {
+			.sidenav {
+				padding-top: 15px;
+			}
+
+				.sidenav a {
+					font-size: 18px;
+				}
+		}
+
+		td.details-control {
+			text-align: center;
+			color: forestgreen;
+			cursor: pointer;
+		}
+
+		tr.dropPlayer td.details-control {
+			text-align: center;
+			color: red;
+		}
+
+		.padding-0 {
+			padding-right: 0;
+			padding-left: 0;
+		}
+	</style>
+	<!-- Bootstrap core CSS -->
+	<!-- Custom styles for this template -->
+	<link href="~/css/chart.css" rel="stylesheet">
+
+	@*
+		<link href="~/css/sortable.css" rel="stylesheet">*@
+
+	@*<link href="~/css/dashboard.css" rel="stylesheet">*@
+
+	@*
+		<link rel="stylesheet" href="~/css/sidebar.css">*@
+	@*
+		<link href="~/css/accordion.css" rel="stylesheet">*@
+
+	@*
+		<link href="~/css/sidenav.css" rel="stylesheet">*@
+	@*
+		<script type="text/javascript" src="~/js/sortable.js" async></script>*@
+
+	@*@RenderSection( "MyPlayers", false );*@
+
+
+
+</head>
+
+<body>
+	@*<nav class="navbar">
+			<span class="open-slide">
+				<a href="#" onclick="openSlideMenu()">
+					<svg height="30" width="30">
+						<path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
+						<path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
+						<path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
+					</svg>
+				</a>
+			</span>
+			<ul class="navbar-nav">
+				<li>
+					<a href="#Home">W</a>
+				</li>
+				<li>
+					<a href="#">About</a>
+				</li>
+				<li>
+					<a href="#">Services</a>
+				</li>
+			</ul>
+		</nav>*@
+
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div class="list-group border-0 card text-center text-md-left">
+			<a href="#menu1" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
+				<i class="fa fa-dashboard"></i>
+				<span class="d-none d-md-inline">Item 1</span>
+			</a>
+			<div class="collapse" id="menu1">
+				<a href="#menu1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 1 </a>
+				<div class="collapse" id="menu1sub1">
+					<a href="#demo" class="list-group-item" data-parent="#menu1sub1">Demo</a>
+					<a href="#demo2" class="list-group-item" data-parent="#menu1sub1">Demo 2 b</a>
+					<a href="#menu1sub1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 3 c </a>
+					<div class="collapse" id="menu1sub1sub1">
+						<a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem 3 c.1</a>
+						<a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem 3 c.2</a>
+					</div>
+					<a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem 4 d</a>
+					<a href="#menu1sub1sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 5 e </a>
+					<div class="collapse" id="menu1sub1sub2">
+						<a href="#" class="list-group-item" data-parent="#menu1sub1sub2">Subitem 5 e.1</a>
+						<a href="#" class="list-group-item" data-parent="#menu1sub1sub2">Subitem 5 e.2</a>
+					</div>
+				</div>
+				<a href="#" class="list-group-item" data-parent="#menu1">Subitem 2</a>
+				<a href="#" class="list-group-item" data-parent="#menu1">Subitem 3</a>
+			</div>
+
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-heart"></i>
+				<span class="d-none d-md-inline">Item 2</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-list"></i>
+				<span class="d-none d-md-inline">Item 3</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-clock-o"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-th"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-gear"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-calendar"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-envelope"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-bar-chart-o"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+			<a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+				<i class="fa fa-star"></i>
+				<span class="d-none d-md-inline">Link</span>
+			</a>
+		</div>
+	</div>
+
+	<main id="main">
+		@*<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+				<h1 class="h2">Dashboard</h1>
+			</div>*@
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+		<div class="d-flex flex-column col-md-5">
+			@RenderSection( "FranchiseMenu" )
+			@*@RenderBody()*@
+		</div>
+
+		@*<div class="row chartRow">
+				<div class="chartContainer">
+					<div class="chart1">
+						<label for="myChart1" style="text-align:center">
+							Franchise Points<br />
+							<canvas id="myChart1"></canvas>
+						</label>
+					</div>
+				</div>
+				<div class="chartContainer">
+					<div class="chart2">
+						<label for="myChart2" style="text-align:center">
+							Franchise Value <br />
+							<canvas id="myChart2"></canvas>
+						</label>
+					</div>
+				</div>
+				<div class="chartContainer">
+					<div class="chart3">
+						<label for="myChart3" style="text-align:center">
+							Franchise Points<br />
+							<canvas id="myChart3"></canvas>
+						</label>
+					</div>
+				</div>
+				<div class="chartContainer">
+					<div class="chart4">
+						<label for="myChart4" style="text-align:center">
+							Franchise Points<br />
+							<canvas id="myChart4"></canvas>
+						</label>
+					</div>
+				</div>
+
+			</div>*@
+		<div class="container d-flex col-lg-12">
+			@*<div class="card bg-warning">
+			*@
+			<div class="card-header bg-warning" style="padding:0" id="headingTrade">
+				<h5 class="mb-0">
+					<button class="btn btn-xs btn-link collapsed  text-white"
+							data-toggle="collapse"
+							data-target="#collapseTrade"
+							aria-expanded="false"
+							aria-controls="collapseTrade">
+						<h5>Trade</h5>
+					</button>
+				</h5>
+
+				<div id="collapseTrade" class="collapse"
+					 aria-labelledby="headingTrade"
+					 data-parent="#accordion">
+					<div class="card-body" style="padding:0">
+						<div class="card">
+							<div class="card-header" style="padding:0" id="headingAllHitters">
+								<h5 class="mb-0">
+									<button class="btn btn-link collapsed"
+											data-toggle="collapse"
+											data-target="#collapseAllHitters"
+											aria-expanded="false"
+											aria-controls="collapseAllHitters">
+										<h5>Hitters</h5>
+									</button>
+								</h5>
+							</div>
+
+						</div>
+						<div id="accordion">
+							<div id="collapseAllHitters"
+								 class="collapse"
+								 aria-labelledby="headingAllHitters"
+								 data-parent="#accordion">
+								<div class="card-body">
+									@RenderSection( "HitterList" )
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingAllPitchers">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed"
+												data-toggle="collapse"
+												data-target="#collapseAllPitchers"
+												aria-expanded="false"
+												aria-controls="collapseAllPitchers">
+											<h5>Pitchers</h5>
+										</button>
+									</h5>
+								</div>
+							</div>
+
+							<div id="collapseAllPitchers"
+								 class="collapse"
+								 aria-labelledby="headingAllPitchers"
+								 data-parent="#accordion">
+								<div class="card-body d-flex">
+									@RenderSection( "PitcherList" )
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="card-header bg-success" style="padding:0" id="myTeamHeader">
+				<h5 class="mb-0">
+					<button class="btn btn-xs btn-link collapsed  text-white"
+							data-toggle="collapse"
+							data-target="#collapseMyTeam"
+							aria-expanded="false"
+							aria-controls="collapseMyTeam">
+						<h5>My Team</h5>
+					</button>
+				</h5>
+
+				<div id="collapseMyTeam" class="collapse"
+					 aria-labelledby="myTeamHeader"
+					 data-parent="#accordion">
+					<div class="card-body" style="padding:0">
+						<div class="card">
+							<div class="card-header" style="padding:0" id="myHittersHeader">
+								<h5 class="mb-0">
+									<button class="btn btn-link collapsed"
+											data-toggle="collapse"
+											data-target="#collapseMyHitters"
+											aria-expanded="false"
+											aria-controls="collapseMyHitters">
+										<h5>Hitters</h5>
+									</button>
+								</h5>
+							</div>
+
+						</div>
+						<div id="accordion">
+							<div id="collapseMyHitters"
+								 class="collapse"
+								 aria-labelledby="myHittersHeader"
+								 data-parent="#accordion">
+								<div class="card-body">
+									@RenderSection( "MyHitters" )
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="myPitchersHeader">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed"
+												data-toggle="collapse"
+												data-target="#collapseMyPitchers"
+												aria-expanded="false"
+												aria-controls="collapseMyPitchers">
+											<h5>Pitchers</h5>
+										</button>
+									</h5>
+								</div>
+							</div>
+
+							<div id="collapseMyPitchers"
+								 class="collapse"
+								 aria-labelledby="myPitchersHeader"
+								 data-parent="#accordion">
+								<div class="card-body d-flex">
+									@RenderSection( "MyPitchers" )
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	@*<div class="card bg-success">
+		<div class="card bg-success">
+			<div class="card bg-success">*@
+	@*<div class="card-header bg-success" style="border:0" id="headingMyTeam">
+								<h5 class="mb-0">
+									<button class="btn btn-xs btn-link collapsed text-white"
+											data-toggle="collapse"
+											data-target="#collapseMyTeam"
+											aria-expanded="false"
+											aria-controls="collapseMyTeam">
+										<h5>My Team</h5>
+									</button>
+								</h5>
+								<div id="collapseMyTeam" class="collapse"
+									 aria-labelledby="headingMyTeam"
+									 data-parent="#accordion">
+									<div class="card-body">
+										<div class="card">
+											<div class="card-header" id="headingMyHitters">
+												<h5 class="mb-0">
+													<button class="btn btn-link collapsed"
+															data-toggle="collapse"
+															data-target="#collapseMyHitters"
+															aria-expanded="false"
+															aria-controls="collapseMyHitters">
+														<h5>Hitters</h5>
+													</button>
+												</h5>
+											</div>
+										</div>
+										<div id="accordion">
+											<div id="collapseMyHitters"
+												 class="collapse"
+												 aria-labelledby="headingMyHitters"
+												 data-parent="#accordion">
+												<div class="card-body">
+													@RenderSection( "MyHitters" )
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingMyPitchers">
+
+													<h5 class="mb-0">
+														<button class="btn btn-link collapsed"
+																data-toggle="collapse"
+																data-target="#collapseMyPitchers"
+																aria-expanded="false"
+																aria-controls="collapseMyPitchers">
+															<h5>Pitchers</h5>
+														</button>
+													</h5>
+												</div>
+											</div>
+											<div id="collapseMyPitchers"
+												 class="collapse"
+												 aria-labelledby="headingMyPitchers"
+												 data-parent="#accordion">
+												<div class="card-body d-flex">
+													@RenderSection( "MyPitchers" )
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							<div class="card-header bg-success" style="border:0" id="headingMyTeam">
+							<h5 class="mb-0">
+								<button class="btn btn-xs btn-link collapsed text-white"
+										data-toggle="collapse"
+										data-target="#collapseMyTeam"
+										aria-expanded="false"
+										aria-controls="collapseMyTeam">
+									<h5></h5>
+								</button>
+							</h5>
+							<div id="collapseMyTeam" class="collapse"
+								 aria-labelledby="headingMyTeam"
+								 data-parent="#accordion">
+								<div class="card-body">
+									<div class="card">
+										<div class="card-header" id="headingMyHitters">
+											<h5 class="mb-0">
+												<button class="btn btn-link collapsed"
+														data-toggle="collapse"
+														data-target="#collapseMyHitters"
+														aria-expanded="false"
+														aria-controls="collapseMyHitters">
+													<h5></h5>
+												</button>
+											</h5>
+										</div>
+									</div>
+									<div id="accordion">
+										<div id="collapseMyHitters"
+											 class="collapse"
+											 aria-labelledby="headingMyHitters"
+											 data-parent="#accordion">
+											<div class="card-body">
+											</div>
+										</div>
+										<div class="card">
+											<div class="card-header" id="headingMyPitchers">
+
+												<h5 class="mb-0">
+													<button class="btn btn-link collapsed"
+															data-toggle="collapse"
+															data-target="#collapseMyPitchers"
+															aria-expanded="false"
+															aria-controls="collapseMyPitchers">
+														<h5></h5>
+													</button>
+												</h5>
+											</div>
+										</div>
+										<div id="collapseMyPitchers"
+											 class="collapse"
+											 aria-labelledby="headingMyPitchers"
+											 data-parent="#accordion">
+											<div class="card-body d-flex">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card-header bg-success" style="border:0" id="headingMyTeam">
+								<h5 class="mb-0">
+									<button class="btn btn-xs btn-link collapsed text-white"
+											data-toggle="collapse"
+											data-target="#collapseMyTeam"
+											aria-expanded="false"
+											aria-controls="collapseMyTeam">
+										<h5></h5>
+									</button>
+								</h5>
+								<div id="collapseMyTeam" class="collapse"
+									 aria-labelledby="headingMyTeam"
+									 data-parent="#accordion">
+									<div class="card-body">
+										<div class="card">
+											<div class="card-header" id="headingMyHitters">
+												<h5 class="mb-0">
+													<button class="btn btn-link collapsed"
+															data-toggle="collapse"
+															data-target="#collapseMyHitters"
+															aria-expanded="false"
+															aria-controls="collapseMyHitters">
+														<h5></h5>
+													</button>
+												</h5>
+											</div>
+										</div>
+										<div id="accordion">
+											<div id="collapseMyHitters"
+												 class="collapse"
+												 aria-labelledby="headingMyHitters"
+												 data-parent="#accordion">
+												<div class="card-body">
+												</div>
+											</div>
+											<div class="card">
+												<div class="card-header" id="headingMyPitchers">
+
+													<h5 class="mb-0">
+														<button class="btn btn-link collapsed"
+																data-toggle="collapse"
+																data-target="#collapseMyPitchers"
+																aria-expanded="false"
+																aria-controls="collapseMyPitchers">
+															<h5></h5>
+														</button>
+													</h5>
+												</div>
+											</div>
+											<div id="collapseMyPitchers"
+												 class="collapse"
+												 aria-labelledby="myPitchersDeader"
+												 data-parent="#accordion">
+												<div class="card-body d-flex">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+
+							@*
+
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<!-- Graphs -->
+		@*
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>*@
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+	@*
+		<script>
+			var ctx1 = document.getElementById("myChart1");
+			var myChart1 = new Chart(ctx1, {
+				type: 'bar',
+				data: {
+					labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+					datasets: [{
+						data: [25, 10, 30, 21, 17, 30, 14],
+						lineTension: 0,
+						backgroundColor: 'transparent',
+						borderColor: '#007bff',
+						borderWidth: 4,
+						pointBackgroundColor: '#007bff',
+						fillColor: "rgba(220,220,220,0.3)",
+						strokeColor: "rgba(220,220,220,1)",
+						pointStrokeColor: "#fff",
+						pointHighlightFill: "#fff",
+						pointHighlightStroke: "rgba(220,220,220,1)",
+					},
+					{
+						data: [8, 6, -2, 2.1, -3, 5, 4],
+						lineTension: 0,
+						backgroundColor: 'transparent',
+						borderColor: '#009000',
+						borderWidth: 3,
+						pointBackgroundColor: '#009000'
+					}]
+				},
+
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					},
+					legend: {
+						display: false,
+					}
+				}
+			});
+		</script>*@
+	<script>
+		var ctx1 = document.getElementById("myChart1");
+		var myChart1 = new Chart(ctx1, {
+			type: 'bar',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.3)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				},
+				{
+					data: [8, 6, -2, 2.1, -3, 5, 4],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#009000',
+					borderWidth: 3,
+					pointBackgroundColor: '#009000'
+				}]
+			},
+
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	<script>
+		var ctx1 = document.getElementById("myChart1");
+		var myChart1 = new Chart(ctx1, {
+			type: 'bar',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.3)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				},
+				{
+					data: [8, 6, -2, 2.1, -3, 5, 4],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#009000',
+					borderWidth: 3,
+					pointBackgroundColor: '#009000'
+				}]
+			},
+
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	@*
+		<script>
+			var ctx2 = document.getElementById("myChart2");
+			var myChart2 = new Chart(ctx2, {
+				type: 'line',
+				data: {
+					labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+					datasets: [{
+						data: [5, -10, 3.1, 2.1, -3, 30, 14],
+						lineTension: 0,
+						backgroundColor: 'transparent',
+						borderColor: '#007bff',
+						borderWidth: 4,
+						pointBackgroundColor: '#007bff',
+						fillColor: "rgba(220,220,220,0.2)",
+						strokeColor: "rgba(220,220,220,1)",
+						pointStrokeColor: "#fff",
+						pointHighlightFill: "#fff",
+						pointHighlightStroke: "rgba(220,220,220,1)",
+
+					},
+
+					{
+						data: [8, 6, -2, 2.1, -3, 5, 4],
+						lineTension: 0,
+						backgroundColor: 'transparent',
+						borderColor: '#009000',
+						borderWidth: 3,
+						pointBackgroundColor: '#009000'
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					},
+					legend: {
+						display: false,
+					}
+
+				}
+			});
+		</script>*@
+	<script>
+		var ctx2 = document.getElementById("myChart2");
+		var myChart2 = new Chart(ctx2, {
+			type: 'line',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [5, -10, 3.1, 2.1, -3, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+
+				},
+
+				{
+					data: [8, 6, -2, 2.1, -3, 5, 4],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#009000',
+					borderWidth: 3,
+					pointBackgroundColor: '#009000'
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+
+			}
+		});
+	</script>
+	<script>
+		var ctx2 = document.getElementById("myChart2");
+		var myChart2 = new Chart(ctx2, {
+			type: 'line',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [5, -10, 3.1, 2.1, -3, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+
+				},
+
+				{
+					data: [8, 6, -2, 2.1, -3, 5, 4],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#009000',
+					borderWidth: 3,
+					pointBackgroundColor: '#009000'
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+
+			}
+		});
+	</script>
+	@*
+		<script>
+			var ctx3 = document.getElementById("myChart3");
+			var myChart3 = new Chart(ctx3, {
+				type: 'line',
+				data: {
+					labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+					datasets: [{
+						data: [25, 10, 30, 21, 17, 30, 14],
+						lineTension: 0,
+						backgroundColor: 'transparent',
+						borderColor: '#007bff',
+						borderWidth: 4,
+						pointBackgroundColor: '#007bff',
+						fillColor: "rgba(220,220,220,0.2)",
+						strokeColor: "rgba(220,220,220,1)",
+						pointStrokeColor: "#fff",
+						pointHighlightFill: "#fff",
+						pointHighlightStroke: "rgba(220,220,220,1)",
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					},
+					legend: {
+						display: false,
+					}
+				}
+			});
+		</script>*@
+	<script>
+		var ctx3 = document.getElementById("myChart3");
+		var myChart3 = new Chart(ctx3, {
+			type: 'line',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	<script>
+		var ctx3 = document.getElementById("myChart3");
+		var myChart3 = new Chart(ctx3, {
+			type: 'line',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	@*
+		<script>
+			var ctx4 = document.getElementById("myChart4");
+			var myChart4 = new Chart(ctx4, {
+				type: 'bar',
+				data: {
+					labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+					datasets: [{
+						data: [25, 10, 30, 21, 17, 30, 14],
+						lineTension: 0,
+						backgroundColor: 'transparent',
+						borderColor: '#007bff',
+						borderWidth: 4,
+						pointBackgroundColor: '#007bff',
+						fillColor: "rgba(220,220,220,0.2)",
+						strokeColor: "rgba(220,220,220,1)",
+						pointStrokeColor: "#fff",
+						pointHighlightFill: "#fff",
+						pointHighlightStroke: "rgba(220,220,220,1)",
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					},
+					legend: {
+						display: false,
+					}
+				}
+			});
+		</script>*@
+	<script>
+		var ctx4 = document.getElementById("myChart4");
+		var myChart4 = new Chart(ctx4, {
+			type: 'bar',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	<script>
+		var ctx4 = document.getElementById("myChart4");
+		var myChart4 = new Chart(ctx4, {
+			type: 'bar',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	@*
+		<script>
+			var ctx5 = document.getElementById("myChart5");
+			var myChart5 = new Chart(ctx5, {
+				type: 'bar',
+				data: {
+					labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+					datasets: [{
+						data: [25, 10, 30, 21, 17, 30, 14],
+						lineTension: 0,
+						backgroundColor: 'transparent',
+						borderColor: '#007bff',
+						borderWidth: 4,
+						pointBackgroundColor: '#007bff',
+						fillColor: "rgba(220,220,220,0.2)",
+						strokeColor: "rgba(220,220,220,1)",
+						pointStrokeColor: "#fff",
+						pointHighlightFill: "#fff",
+						pointHighlightStroke: "rgba(220,220,220,1)",
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					},
+					legend: {
+						display: false,
+					}
+				}
+			});
+		</script>*@
+	<script>
+		var ctx5 = document.getElementById("myChart5");
+		var myChart5 = new Chart(ctx5, {
+			type: 'bar',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	<script>
+		var ctx5 = document.getElementById("myChart5");
+		var myChart5 = new Chart(ctx5, {
+			type: 'bar',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	@*
+		<script>
+			var ctx6 = document.getElementById("myChart6");
+			var myChart6 = new Chart(ctx6, {
+				type: 'bar',
+				data: {
+					labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+					datasets: [{
+						data: [25, 10, 30, 21, 17, 30, 14],
+						lineTension: 0,
+						backgroundColor: 'transparent',
+						borderColor: '#007bff',
+						borderWidth: 4,
+						pointBackgroundColor: '#007bff',
+						fillColor: "rgba(220,220,220,0.2)",
+						strokeColor: "rgba(220,220,220,1)",
+						pointStrokeColor: "#fff",
+						pointHighlightFill: "#fff",
+						pointHighlightStroke: "rgba(220,220,220,1)",
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					},
+					legend: {
+						display: false,
+					}
+				}
+			});
+		</script>*@
+	<script>
+		var ctx6 = document.getElementById("myChart6");
+		var myChart6 = new Chart(ctx6, {
+			type: 'bar',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	<script>
+		var ctx6 = document.getElementById("myChart6");
+		var myChart6 = new Chart(ctx6, {
+			type: 'bar',
+			data: {
+				labels: ["6/24", "6/25", "6/26", "6/27", "6/28", "6/29", "6/30"],
+				datasets: [{
+					data: [25, 10, 30, 21, 17, 30, 14],
+					lineTension: 0,
+					backgroundColor: 'transparent',
+					borderColor: '#007bff',
+					borderWidth: 4,
+					pointBackgroundColor: '#007bff',
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				},
+				legend: {
+					display: false,
+				}
+			}
+		});
+	</script>
+	@*
+		<script>window.jQuery || document.write('<script src="~/js/jquery-slim.min.js"><\/script>')</script>*@
+	@*<script>window.jQuery || document.write('<script src="~/js/jquery-slim.min.js"><\/script>')</script>*@
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/fh-3.1.3/r-2.2.1/sl-1.2.5/datatables.min.js"></script>
+	<script>
+
+		//$(document).ready(function () {
+		//	$('#pitchersTable').DataTable()
+		//});
+
+		$(document).ready(function () {
+			$('#pitchersTable').DataTable({
+				"ordering": true,
+				"paging": true,
+				"FixedHeader": true,
+				"fixedColumns": true
+			});
+
+			$("input[name='franchiseId']:radio").change(function () {
+				var value = $(this).val();
+				alert(value);
+
+			});
+
+			var span = document.getElementsByName("franchiseId");
+			var inputs = span.getElementsByTagName("input");
+			for (var i = 0; i < inputs.length; ++i) {
+				if (inputs[i].checked) {
+					var i = inputs[i].value;
+					alert(i);
+				}
+			}
+
+
+		});
+
+		// Add event listener for opening and closing details
+		$('#pitchersTable tbody').on('click', 'td.details-control', function () {
+			var table = $('#pitchersTable').DataTable();
+			var tr = $(this).closest('tr');
+			var tdi = tr.find("i.fa");
+			var row = table.row(tr);
+
+			if (tr.hasClass('dropPlayer')) {
+				//tdi.first().hasClass('addPlayer'))
+				//tr.removeClass('addPlayer');
+				tdi.first().removeClass('fa-minus-square');
+				tdi.first().addClass('fa-plus-square');
+				tr.removeClass('dropPlayer');
+
+
+			}
+			else {
+				// Open this row
+				//row.child(format(row.data())).show();
+				tr.addClass('dropPlayer');
+
+				tdi.first().removeClass('fa-plus-square');
+				tdi.first().addClass('fa-minus-square');
+
+			}
+		});
+
+		//	}
+		//});
+	</script>
+
+	<script>
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "250px";
+			document.getElementById("main").style.marginLeft = "250px";
+			document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+			document.getElementById("main").style.marginLeft = "0";
+			document.body.style.backgroundColor = "white";
+		}																														//	if ($(cell.node()).hasClass("details-control")) {
+																																																																																																																																							//		e.preventDefault();
+
+	</script>
+</body>
+</html>

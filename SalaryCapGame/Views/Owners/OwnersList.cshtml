@@ -1,51 +1,33 @@
-﻿@model SalaryCapGame.ViewModels.OwnerIndexModel 
-
-@{ 
-    Layout = "~/Views/Shared/Layout.cshtml";
+﻿@model SalaryCapGame.ViewModels.OwnerIndexModel
+@{
+	Layout = "~/Views/Shared/Layout.cshtml";
 }
-@*<div class="container">*@
-    <div class="header clearfix detailHeading">
-        <h2 class="text-muted">League Information</h2>
-    </div>
-    <div class="jumbotron">
-        <div class="row">
-            <table class="col-lg-2 table table-bordered table-hover table-condensed table-responsive">
-                <thead>
-                        @Html.Partial( "~/Views/Partial/Owners/_OwnerHeader.cshtml" )
-         
-                    @Html.Partial( "~/Views/Partial/Franchise/_FranchiseHeader.cshtml" )
-                </thead>
-                @foreach ( var owner in Model.Owners )
-    {
+<div class="container" style="width:100%; margin:2px auto;">
+	<br />
+	@*<div style="width:100%; margin:0 auto;">*@
 
-            <tbody>
-               
+	<table class="display table-condensed table-bordered table-hover" style="padding:3px" cellspacing="0" cellpadding="2" border-spacing="0" width:80%; border="0">
 
-                    @*<a asp-action="View" asp-controller="Owners" asp-route-id=@owner.Id>@owner.LastName, @owner.FirstName</a>*@
-             
-                    @Html.Partial( "~/Views/Partial/Owners/_OwnersSummary.cshtml", owner )
-              
-                    @Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", owner.Franchises )
-             
+		<thead class="bg-success">
+			<tr>
+				<th style="border:0; text-align:left">Owner</th>
+				@Html.Partial( "~/Views/Partial/Franchise/_FranchiseHeader.cshtml" )
+			</tr>
+		</thead>
+		@foreach ( var owner in Model.Owners )
+		{
 
-          
+			<tbody>
+				<tr>
+					<td>
+						<a style="text-align:left" asp-action="Details" asp-controller="Owners" asp-route-id=@owner.Id>@owner.LastName, @owner.FirstName</a>
+					</td>
+				</tr>
+				@Html.Partial( "/Views/Partial/Franchise/FranchiseSummary.cshtml", owner.Franchises )
+			</tbody>
+		}
+	</table>
+</div>
 
-            </tbody>
-
-
-
-}
-            </table>
-                @*@if ( owner.Leagues != null )
-            {
-                @Html.Partial( "/Views/Partial/League/LeagueListing.cshtml", owner.Leagues )
-
-            }*@
-
-
-
-
-            </div>
-        </div>
 
 

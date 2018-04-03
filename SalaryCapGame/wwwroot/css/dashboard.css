@@ -1,5 +1,5 @@
 ﻿body {
-    font-size: .875rem;
+	font-size: .875rem;
 }
 
 html, body {
@@ -13,9 +13,9 @@ table.sortable span.sign, table.sortable th:after {
 	display: block;
 	position: absolute;
 	top: 50%;
-	right: 5px;
-	font-size: 12px;
-	margin-top: -10px;
+	right: 3px;
+	font-size: 8px;
+	margin-top: 0;
 	color: #bfbfc1
 }
 
@@ -25,7 +25,7 @@ table.sortable th.arrow:after {
 
 span.reversed, table.sortable span.arrow, th.arrow.down:after, th.arrow.up:after, th.reversedarrow.down:after, th.reversedarrow.up:after {
 	border-style: solid;
-	border-width: 5px;
+	border-width: 1px;
 	font-size: 0;
 	border-color: #ccc transparent transparent;
 	line-height: 0;
@@ -100,19 +100,19 @@ span.groupbox {
 	display: block;
 	margin-top: -30px;
 	margin-left: -5px;
-	padding-left: 5px;
-	padding-right: 5px;
+	padding-left: 3px;
+	padding-right: 3px;
 	background-color: #f5f5f5
 }
 
 
 
 
-.chartRow{
+.chartRow {
 	width: 100%;
-	border-bottom:medium;
-
+	border-bottom: medium;
 }
+
 .chartContainer {
 	display: flex;
 	width: 25%;
@@ -125,7 +125,7 @@ span.groupbox {
 .chart1,
 .chart2,
 .chart3,
-.chart4{
+.chart4 {
 	width: 100%;
 	background-color: lightblue;
 	border: thin solid darkgray;

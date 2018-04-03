@@ -11,6 +11,6 @@ namespace SalaryCapGame.ViewModels.Dashboard
 	{
 		//public int TotalPoints { get; set; }
 		public IEnumerable<HitterStats> HitterStats { get; set; }
-		public IEnumerable<PitcherStats> PicthterStats { get; set; }
+		public IEnumerable<PitcherStats> PitcherStats { get; set; }
 	}
 }

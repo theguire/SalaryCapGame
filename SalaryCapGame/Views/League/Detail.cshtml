@@ -1,60 +1,62 @@
-﻿@model SalaryCapGame.ViewModels.LeagueIndexListingModel
-
+﻿@model SalaryCapGame.ViewModels.LeagueListingModel
+@{
+	Layout = null;
+}
 <div class="container">
-    <div class="header clearfix detailHeading">
-        <h2 class="text-muted">League Information</h2>
-    </div>
-    <div class="jumbotron">
-        <h1>@Model.LeagueListingModel.Name</h1>
-        <hr />
-        <h5><a asp-controller="Owners" asp-action="View" asp-route-id="@Model.LeagueListingModel.Id">@Model.LeagueListingModel.Commissioner.FirstName @Model.LeagueListingModel.Commissioner.LastName</a></h5>
-        <h5>Email: @Model.LeagueListingModel.Commissioner.Email</h5>
-        <div class="row">
-            <div class="col-lg-6">
-                <table class="table table-bordered table-hover table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Teams</th>
-                            <th>Points</th>
-                            <th>Franchise Value</th>
-                            <th>Trades</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if ( Model.Franchises != null )
-                        {
-                            long leaguePoints = 0;
-                            decimal leagueValue = 0;
-                            foreach ( var franchise in @Model.Franchises )
-                            {
-                                <tr>
-                                    <td><a asp-controller="Franchise" asp-action="Details" asp-route-id="@franchise.Id">@franchise.Name</a></td>
-                                    <td style="text-align:right;">@String.Format( "{0,6:n}", franchise.Points )</td>
-                                    <td style="text-align:right;">@String.Format( "{0,6:c}", franchise.Value )</td>
-                                    <td style="text-align:center">@Html.DisplayFor( modelItem => franchise.NumberOfTrades )</td>
-                                    @{
-                                        leaguePoints += franchise.Points;
-                                        leagueValue += franchise.Value;
-                                    }
-                               </tr>
-                            }
-                            <tr>
-                                <td>Totals</td>
-                                <td style="text-align:right;">@String.Format( "{0,6:n}", leaguePoints )</td>
-                                <td style="text-align:right;">@String.Format( "{0,6:c}", leagueValue )</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Rank (2021)</td>
-                                <td style="text-align:right;">@Html.Raw( "199".ToString() )</td>
-                                <td style="text-align:right;">@Html.Raw( "331" )</td>
-                                <td></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+	<div class="header clearfix detailHeading">
+		<h2 class="text-muted">League Information</h2>
+	</div>
+	<div class="jumbotron">
+		<h1>@Model.LeagueListingModel.Name</h1>
+		<hr />
+		@*<h5><a asp-controller="Owners" asp-action="View" asp-route-id="@Model.LeagueListingModel.Id">@Model.LeagueListingModel.Commissioner.FirstName @Model.LeagueListingModel.Commissioner.LastName</a></h5>*@
+		<h5>Email: @Model.LeagueListingModel.Commissioner.Email</h5>
+		<div class="row">
+			<div class="col-lg-6">
+				<table class="table table-bordered table-hover table-condensed">
+					<thead>
+						<tr>
+							<th>Teams</th>
+							<th>Points</th>
+							<th>Franchise Value</th>
+							<th>Trades</th>
+						</tr>
+					</thead>
+					<tbody>
+						@if ( Model.Franchises != null )
+						{
+							long leaguePoints = 0;
+							decimal leagueValue = 0;
+							foreach ( var franchise in @Model.Franchises )
+							{
+								<tr>
+									<td><a asp-controller="Franchises" asp-action="Details" asp-route-id="@franchise.Id">@franchise.Name</a></td>
+									<td style="text-align:right;">@String.Format( "{0,6:n}", franchise.Points )</td>
+									<td style="text-align:right;">@String.Format( "{0,6:c}", franchise.Value )</td>
+									<td style="text-align:center">@String.Format( "{0,6:n}", franchise.NumberOfTrades )</td>
+									@{
+										leaguePoints += franchise.Points;
+										leagueValue += franchise.Value;
+									}
+								</tr>
+							}
+							<tr>
+								<td>Totals</td>
+								<td style="text-align:right;">@String.Format( "{0,6:n}", leaguePoints )</td>
+								<td style="text-align:right;">@String.Format( "{0,6:c}", leagueValue )</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Rank (2021)</td>
+								<td style="text-align:right;">@Html.Raw( "199".ToString() )</td>
+								<td style="text-align:right;">@Html.Raw( "331" )</td>
+								<td></td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
 

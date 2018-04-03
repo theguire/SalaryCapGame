@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SalaryCapGame.ViewModels
 {
-    public class DashboardViewModel
-    {
-        public OwnerIndexListingModel OwnerIndex { get; set; }
-        //public PlayerIndexModel PlayerIndexModel { get; set; }
+	public class DashboardViewModel
+	{
+		public OwnerIndexListingModel OwnerIndex { get; set; }
+		//public PlayerIndexModel PlayerIndexModel { get; set; }
 		public StatsIndexListModel PlayerStats { get; set; }
-    }
+	}
 }

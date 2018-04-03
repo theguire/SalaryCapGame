@@ -3,76 +3,79 @@
 @using ( Html.BeginForm() )
 {
 
-    @foreach ( var item in Model )
-    {
 
-            <tr >
-               
-                <td colspan="2" style="text-align:left">
-                    <a asp-controller="Player" asp-action="Index" asp-route-id="@item.Id">@item.Name</a>
-                </td>
-                <td style="text-align:left">
-                    @String.Format( "{0,6:c}", item.Value )
-                </td>
-                <td style="color:green; text-align:left">@String.Format( "+10" )</td>
-                <td style="text-align:left">
-                    @String.Format( "{0,6:n}", item.Points )
-                </td>
-                <td style="color:red; text-align:left">@String.Format( "-420" )</td>
-                <td style="text-align:center">
-                    @String.Format( "{0,6:g}", item.NumberOfTrades )
-                </td>
-                <td style="text-align:left">
-                    <a asp-controller="League" asp-action="Detail" asp-route-id="@item.LeagueId">@item.League.Name</a>
-                </td>
-                <td style="text-align:left">@String.Format( "3/10" )</td>
-                <td style="color:green; text-align:left">@String.Format( "+1" ) </td>
-            </tr>
+	@foreach ( var item in Model )
+	{
+		<tr>
+			<td>
+				<label><input type="radio" name="franchiseId" id="@item.Id" value="@item.Id" ); /></label>
+			</td>
+			<td style="text-align:left">
+				<a asp-controller="Franchises" asp-action="Index" asp-route-id="@item.Id">@item.Name</a>
+			</td>
+			<td>
+				@String.Format( "{0,6:c}", item.Value )
+			</td>
+			<td style="color:green;">@String.Format( "+10" )</td>
+			<td>
+				@String.Format( "{0,6:n}", item.Points )
+			</td>
+			<td style="color:red;">@String.Format( "-420" )</td>
+			<td>
+				@String.Format( "{0,6:g}", item.NumberOfTrades )
+			</td>
+			<td>
 
-    }
+				@*<a asp-controller="League" asp-action="Detail" asp-route-id="@item.LeagueId">@item.League.Name</a>*@
+			</td>
+			<td>@String.Format( "3/10" )</td>
+			<td style="color:green;">@String.Format( "+1" ) </td>
+		</tr>
+
+	}
 }
 
 @*<div class="row">
-        <div class="col-lg-2 pull-left">
+		<div class="col-lg-2 pull-left">
 
-            <h4>League</h4>
-        </div>
-        <div class="col-lg-2 pull-left">
-            <h4>Franchise</h4>
-        </div>
-        <div class="col-lg-2 pull-left">
-            <h4>Value</h4>
-        </div>
-        <div class="col-lg-2 pull-left">
-            <h4>Points</h4>
-        </div>
+			<h4>League</h4>
+		</div>
+		<div class="col-lg-2 pull-left">
+			<h4>Franchise</h4>
+		</div>
+		<div class="col-lg-2 pull-left">
+			<h4>Value</h4>
+		</div>
+		<div class="col-lg-2 pull-left">
+			<h4>Points</h4>
+		</div>
 
-    </div>
-    <div class="row ">
-        <div class="col-md-8 pull-left">
-            @foreach ( var item in Model )
-            {
+	</div>
+	<div class="row ">
+		<div class="col-md-8 pull-left">
+			@foreach ( var item in Model )
+			{
 
 
-                @*<td><img src="~/@Url.Content( item.ImageUrl )" class="imageCell" /></td>*@
+				@*<td><img src="~/@Url.Content( item.ImageUrl )" class="imageCell" /></td>*@
 @*<div class="row">
 
-        <div class="col-md-3">
-            <a asp-controller="League" asp-action="Detail" asp-route-id="@item.LeagueId">@item.League.Name</a>
-        </div>
-        <div class="col-md-3">
-            <a asp-controller="Franchises" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
-        </div>
-        <div class="col-md-2">
-            <label style="text-align:right;">@String.Format( "{0,6:c}", item.Value )</label>
-        </div>
-        <div class="col-md-2">
-            <label style="text-align:right;">@String.Format( "{0,6:n}", item.Points )</label>
-        </div>
+		<div class="col-md-3">
+			<a asp-controller="League" asp-action="Detail" asp-route-id="@item.LeagueId">@item.League.Name</a>
+		</div>
+		<div class="col-md-3">
+			<a asp-controller="Franchises" asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
+		</div>
+		<div class="col-md-2">
+			<label style="text-align:right;">@String.Format( "{0,6:c}", item.Value )</label>
+		</div>
+		<div class="col-md-2">
+			<label style="text-align:right;">@String.Format( "{0,6:n}", item.Points )</label>
+		</div>
 
 
-    </div>
-            }
-        </div>
-    </div>
-    }*@
+	</div>
+			}
+		</div>
+	</div>
+	}*@

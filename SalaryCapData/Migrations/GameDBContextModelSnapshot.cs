@@ -238,9 +238,15 @@ namespace SalaryCapData.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("DateDrafted");
+
+                    b.Property<DateTime>("DateDropped");
+
                     b.Property<int>("FranchiseId");
 
                     b.Property<int>("PlayerId");
+
+                    b.Property<int>("PlayerPosition");
 
                     b.HasKey("Id");
 

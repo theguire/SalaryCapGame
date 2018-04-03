@@ -6,30 +6,34 @@ using SalaryCapData.Models;
 
 namespace SalaryCapData.Interfaces
 {
-    public interface IFranchise
-    {
-        IEnumerable<Franchise> GetAll();
-        Franchise Get( int id );
+	public interface IFranchise
+	{
+		IEnumerable<Franchise> GetAll();
+		Franchise Get( int id );
 
-        void Add( Franchise newFranchise );
-        
-        string Name( int id );
-        void Update( Franchise franchise );
+		void Add( Franchise newFranchise );
 
-        int OwnerId( int id );
-        Owner Owner( int id );
+		string Name( int id );
+		void Update( Franchise franchise );
 
-        int LeagueId( int id );
-        League League( int id );
+		int OwnerId( int id );
+		Owner Owner( int id );
 
-        bool Any( int id );
+		int LeagueId( int id );
+		League League( int id );
 
-        long PointTotal( int id );
-        decimal FranchiseValue( int id );
-        int NumberOfTrades( int id );
+		bool Any( int id );
 
-        IEnumerable<Franchise> GetAllByOwnerId( int ownerId );
-        
+		long PointTotal( int id );
+		decimal FranchiseValue( int id );
+		int NumberOfTrades( int id );
 
-    }
+		IEnumerable<Franchise> GetAllByOwnerId( int ownerId );
+
+		IEnumerable<Player> GetPlayers( int id );
+		void AddPlayer( int franchiseId, int playerId );
+		void Droplayer( int franchiseId, int playerId );
+
+
+	}
 }

@@ -6,3 +6,40 @@ table.sortable thead {
 	cursor: default;
 }
 
+table, tr, td, th {
+	margin: 0;
+	border: 0;
+	padding: 0;
+	border-spacing: 0;
+}
+
+
+	table td,
+	table th {
+		min-width: 2em;
+		min-height: 2em;
+		border: 1px solid #000;
+	}
+
+
+
+.customTable td {
+	text-align: left;
+	font-size: 1.2em;
+}
+
+td.details-control {
+	text-align: center;
+	color: forestgreen;
+	cursor: pointer;
+}
+
+tr.dropPlayer td.details-control {
+	text-align: center;
+	color: red;
+}
+
+.padding-0 {
+	padding-right: 0;
+	padding-left: 0;
+}
